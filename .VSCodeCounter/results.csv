@@ -1,0 +1,27 @@
+filename, language, JavaScript, SCSS, JSON, JavaScript React, comment, blank, total
+App.js, JavaScript, 35, 0, 0, 0, 0, 5, 40
+Components\BackgroundSlider.js, JavaScript, 28, 0, 0, 0, 0, 4, 32
+Components\BasicInput.jsx, JavaScript React, 0, 0, 0, 158, 0, 9, 167
+Components\Footer.js, JavaScript, 27, 0, 0, 0, 0, 5, 32
+Components\Navigation.js, JavaScript, 80, 0, 0, 0, 2, 5, 87
+Components\Popup.js, JavaScript, 82, 0, 0, 0, 1, 4, 87
+Pages\HomePage.js, JavaScript, 49, 0, 0, 0, 0, 5, 54
+Pages\RotisserieRoyalePage.js, JavaScript, 133, 0, 0, 0, 0, 6, 139
+Popups\Contact.js, JavaScript, 66, 0, 0, 0, 0, 5, 71
+Popups\Impressum.js, JavaScript, 39, 0, 0, 0, 0, 11, 50
+Popups\Location.js, JavaScript, 21, 0, 0, 0, 0, 3, 24
+Popups\Privacy.js, JavaScript, 22, 0, 0, 0, 0, 3, 25
+Reducers\PopupsReducer.js, JavaScript, 17, 0, 0, 0, 0, 2, 19
+Styles\Component.Footer.scss, SCSS, 0, 53, 0, 0, 0, 3, 56
+Styles\Component.Nav.scss, SCSS, 0, 114, 0, 0, 0, 14, 128
+Styles\Component.Popup.scss, SCSS, 0, 248, 0, 0, 0, 22, 270
+Styles\Input.scss, SCSS, 0, 83, 0, 0, 0, 5, 88
+Styles\MainStyle.scss, SCSS, 0, 220, 0, 0, 0, 9, 229
+Styles\Pages.Home.scss, SCSS, 0, 74, 0, 0, 0, 6, 80
+Styles\Reset.scss, SCSS, 0, 123, 0, 0, 5, 2, 130
+Translations\de.json, JSON, 0, 0, 108, 0, 0, 1, 109
+Translations\en.json, JSON, 0, 0, 108, 0, 0, 1, 109
+i18n.js, JavaScript, 22, 0, 0, 0, 1, 7, 30
+index.js, JavaScript, 13, 0, 0, 0, 0, 3, 16
+serviceWorker.js, JavaScript, 92, 0, 0, 0, 31, 13, 136
+Total, -, 726, 915, 216, 158, 40, 153, 2208

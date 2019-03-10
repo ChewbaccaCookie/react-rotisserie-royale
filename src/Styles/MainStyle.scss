@@ -1,0 +1,233 @@
+@font-face {
+	font-family: Champagne;
+	src: url("/Assets/Fonts/Champagne_Limousines.ttf");
+	font-display: swap;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	overflow-x: hidden;
+	font-family: "Roboto";
+	font-size: 12px;
+	color: #494949;
+	background: url("/Assets/Basic/Background.png");
+}
+noscript {
+	background: #d33737;
+}
+.noscript {
+	background: url("/Assets/Basic/Noscript.svg");
+	height: calc(100vh - 18vw);
+	width: 100vw;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: top center;
+	color: white;
+	font-family: "Roboto";
+	text-align: center;
+	padding-top: 18vw;
+	h1 {
+		padding: 30px 0px 10px 0px;
+		font-weight: bold;
+		font-size: 1.5rem;
+	}
+}
+
+::-webkit-scrollbar {
+	width: 0;
+}
+::-webkit-scrollbar-track {
+	display: none;
+}
+.aws-sld__container {
+	padding-bottom: 100vh;
+}
+.aws-sld__bullets {
+	display: none;
+}
+.aws-sld__controls {
+	opacity: 0;
+}
+.aws-sld {
+	z-index: -1;
+}
+.backgroundSlider {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	z-index: -1;
+	box-shadow: 1px -1px 5px 0px rgba(0, 0, 0, 0.5);
+	width: 100vw;
+	img {
+		pointer-events: none;
+	}
+}
+.sub-text {
+	font-size: 0.8rem;
+	font-weight: bold;
+}
+.slider-overlay {
+	background: url("/Assets/Slider/overlay.png");
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	opacity: 0.5;
+	overflow: hidden;
+	border: none;
+	padding: 0;
+	margin: 0;
+	z-index: 1;
+}
+#logo {
+	width: 100%;
+	position: absolute;
+	top: 50px;
+	left: 50px;
+	height: 110px;
+	background: url("/Assets/Slider/logo.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+h1,
+h2,
+h3,
+h4 {
+	font-weight: normal;
+}
+button,
+a {
+	background: none;
+	border: none;
+	font: inherit;
+	align-items: inherit;
+	cursor: pointer;
+	margin: initial;
+	transition: 0.3s ease-in-out all;
+
+	&:hover {
+		opacity: 0.7;
+	}
+	&:focus {
+		outline: none;
+	}
+}
+.main-content {
+	top: 75vh;
+	position: relative;
+}
+
+.content {
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	background: white;
+	height: auto;
+	min-height: 500px;
+	box-shadow: 1px -1px 5px 0px rgba(0, 0, 0, 0.5);
+	position: relative;
+	line-height: 32px;
+	font-size: 17px;
+
+	color: #3b3a36;
+	padding: 80px;
+	transition: all 0.5s ease;
+
+	h1 {
+		font-family: "Qwigley";
+		padding: 20px;
+		font-size: 3.3rem;
+		text-align: center;
+		color: #9e1212;
+	}
+	h2 {
+		text-align: center;
+		font-weight: bold;
+		margin: 20px 50px;
+
+		.span {
+			height: 1px;
+			width: 80px;
+			background: #3b3a36;
+			margin-top: 15px;
+		}
+	}
+
+	.float-left {
+		float: left;
+	}
+	.float-right {
+		float: right;
+	}
+	.bigLetter {
+		float: left;
+		font-size: 3.7rem;
+		line-height: 2.5rem;
+		padding-top: 10px;
+		padding-right: 8px;
+		padding-left: 3px;
+	}
+	.small-content {
+		max-width: 360px;
+		display: inline-block;
+		margin: 15px 15px;
+		img {
+			margin: 20px 10px 10px 10px;
+			width: 90%;
+			box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+		}
+	}
+	.flex-center {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+}
+.text-center {
+	text-align: center;
+}
+.bold {
+	font-weight: bold;
+}
+a {
+	text-decoration: none;
+	color: inherit;
+}
+.no-break {
+	break-inside: avoid;
+	white-space: nowrap;
+	line-height: 4rem;
+}
+.middle-content {
+	max-width: 600px;
+}
+@media (max-width: 720px) {
+	body {
+		font-size: 8px;
+	}
+	#logo {
+		left: 0;
+		background-position: center;
+		width: 100%;
+		background-size: 80%;
+	}
+	.content {
+		font-size: 0.9rem;
+		line-height: 1.8rem;
+		padding: 10px;
+		h1 {
+			padding: 15px;
+			font-size: 2.8rem;
+			margin: 20px 0px;
+		}
+		h2 {
+			margin: 20px 10px;
+			font-size: 0.9rem;
+		}
+	}
+}

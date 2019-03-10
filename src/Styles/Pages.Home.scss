@@ -1,0 +1,79 @@
+.HomePage {
+	display: flex;
+	min-height: 100vh;
+	align-items: center;
+	justify-content: center;
+
+	#welcome-text h1 {
+		font-family: "Qwigley";
+		color: white;
+		font-size: 3.5rem;
+		text-align: center;
+		text-shadow: 1px 1px 1px black;
+	}
+	#btns {
+		display: flex;
+		justify-content: center;
+		margin-top: 40px;
+		flex-wrap: wrap;
+	}
+	.btn {
+		display: inline-block;
+		position: relative;
+		padding: 20px 30px 20px 55px;
+		background: rgb(37, 37, 37);
+		font-family: "Champagne";
+		font-size: 1.2rem;
+
+		color: white;
+		box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.5);
+		text-decoration: none;
+		margin: 20px;
+		transition: 0.3s all ease-in-out;
+		text-align: left;
+		text-decoration: none;
+
+		&:hover {
+			opacity: 1;
+			.arrow {
+				transform: rotate(180deg);
+				margin-left: -15px;
+			}
+		}
+
+		.arrow-wrapper {
+			text-align: center;
+			width: 35px;
+			height: 35px;
+			margin-top: -7px;
+			left: 10px;
+			background: white;
+			display: block;
+			position: absolute;
+			border-radius: 50%;
+		}
+		.arrow {
+			background: url("/Assets/Basic/arrow.svg");
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+			margin-top: 3px;
+			transition: 0.3s all ease-in-out;
+			width: 28px;
+			height: 28px;
+			margin-left: -12px;
+			content: "";
+			position: absolute;
+		}
+	}
+
+	@media (max-width: 720px) {
+		#welcome-text h1 {
+			font-size: 2.5rem;
+			margin: 20px;
+		}
+		.btn {
+			width: 200px;
+		}
+	}
+}

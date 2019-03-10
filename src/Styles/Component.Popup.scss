@@ -1,0 +1,269 @@
+@mixin transition() {
+	transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.popup-container {
+	.popup-content {
+		margin-left: 10px;
+	}
+	.popup-close {
+		position: fixed;
+		z-index: 10;
+		right: 50px;
+		top: 50px;
+		display: none;
+		cursor: pointer;
+		.close-btn-wrapper {
+			width: 50px;
+			box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+			height: 50px;
+			position: absolute;
+			right: 50%;
+			top: 50%;
+			margin-top: -25px;
+			margin-right: -25px;
+			background-color: #ffffff;
+			border-radius: 25px;
+			opacity: 1;
+			@include transition();
+
+			& > span {
+				background-color: #6d6d6d;
+				display: block;
+				height: 6px;
+				border-radius: 6px;
+				position: relative;
+				@include transition();
+				position: absolute;
+				top: 50%;
+				margin-top: -3px;
+				left: 9px;
+				width: 32px;
+				display: flex;
+				justify-content: space-between;
+
+				span {
+					display: block;
+					background-color: #1f1f1f;
+					width: 6px;
+					height: 6px;
+					border-radius: 6px;
+					@include transition();
+					position: absolute;
+					left: 0;
+					top: 0;
+				}
+
+				&.left {
+					transform: rotate(45deg);
+					transform-origin: center;
+
+					.circle-left {
+						@include transition();
+						margin-left: 0;
+					}
+
+					.circle-right {
+						@include transition();
+						margin-left: 26px;
+					}
+				}
+
+				&.right {
+					transform: rotate(-45deg);
+					transform-origin: center;
+
+					.circle-left {
+						@include transition();
+						margin-left: 0;
+					}
+
+					.circle-right {
+						@include transition();
+						margin-left: 26px;
+					}
+				}
+			}
+
+			&:hover {
+				& > span {
+					background-color: #ca1919;
+					@include transition();
+
+					span {
+						@include transition();
+						background-color: #9e1212;
+					}
+
+					&.left {
+						.circle-left {
+							@include transition();
+							margin-left: 26px;
+						}
+
+						.circle-right {
+							@include transition();
+							margin-left: 0;
+						}
+					}
+
+					&.right {
+						.circle-left {
+							@include transition();
+							margin-left: 26px;
+						}
+
+						.circle-right {
+							@include transition();
+							margin-left: 0;
+						}
+					}
+				}
+			}
+		}
+	}
+	.shown {
+		display: block;
+	}
+	.popup-background {
+		height: 100vh;
+		width: 0;
+		position: fixed;
+		z-index: 1;
+		left: 0;
+		top: 0;
+		background-color: rgba(0, 0, 0, 0.9);
+		overflow: hidden;
+		transition: 0.5s;
+	}
+	&.popupOpen .popup-background {
+		width: 100vw;
+	}
+	&.popupOpen .popup-wrapper {
+		opacity: 1;
+	}
+	&.popupOpen .detailed-popup {
+		display: flex;
+	}
+	.popup-wrapper {
+		z-index: 2;
+		max-width: 700px;
+		background: white;
+		border-radius: 10px;
+		width: 90%;
+		padding: 30px;
+		opacity: 0;
+		transition-delay: 2s;
+		transition: 0.2s all ease-in;
+		overflow: auto;
+		max-height: 100%;
+
+		&.small-popup {
+			max-width: 500px;
+		}
+		&::-webkit-scrollbar {
+			width: 12px;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background: rgba(0, 0, 0, 0.8);
+		}
+
+		&::-webkit-scrollbar-track {
+			display: none;
+		}
+	}
+
+	.detailed-popup {
+		margin: 80px 20px;
+		width: calc(100vw - 40px);
+		height: calc(100vh - 160px);
+		display: none;
+		justify-content: center;
+		align-items: center;
+		position: fixed;
+		top: 0;
+		z-index: 5;
+		h1 {
+			font-family: "Qwigley";
+			margin: 0px 40px 10px 0px;
+			padding: 10px 0px 0px 20px;
+			font-size: 3.8rem;
+			text-align: left;
+			color: #9e1212;
+		}
+		h2 {
+			font-family: "Champagne";
+			padding: 20px 0px 0px 0px;
+			font-size: 2rem;
+			margin-left: 20px;
+			text-align: left;
+			color: #9e1212;
+		}
+		a {
+			color: #d33737;
+		}
+		h3 {
+			margin: 10px 15px;
+			font-weight: bold;
+			font-size: 1rem;
+		}
+		p {
+			font-size: 1rem;
+			font-family: "Roboto Condensed";
+			margin: 10px 20px;
+			font-weight: lighter;
+			line-height: 2rem;
+		}
+
+		&.without-border {
+			.popup-wrapper {
+				background: none;
+				.popup-title {
+					display: none;
+				}
+			}
+		}
+	}
+
+	@media (max-width: 720px) {
+		.detailed-popup {
+			margin: 20px 10px;
+			width: calc(100vw - 20px);
+			height: calc(100vh - 40px);
+			align-items: flex-start;
+			h1 {
+				text-align: left;
+				padding: 10px 20px 0px 20px;
+				font-size: 2.7rem;
+			}
+			h2 {
+				font-size: 1.5rem;
+			}
+			h3 {
+				font-size: 0.9rem;
+			}
+			p {
+				font-size: 0.85rem;
+				line-height: 1.5rem;
+			}
+		}
+		.popup-close {
+			right: 50px;
+			top: 45px;
+			.close-btn-wrapper {
+				box-shadow: none;
+				background: none;
+			}
+		}
+		.popup-wrapper {
+			padding: 10px;
+			&::-webkit-scrollbar {
+				width: 2px;
+			}
+		}
+		.popup-content {
+			margin: 0px 10px;
+		}
+	}
+}

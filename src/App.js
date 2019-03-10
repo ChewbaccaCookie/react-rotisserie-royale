@@ -1,28 +1,41 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { Route } from "react-router-dom";
+import { withTranslation } from "react-i18next";
+import HomePage from "./Pages/HomePage";
+
+import "./Styles/Reset.scss";
+import "./Styles/MainStyle.scss";
+import "./Styles/Input.scss";
+import Navigation from "./Components/Navigation";
+import RotisserieRoyalePage from "./Pages/RotisserieRoyalePage";
+import Privacy from "./Popups/Privacy";
+import { createStore } from "redux";
+import popupRededucer from "./Reducers/PopupsReducer";
+import Impressum from "./Popups/Impressum";
+import Location from "./Popups/Location";
+import Contact from "./Popups/Contact";
+import GaestehausAmSchlossberg from "./Pages/GaestehausAmSchlossberg";
+
+const store = createStore(popupRededucer);
+window.store = store;
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+	render() {
+		return (
+			<div>
+				<Navigation />
+				<Route exact path="/" component={HomePage} />
+				<Route exact path="/Rotisserie-Royale" component={RotisserieRoyalePage} />
+				<Route exact path="/Gästehaus-am-Schlossberg" component={GaestehausAmSchlossberg} />
+				<section className="popups">
+					<Privacy />
+					<Impressum />
+					<Location />
+					<Contact />
+				</section>
+			</div>
+		);
+	}
 }
 
-export default App;
+export default withTranslation()(App);
