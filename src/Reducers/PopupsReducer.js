@@ -3,7 +3,8 @@ const popups = (
 		{ name: "privacy", open: false },
 		{ name: "impressum", open: false },
 		{ name: "location", open: false },
-		{ name: "contact", open: false }
+		{ name: "contact", open: false },
+		{ name: "dog", open: false }
 	],
 	action
 ) => {
