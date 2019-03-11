@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
 import "react-awesome-slider/dist/styles.css";
-import "../Styles/Pages.Home.scss";
 import BackgroundSlider from "../Components/BackgroundSlider";
 import Footer from "../Components/Footer";
 import $ from "jquery";
