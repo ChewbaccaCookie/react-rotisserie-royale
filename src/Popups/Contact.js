@@ -54,13 +54,10 @@ class Contact extends Component {
 			});
 			let content = this.state.inputValues.filter(input => input.name.indexOf("contact") === 0);
 			content.language = window.lang;
-			console.log(content);
 			window.store.dispatch({ type: "TOGGLE_POPUP", name: "contact" });
 			window.store.dispatch({ type: "TOGGLE_POPUP", name: "responseMessage" });
 			Axios.post(mainSettings.backendServer + "/rotisserie/contact", content).then(function(response) {
 				setTimeout(function() {
-					console.log(response);
-					console.log(response.data.message);
 					window.store.dispatch({ type: "REQUEST_FINISHED", name: "responseMessage", response: response.data.message });
 				}, 1000);
 			});
