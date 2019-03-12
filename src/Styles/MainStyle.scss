@@ -125,12 +125,7 @@ a {
 	top: 75vh;
 	position: relative;
 }
-li::before {
-	margin: 10px;
-	color: #ca4343;
-	content: "\25ba";
-	font-size: 15px;
-}
+
 .content {
 	max-width: 800px;
 	margin-left: auto;
@@ -146,6 +141,13 @@ li::before {
 	color: #3b3a36;
 	padding: 80px;
 	transition: all 0.5s ease;
+
+	li::before {
+		margin: 10px;
+		color: #ca4343;
+		content: "\25ba";
+		font-size: 15px;
+	}
 
 	h1 {
 		font-family: "Qwigley";

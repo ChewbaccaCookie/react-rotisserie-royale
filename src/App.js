@@ -16,6 +16,7 @@ import Location from "./Popups/Location";
 import Contact from "./Popups/Contact";
 import GaestehausAmSchlossberg from "./Pages/GaestehausAmSchlossberg";
 import Dogs from "./Popups/Dogs";
+import ResponseMessage from "./Popups/ResponseMessage";
 
 const store = createStore(popupRededucer);
 window.store = store;
@@ -34,6 +35,7 @@ class App extends Component {
 					<Location />
 					<Contact />
 					<Dogs />
+					<ResponseMessage />
 				</section>
 			</div>
 		);

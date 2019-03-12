@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
-import "../Styles/Component.Footer.scss";
 import Popup from "../Components/Popup";
 
 class Privacy extends Component {
