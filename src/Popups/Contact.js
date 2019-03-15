@@ -52,8 +52,16 @@ class Contact extends Component {
 			$(".popups input, .popups textarea").each((index, element) => {
 				element.value = "";
 			});
-			let content = this.state.inputValues.filter(input => input.name.indexOf("contact") === 0);
-			content.language = window.lang;
+			let content = {
+				language: window.lang,
+				inputVal: {}
+			};
+			this.state.inputValues
+				.filter(input => input.name.indexOf("contact") === 0)
+				.forEach(inputVal => {
+					content.inputVal[inputVal.name] = inputVal.value;
+				});
+
 			window.store.dispatch({ type: "TOGGLE_POPUP", name: "contact" });
 			window.store.dispatch({ type: "TOGGLE_POPUP", name: "responseMessage" });
 			Axios.post(mainSettings.backendServer + "/rotisserie/contact", content).then(function(response) {

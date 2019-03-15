@@ -5,6 +5,8 @@ import BackgroundSlider from "../Components/BackgroundSlider";
 import Footer from "../Components/Footer";
 import $ from "jquery";
 import BasicInput from "../Components/BasicInput";
+import Axios from "axios";
+import mainSettings from "../MainSettings";
 
 let backgroundImages = [
 	{
@@ -56,14 +58,34 @@ class RotisserieRoyalePage extends Component {
 		this.setState({
 			disabled: !valid
 		});
+		return valid;
 	};
-	sendContactRequest = e => {
+	sendTableReservationRequest = e => {
 		e.preventDefault();
-		$(".popups input").each((index, element) => {
-			element.value = "";
-		});
-		this.checkValidationStatus();
+		if (this.checkValidationStatus()) {
+			console.log("fa");
+			$(".table-reservation input, .table-reservation textarea").each((index, element) => {
+				element.value = "";
+			});
+			let content = {
+				language: window.lang,
+				inputVal: {}
+			};
+			this.state.inputValues
+				.filter(input => input.name.indexOf("tableReservation") === 0)
+				.forEach(inputVal => {
+					content.inputVal[inputVal.name] = inputVal.value;
+				});
+
+			window.store.dispatch({ type: "TOGGLE_POPUP", name: "responseMessage" });
+			Axios.post(mainSettings.backendServer + "/rotisserie/table_request", content).then(function(response) {
+				setTimeout(function() {
+					window.store.dispatch({ type: "REQUEST_FINISHED", name: "responseMessage", response: response.data.message });
+				}, 1000);
+			});
+		}
 	};
+
 	render() {
 		const { t } = this.props;
 		return (
@@ -101,22 +123,64 @@ class RotisserieRoyalePage extends Component {
 						<div className="flex-center">
 							<article className="table-reservation middle-content basicInput">
 								<h1>{t("pages.rr.table_reservation")}</h1>
-								<form onSubmit={this.sendContactRequest}>
+								<form onSubmit={this.sendTableReservationRequest}>
 									<fieldset>
-										<BasicInput type="text" name="table_reservation-name" required={true} setValue={this.setInputValue} placeholder={t("input.basic.name")} />
-										<BasicInput type="text" name="table_reservation-street" required={true} setValue={this.setInputValue} placeholder={t("input.basic.street")} />
-										<BasicInput type="num" name="table_reservation-plz" required={true} setValue={this.setInputValue} placeholder={t("input.basic.plz")} />
-										<BasicInput type="text" name="table_reservation-city" required={true} setValue={this.setInputValue} placeholder={t("input.basic.city")} />
-										<BasicInput type="tel" name="table_reservation-phone" setValue={this.setInputValue} placeholder={t("input.basic.phone")} />
-										<BasicInput type="email" name="table_reservation-email" required={true} setValue={this.setInputValue} placeholder={t("input.basic.email")} />
-									</fieldset>
-									<fieldset>
-										<BasicInput type="date" name="table_reservation-date" required={true} setValue={this.setInputValue} placeholder={t("input.basic.date")} />
-										<BasicInput type="time" name="table_reservation-time" required={true} setValue={this.setInputValue} placeholder={t("input.basic.time")} />
-										<BasicInput type="num" name="table_reservation-count" required={true} setValue={this.setInputValue} placeholder={t("input.basic.num_pers")} />
 										<BasicInput
 											type="text"
-											name="table_reservation-message"
+											name="tableReservationName"
+											required={true}
+											setValue={this.setInputValue}
+											placeholder={t("input.basic.name")}
+										/>
+										<BasicInput
+											type="text"
+											name="tableReservationStreet"
+											required={true}
+											setValue={this.setInputValue}
+											placeholder={t("input.basic.street")}
+										/>
+										<BasicInput type="num" name="tableReservationPLZ" required={true} setValue={this.setInputValue} placeholder={t("input.basic.plz")} />
+										<BasicInput
+											type="text"
+											name="tableReservationCity"
+											required={true}
+											setValue={this.setInputValue}
+											placeholder={t("input.basic.city")}
+										/>
+										<BasicInput type="tel" name="tableReservationPhone" setValue={this.setInputValue} placeholder={t("input.basic.phone")} />
+										<BasicInput
+											type="email"
+											name="tableReservationEmail"
+											required={true}
+											setValue={this.setInputValue}
+											placeholder={t("input.basic.email")}
+										/>
+									</fieldset>
+									<fieldset>
+										<BasicInput
+											type="date"
+											name="tableReservationDate"
+											required={true}
+											setValue={this.setInputValue}
+											placeholder={t("input.basic.date")}
+										/>
+										<BasicInput
+											type="time"
+											name="tableReservationTime"
+											required={true}
+											setValue={this.setInputValue}
+											placeholder={t("input.basic.time")}
+										/>
+										<BasicInput
+											type="num"
+											name="tableReservationNum"
+											required={true}
+											setValue={this.setInputValue}
+											placeholder={t("input.basic.num_pers")}
+										/>
+										<BasicInput
+											type="text"
+											name="tableReservationAdditionalMessage"
 											setValue={this.setInputValue}
 											textarea={true}
 											placeholder={t("input.basic.additional_info")}
