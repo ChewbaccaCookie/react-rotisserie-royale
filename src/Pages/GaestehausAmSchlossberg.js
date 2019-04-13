@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
 import "react-awesome-slider/dist/styles.css";
 import "../Styles/Pages.GaestehausAmSchlossberg.scss";
+import "../Styles/Component.Calendar.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import BackgroundSlider from "../Components/BackgroundSlider";
@@ -11,6 +12,9 @@ import $ from "jquery";
 import BasicInput from "../Components/BasicInput";
 import mainSettings from "../MainSettings";
 import Axios from "axios";
+import "@y0c/react-datepicker/assets/styles/calendar.scss";
+import "moment/locale/de";
+import "moment/locale/en-gb";
 
 let backgroundImages = [
 	{
@@ -30,7 +34,8 @@ let backgroundImages = [
 class GaestehausAmSchlossberg extends Component {
 	state = {
 		inputValues: [],
-		disabled: true
+		disabled: true,
+		date: new Date()
 	};
 
 	componentDidMount = () => {
@@ -83,14 +88,33 @@ class GaestehausAmSchlossberg extends Component {
 		this.setState({
 			disabled: !valid
 		});
+		return valid;
 	};
-	sendContactRequest = e => {
+	sendBookingRequest = e => {
 		e.preventDefault();
-		$(".popups input").each((index, element) => {
-			element.value = "";
-		});
-		this.checkValidationStatus();
+		if (this.checkValidationStatus()) {
+			$(".booking-request input, .booking-request textarea").each((index, element) => {
+				element.value = "";
+			});
+			let content = {
+				language: window.lang,
+				inputVal: {}
+			};
+			this.state.inputValues
+				.filter(input => input.name.indexOf("bookingRequest") === 0)
+				.forEach(inputVal => {
+					content.inputVal[inputVal.name] = inputVal.value;
+				});
+
+			window.store.dispatch({ type: "TOGGLE_POPUP", name: "responseMessage" });
+			Axios.post(mainSettings.backendServer + "/rotisserie/booking_request", content).then(function(response) {
+				setTimeout(function() {
+					window.store.dispatch({ type: "REQUEST_FINISHED", name: "responseMessage", response: response.data.message });
+				}, 1000);
+			});
+		}
 	};
+
 	openPopup = name => {
 		window.store.dispatch({ type: "TOGGLE_POPUP", name });
 	};
@@ -185,36 +209,24 @@ class GaestehausAmSchlossberg extends Component {
 						</div>
 
 						<div className="flex-center">
-							<article className="table-reservation middle-content basicInput">
+							<article className="booking-request middle-content basicInput">
 								<h1>{t("pages.gh.booking_request")}</h1>
-								<form onSubmit={this.sendContactRequest}>
+								<form onSubmit={this.sendBookingRequest}>
 									<fieldset>
+										<BasicInput type="text" name="bookingRequestName" required={true} setValue={this.setInputValue} placeholder={t("input.basic.name")} />
 										<BasicInput
 											type="text"
-											name="table_reservation-name"
-											required={true}
-											setValue={this.setInputValue}
-											placeholder={t("input.basic.name")}
-										/>
-										<BasicInput
-											type="text"
-											name="table_reservation-street"
+											name="bookingRequestStreet"
 											required={true}
 											setValue={this.setInputValue}
 											placeholder={t("input.basic.street")}
 										/>
-										<BasicInput type="num" name="table_reservation-plz" required={true} setValue={this.setInputValue} placeholder={t("input.basic.plz")} />
-										<BasicInput
-											type="text"
-											name="table_reservation-city"
-											required={true}
-											setValue={this.setInputValue}
-											placeholder={t("input.basic.city")}
-										/>
-										<BasicInput type="tel" name="table_reservation-phone" setValue={this.setInputValue} placeholder={t("input.basic.phone")} />
+										<BasicInput type="number" name="bookingRequestPLZ" required={true} setValue={this.setInputValue} placeholder={t("input.basic.plz")} />
+										<BasicInput type="text" name="bookingRequestCity" required={true} setValue={this.setInputValue} placeholder={t("input.basic.city")} />
+										<BasicInput type="tel" name="bookingRequestPhone" setValue={this.setInputValue} placeholder={t("input.basic.phone")} />
 										<BasicInput
 											type="email"
-											name="table_reservation-email"
+											name="bookingRequestEmail"
 											required={true}
 											setValue={this.setInputValue}
 											placeholder={t("input.basic.email")}
@@ -222,28 +234,25 @@ class GaestehausAmSchlossberg extends Component {
 									</fieldset>
 									<fieldset>
 										<BasicInput
-											type="date"
-											name="table_reservation-date"
-											required={true}
+											type="dateRange"
+											name1="bookingRequestArrival"
+											name2="bookingRequestDeparture"
+											dateFormat={t("input.basic.dateFormat")}
 											setValue={this.setInputValue}
-											placeholder={t("input.basic.arrival")}
-										/>
-										<BasicInput
-											type="date"
-											name="table_reservation-date"
+											placeholder1={t("input.basic.arrival")}
+											placeholder2={t("input.basic.departure")}
 											required={true}
-											setValue={this.setInputValue}
-											placeholder={t("input.basic.departure")}
 										/>
 
 										<BasicInput
-											type="text"
-											name="table_reservation-message"
+											type="textarea"
+											name="bookingRequestAdditionalMessage"
 											setValue={this.setInputValue}
-											textarea={true}
 											placeholder={t("input.basic.additional_info")}
 										/>
-										<button disabled={this.state.disabled}>{t("input.basic.table_reservation")}</button>
+										<button className="btn" disabled={this.state.disabled}>
+											{t("input.basic.booking_request")}
+										</button>
 									</fieldset>
 								</form>
 							</article>

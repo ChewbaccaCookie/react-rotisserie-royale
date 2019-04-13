@@ -27,7 +27,6 @@
 			position: relative;
 			outline: none;
 			padding: 5px;
-			width: 145px;
 			font-family: "Champagne";
 			color: antiquewhite;
 			display: inline-block;
@@ -50,6 +49,12 @@
 				transform: scaleX(0);
 				transition: 0.25s linear;
 			}
+		}
+	}
+	@media (max-width: 720px) {
+		font-size: 0.6rem;
+		.footer-nav li {
+			width: 145px;
 		}
 	}
 }

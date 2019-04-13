@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
+import { RangeDatePicker, DatePicker } from "@y0c/react-datepicker";
+import moment from "moment";
 
 class BasicInput extends Component {
 	state = {
@@ -16,14 +18,19 @@ class BasicInput extends Component {
 		if (this.state.active === false) {
 			element.value = "";
 		}
-		element.placeholder = element.getAttribute("orig-placeholder") + ": " + message;
+		if (element) {
+			element.placeholder = element.getAttribute("orig-placeholder") + ": " + message;
+		}
 		this.setState({
 			validationFailed: true
 		});
 	};
 	validationSucess = () => {
 		let element = this.input.current;
-		element.placeholder = element.getAttribute("orig-placeholder");
+		if (element) {
+			element.placeholder = element.getAttribute("orig-placeholder");
+		}
+
 		this.setState({
 			validationFailed: false
 		});
@@ -72,46 +79,61 @@ class BasicInput extends Component {
 				} else {
 					return true;
 				}
-
+			case "number":
+				regex = /[0-9]+/i;
+				if (!regex.test(value.toLowerCase())) {
+					return "input.validation.failedNumber";
+				} else {
+					return true;
+				}
 			default:
 				return true;
 		}
 	};
-	checkInput = display => {
+	checkInput = (display, value, name) => {
 		const { t } = this.props;
-		let value = this.input.current.value;
-		let response;
-		let valid;
+		if (this.input.current || value !== undefined) {
+			if (value === undefined) {
+				value = this.input.current.value;
+			}
 
-		if (value.length > 0) {
-			let typeVal = this.checkType(value);
-			if (typeVal !== true) {
-				response = typeVal;
+			let response;
+			let valid;
+
+			if (value.length > 0) {
+				let typeVal = this.checkType(value);
+				if (typeVal !== true) {
+					response = typeVal;
+				}
+				let minVal = this.checkMinLenght(value);
+				if (minVal !== true) {
+					response = minVal;
+				}
+				let maxVal = this.checkMaxLenght(value);
+				if (maxVal !== true) {
+					response = maxVal;
+				}
 			}
-			let minVal = this.checkMinLenght(value);
-			if (minVal !== true) {
-				response = minVal;
+			let reqVal = this.checkRequired(value);
+			if (reqVal !== true) {
+				response = reqVal;
 			}
-			let maxVal = this.checkMaxLenght(value);
-			if (maxVal !== true) {
-				response = maxVal;
+			if (response) {
+				valid = false;
+			} else {
+				valid = true;
+			}
+			if (display && !valid) {
+				this.validationFailed(t(response));
+			} else {
+				this.validationSucess();
+			}
+			if (name) {
+				this.props.setValue(name, value, valid);
+			} else {
+				this.props.setValue(this.props.name, value, valid);
 			}
 		}
-		let reqVal = this.checkRequired(value);
-		if (reqVal !== true) {
-			response = reqVal;
-		}
-		if (response) {
-			valid = false;
-		} else {
-			valid = true;
-		}
-		if (display && !valid) {
-			this.validationFailed(t(response));
-		} else {
-			this.validationSucess();
-		}
-		this.props.setValue(this.props.name, value, valid);
 	};
 
 	validateInput = () => {
@@ -119,8 +141,21 @@ class BasicInput extends Component {
 	};
 	componentDidMount = () => {
 		let element = this.input.current;
-		element.setAttribute("orig-placeholder", element.placeholder);
-		this.checkInput(false);
+		if (element) {
+			element.setAttribute("orig-placeholder", element.placeholder);
+		}
+		switch (this.props.type) {
+			case "dateRange":
+				this.checkInput(false, "", this.props.name1);
+				this.checkInput(false, "", this.props.name2);
+				break;
+			case "date":
+				this.checkInput(false, moment().format(this.props.dateFormat), this.props.name);
+				break;
+			default:
+				this.checkInput(false);
+				break;
+		}
 	};
 
 	inputBlur = () => {
@@ -129,21 +164,58 @@ class BasicInput extends Component {
 		});
 		this.validateInput();
 	};
-	render() {
-		return (
-			<div className={this.props.textarea === true ? "input-wrapper textarea-wrapper" : "input-wrapper"}>
-				{!this.props.textarea && (
-					<input
-						onKeyUp={this.validateInput}
-						ref={this.input}
-						onFocus={this.resetInput}
-						onBlur={this.inputBlur}
-						className={this.state.validationFailed ? "val-failed" : ""}
-						name={this.props.name}
-						placeholder={this.props.placeholder}
+	dateRangeChange = (firstDate, secondDate) => {
+		if (firstDate) {
+			this.checkInput(true, firstDate.format(this.props.dateFormat), this.props.name1);
+		}
+		if (secondDate) {
+			this.checkInput(true, secondDate.format(this.props.dateFormat), this.props.name2);
+		}
+	};
+	dateChange = (tmp, date) => {
+		this.checkInput(true, date.format(this.props.dateFormat), this.props.name);
+	};
+	basicDateChange = e => {
+		let date = moment(e.target.value).format("L");
+
+		this.checkInput(true, date, this.props.name);
+	};
+
+	renderType = () => {
+		let el;
+		let width = window.innerWidth;
+		switch (this.props.type) {
+			case "dateRange":
+				let monthCount = 2;
+				if (width < 720) {
+					monthCount = 1;
+				}
+
+				el = (
+					<RangeDatePicker
+						startPlaceholder={this.props.placeholder1}
+						endPlaceholder={this.props.placeholder2}
+						dateFormat={this.props.dateFormat}
+						locale={window.lang}
+						readOnly={true}
+						onChange={this.dateRangeChange}
+						showMonthCnt={monthCount}
 					/>
-				)}
-				{this.props.textarea === true && (
+				);
+				break;
+			case "date":
+				if (window.innerWidth > 720) {
+					el = (
+						<DatePicker placeholder={this.props.placeholder} dateFormat={this.props.dateFormat} locale={window.lang} readOnly={true} onChange={this.dateChange} />
+					);
+				} else {
+					el = <input placeholder={this.props.placeholder} name={this.props.name} type="date" onChange={this.basicDateChange} />;
+				}
+
+				break;
+
+			case "textarea":
+				el = (
 					<textarea
 						onKeyUp={this.validateInput}
 						ref={this.input}
@@ -153,9 +225,66 @@ class BasicInput extends Component {
 						name={this.props.name}
 						placeholder={this.props.placeholder}
 					/>
-				)}
+				);
+				break;
+			default:
+				el = (
+					<input
+						lang={window.lang}
+						type={this.props.type}
+						onKeyUp={this.validateInput}
+						ref={this.input}
+						onFocus={this.resetInput}
+						onBlur={this.inputBlur}
+						className={this.state.validationFailed ? "val-failed" : ""}
+						name={this.props.name}
+						placeholder={this.props.placeholder}
+					/>
+				);
+				break;
+		}
 
-				{this.props.required && <span className="required">*</span>}
+		return el;
+	};
+	getWrapperClass = () => {
+		let cl = "input-wrapper";
+		switch (this.props.type) {
+			case "textarea":
+				cl += " textarea-wrapper";
+				break;
+			case "dateRange":
+				cl += " dateRange-wrapper";
+				break;
+			default:
+				break;
+		}
+		return cl;
+	};
+	getRequired = () => {
+		let el;
+		if (this.props.required) {
+			switch (this.props.type) {
+				case "dateRange":
+					el = (
+						<div>
+							<span className="required required-date1">*</span>
+							<span className="required required-date2">*</span>
+						</div>
+					);
+					break;
+				default:
+					el = <span className="required">*</span>;
+					break;
+			}
+		}
+		return el;
+	};
+
+	render() {
+		return (
+			<div className={this.getWrapperClass()}>
+				{this.renderType()}
+				{this.getRequired()}
 			</div>
 		);
 	}

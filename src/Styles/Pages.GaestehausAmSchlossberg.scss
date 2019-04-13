@@ -83,43 +83,4 @@
 			margin: 5px;
 		}
 	}*/
-	.slick-prev,
-	.slick-next {
-		text-align: center;
-		width: 40px !important;
-		height: 40px !important;
-		background: #232323 !important;
-		display: block;
-		border-radius: 50% !important;
-	}
-	.slick-prev {
-		left: -50px !important;
-		&::before {
-			content: "" !important;
-			background: url(/Assets/Basic/arrow-light-left.svg);
-			height: 22px;
-			width: 42px;
-			background-repeat: no-repeat;
-			top: 9px;
-			left: -2px;
-			background-size: contain;
-			background-position: center;
-			position: absolute;
-		}
-	}
-	.slick-next {
-		right: -50px !important;
-		&::before {
-			content: "" !important;
-			background: url(/Assets/Basic/arrow-light-right.svg);
-			height: 22px;
-			width: 42px;
-			background-repeat: no-repeat;
-			top: 9px;
-			left: 2px;
-			background-size: contain;
-			background-position: center;
-			position: absolute;
-		}
-	}
 }

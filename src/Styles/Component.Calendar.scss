@@ -1,0 +1,68 @@
+.picker {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+
+	.picker__trigger {
+		width: 100%;
+		height: 100%;
+		.picker-input {
+			width: 100%;
+			height: 100%;
+		}
+		.range-picker-input {
+			border: none;
+			width: 100%;
+			height: 100%;
+
+			.picker-input {
+				padding: 6px 10px;
+				border: 1px solid #9e1212;
+				border-radius: 4px;
+				margin: 0 10px;
+				width: 100%;
+				.picker-input__text {
+					padding: 0 !important;
+				}
+			}
+
+			.range-picker-input__icon {
+				display: none;
+			}
+			input:focus {
+				box-shadow: none;
+			}
+		}
+	}
+}
+.content .calendar__head--title {
+	margin: 4px;
+}
+.calendar__head {
+	background: #971818 !important;
+}
+.calendar__day--6 {
+	color: #337ab7 !important;
+}
+.calendar__day--0 {
+	color: #971818 !important;
+}
+.calendar__day--start,
+.calendar__day--end,
+.calendar__day--selected {
+	background: #971818 !important;
+}
+.calendar__day--range {
+	background: #ffbbbb !important;
+}
+.calendar__day:hover:not(.calendar__day--disabled) {
+	background: #ff9696 !important;
+}
+.calendar__day--start,
+.calendar__day--end,
+.calendar__day--selected {
+	color: white !important;
+}
+.calendar {
+	box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+}

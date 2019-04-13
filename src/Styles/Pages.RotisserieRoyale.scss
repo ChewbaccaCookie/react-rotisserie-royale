@@ -1,0 +1,123 @@
+.dish-divide svg,
+svg polygon {
+	fill: rgba(0, 0, 0, 0.35);
+	stroke-width: 0;
+}
+.dish-divide {
+	margin: 10px;
+}
+.menu-card {
+	text-align: center;
+	font-family: "Champagne";
+	width: 600px;
+	position: relative;
+
+	h2 {
+		font-size: 2rem;
+		font-weight: normal;
+	}
+	.menu-dish,
+	.standard-dish {
+		font-size: 1.2rem;
+	}
+	.price {
+		font-size: 1.6rem;
+		font-weight: bold;
+		margin-top: 20px;
+	}
+	.minPersonsDiv {
+		font-size: 1rem;
+		font-weight: 700;
+	}
+	.menuCard-correspondingWines {
+		font-size: 1.2rem;
+		margin-top: 20px;
+		line-height: 1.4rem;
+
+		.price {
+			font-size: 1.3rem;
+			font-weight: 700;
+			margin-top: 5px;
+		}
+	}
+	.menuCard-wineRecommendation .headding {
+		font-size: 1.2rem;
+		text-decoration: underline;
+		margin-top: 40px;
+		.wineRecommendation {
+			font-size: 1.1rem;
+			line-height: 1.3rem;
+		}
+	}
+	.dish-price {
+		position: absolute;
+		top: calc(50% - 0.6rem);
+		right: 0;
+		font-size: 1.2rem !important;
+		font-weight: normal;
+	}
+	.standard-dish {
+		position: relative;
+	}
+	.menuCard-additionalText {
+		margin-top: 30px;
+		font-size: 1rem;
+		font-weight: 700;
+	}
+	.menu-items {
+		position: relative;
+	}
+	.menu-background {
+		background-image: url("/Assets/Images/menu-background.png");
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		opacity: 0.3;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 0;
+	}
+
+	@media (max-width: 720px) {
+		width: 100%;
+		.standard-dish,
+		.menu-dish {
+			font-size: 1rem;
+		}
+		.dish-price {
+			position: relative;
+			font-size: 1rem !important;
+		}
+		.dish-divide svg,
+		svg polygon {
+			transform: scale(0.8);
+			margin-left: -30px;
+		}
+		.dish-divide {
+			margin: 0;
+		}
+		.slick-next {
+			right: -10px !important;
+		}
+		.slick-prev {
+			left: -10px !important;
+		}
+		.menuCard-correspondingWines {
+			display: none;
+		}
+		.menuCard-wineRecommendation {
+			display: none;
+		}
+		.menuCardContent {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			& > div {
+				width: calc(100% - 75px);
+			}
+		}
+	}
+}

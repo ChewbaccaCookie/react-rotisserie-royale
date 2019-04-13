@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Rotisserie Royale</title>
+		<link href="https://fonts.googleapis.com/css?family=Raleway:400,900" rel="stylesheet" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<style>
+			body {
+				height: 100vh;
+				width: 100vw;
+				font-family: "Raleway";
+				margin: 0;
+				font-size: 15px;
+				color: #4b4b4b;
+			}
+			.main {
+				top: 10vh;
+				position: absolute;
+				width: calc(100% - 40px);
+				left: 0;
+				right: 0;
+				margin: 0 auto;
+				max-width: 700px;
+				padding: 20px;
+			}
+			img {
+				width: 100%;
+			}
+			#javascipt-disabled-text {
+				font-size: 15px;
+				width: 100%;
+				max-width: 600px;
+				text-align: center;
+				margin-left: auto;
+				margin-right: auto;
+				margin-top: 50px;
+			}
+			.first-letter {
+				float: left;
+				font-size: 2.9rem;
+				line-height: 2.5rem;
+				padding-top: 4px;
+				padding-right: 8px;
+				padding-left: 3px;
+			}
+			h1 {
+				font-weight: 900;
+				font-size: 25px;
+			}
+			.highlight {
+				color: #e88760;
+			}
+			.btn {
+				padding: 10px 30px;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				text-transform: uppercase;
+				color: #e88760;
+				border: 2px solid #e88760;
+				border-radius: 1px;
+				width: 250px;
+				margin-top: 30px;
+				text-decoration: none;
+				transition: 0.3s all ease-in-out;
+			}
+
+			.btn:hover {
+				background: #e88760;
+				color: white;
+			}
+
+			@media (max-width: 720px) {
+				#javascipt-disabled-text {
+					font-size: 14px;
+				}
+				h1 {
+					font-size: 18px;
+					margin: 20px 0px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="main">
+			<img src="../Assets/Images/Outdated.svg" />
+			<div id="javascipt-disabled-text">
+				<h1>JavaScript <span class="highlight">ausgeschaltet</span></h1>
+				<p>
+					Lieber Gast,<br />Um das Besuchererlebnis optimal anbieten zu können, setzen wir auf JavaScript zur Darstellung der Seite. Dies bedeutet, dass diese Seite
+					nur besucht werden kann, wenn Skripte aktiviert sind.
+				</p>
+				<p>
+					Dear Guest, <br />
+					In order to optimally offer the visitor experience, we rely on JavaScript to display the page. This means that this page can only be visited if scripts are
+					enabled.
+				</p>
+				<a href="https://www.enable-javascript.com/" class="btn">Weitere Informationen</a>
+			</div>
+		</div>
+	</body>
+
+	<script>
+		window.location.href = "../";
+	</script>
+</html>

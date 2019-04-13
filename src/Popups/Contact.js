@@ -81,8 +81,10 @@ class Contact extends Component {
 					<BasicInput type="email" name="contactEmail" required={true} setValue={this.setInputValue} placeholder={t("input.basic.email")} />
 					<BasicInput type="tel" name="contactPhone" setValue={this.setInputValue} placeholder={t("input.basic.phone")} />
 					<BasicInput type="text" name="contactSubject" required={true} setValue={this.setInputValue} placeholder={t("input.basic.subject")} />
-					<BasicInput textarea={true} type="text" name="contactMessage" required={true} setValue={this.setInputValue} placeholder={t("input.basic.message")} />
-					<button disabled={this.state.disabled}>{t("input.basic.message_submit")}</button>
+					<BasicInput type="textarea" name="contactMessage" required={true} setValue={this.setInputValue} placeholder={t("input.basic.message")} />
+					<button className="btn" disabled={this.state.disabled}>
+						{t("input.basic.message_submit")}
+					</button>
 				</form>
 			</Popup>
 		);
