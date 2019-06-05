@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import HomePage from "./Pages/HomePage";
 
@@ -17,6 +17,7 @@ import Contact from "./Popups/Contact";
 import GaestehausAmSchlossberg from "./Pages/GaestehausAmSchlossberg";
 import Dogs from "./Popups/Dogs";
 import ResponseMessage from "./Popups/ResponseMessage";
+import PageNotFound from "./Components/404";
 
 const store = createStore(popupRededucer);
 window.store = store;
@@ -26,9 +27,13 @@ class App extends Component {
 		return (
 			<div>
 				<Navigation />
-				<Route exact path="/" component={HomePage} />
-				<Route exact path="/Rotisserie-Royale" component={RotisserieRoyalePage} />
-				<Route exact path="/Gästehaus-am-Schlossberg" component={GaestehausAmSchlossberg} />
+				<Switch>
+					<Route exact path="/" component={HomePage} />
+					<Route exact path="/Rotisserie-Royale" component={RotisserieRoyalePage} />
+					<Route exact path="/Gästehaus-am-Schlossberg" component={GaestehausAmSchlossberg} />
+
+					<Route component={PageNotFound} />
+				</Switch>
 				<section className="popups">
 					<Privacy />
 					<Impressum />

@@ -145,8 +145,6 @@ class RotisserieRoyalePage extends Component {
 			}
 		});
 
-		console.log(internalFormat);
-
 		this.setState({
 			menuCard: internalFormat
 		});
