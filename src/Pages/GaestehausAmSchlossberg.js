@@ -209,7 +209,7 @@ class GaestehausAmSchlossberg extends Component {
 						</div>
 
 						<div className="flex-center">
-							<article className="booking-request middle-content basicInput">
+							<article id="booking-request" className="booking-request middle-content basicInput">
 								<h1>{t("pages.gh.booking_request")}</h1>
 								<form onSubmit={this.sendBookingRequest}>
 									<fieldset>

@@ -247,7 +247,7 @@ class RotisserieRoyalePage extends Component {
 							</article>
 						</div>
 						<div className="flex-center">
-							<article className="menu-card">
+							<article id="menu-card" className="menu-card">
 								<h1>{t("pages.rr.menu_card")}</h1>
 								<div className="menu-items">
 									{this.state.menuCard &&
@@ -356,7 +356,7 @@ class RotisserieRoyalePage extends Component {
 							</article>
 						</div>
 						<div className="flex-center">
-							<article className="table-reservation middle-content basicInput">
+							<article id="table-reservation" className="table-reservation middle-content basicInput">
 								<h1>{t("pages.rr.table_reservation")}</h1>
 								<form onSubmit={this.sendTableReservationRequest}>
 									<fieldset>
