@@ -347,10 +347,10 @@ class RotisserieRoyalePage extends Component {
 										})}
 									<div className="menu-background" />
 									<div className="menu-card-controls">
-										<button type="button" class="slick-arrow slick-prev" onClick={() => this.selectPage("prev")}>
+										<button type="button" className="slick-arrow slick-prev" onClick={() => this.selectPage("prev")}>
 											Previous
 										</button>
-										<button type="button" class="slick-arrow slick-next" onClick={() => this.selectPage("next")}>
+										<button type="button" className="slick-arrow slick-next" onClick={() => this.selectPage("next")}>
 											Next
 										</button>
 									</div>

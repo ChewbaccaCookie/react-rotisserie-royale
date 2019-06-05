@@ -52,30 +52,31 @@ class Navigation extends Component {
 	render() {
 		const { t } = this.props;
 		return (
-			<div className={this.state.menuOpen === true ? "navOpen Navigation" : "Navigation"}>
+			<div>
 				<div id="nav-icon" className={this.state.menuOpen === true ? "open" : ""} onClick={this.toggleNav}>
 					<span />
 					<span />
 					<span />
 					<span />
 				</div>
-
-				<div className="overlay-content">
-					<NavLink onClick={this.toggleNav} activeClassName="nav-is-active" exact to="/" className="navigation-link">
-						{t("navigation.home")}
-					</NavLink>
-					<NavLink onClick={this.toggleNav} activeClassName="nav-is-active" to="/Rotisserie-Royale" className="navigation-link">
-						{t("basic.rotisserie_royale")}
-					</NavLink>
-					<NavLink onClick={this.toggleNav} activeClassName="nav-is-active" to="/Gästehaus-am-Schlossberg" className="navigation-link">
-						{t("basic.gaestehaus_am_schlossberg")}
-					</NavLink>
-					<div className="additional-links">
-						<button onClick={() => this.openPopup("impressum")}>{t("basic.impressum")}</button>
-						<button onClick={() => this.openPopup("privacy")}>{t("basic.privacy")}</button>
-						<button onClick={this.toggleLanguage} className="navigation-link">
-							{t("basic.translation_toggle")}
-						</button>
+				<div className={this.state.menuOpen === true ? "navOpen Navigation" : "Navigation"}>
+					<div className="overlay-content">
+						<NavLink onClick={this.toggleNav} activeClassName="nav-is-active" exact to="/" className="navigation-link">
+							{t("navigation.home")}
+						</NavLink>
+						<NavLink onClick={this.toggleNav} activeClassName="nav-is-active" to="/Rotisserie-Royale" className="navigation-link">
+							{t("basic.rotisserie_royale")}
+						</NavLink>
+						<NavLink onClick={this.toggleNav} activeClassName="nav-is-active" to="/Gästehaus-am-Schlossberg" className="navigation-link">
+							{t("basic.gaestehaus_am_schlossberg")}
+						</NavLink>
+						<div className="additional-links">
+							<button onClick={() => this.openPopup("impressum")}>{t("basic.impressum")}</button>
+							<button onClick={() => this.openPopup("privacy")}>{t("basic.privacy")}</button>
+							<button onClick={this.toggleLanguage} className="navigation-link">
+								{t("basic.translation_toggle")}
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>

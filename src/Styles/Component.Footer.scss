@@ -10,7 +10,7 @@
 	box-shadow: 0px -2px 2px 0px rgba(0, 0, 0, 1);
 
 	.footer-nav {
-		width: 100%;
+		width: calc(100% - 10px);
 		display: flex;
 		justify-content: center;
 		padding: 40px 5px 25px 5px;
