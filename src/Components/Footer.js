@@ -21,7 +21,7 @@ class Footer extends Component {
 						</ul>
 					</div>
 
-					<p className="text-center">Copyright ©{new Date().getFullYear()} by www.rotisserie-royale.de. All Rights Reserved</p>
+					<p className="text-center">Copyright ©{new Date().getFullYear()} by <a href="https://onedash.de">OneDash.</a> All Rights Reserved</p>
 				</section>
 			</div>
 		);
