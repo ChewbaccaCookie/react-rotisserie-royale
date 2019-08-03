@@ -131,5 +131,7 @@
 	"pages.rr.text": "ie suchen ein angenehmes Ambiente und eine ansprechende Küche? Dann freuen wir uns, Sie als Gast willkommen zu heissen. Die Rotisserie-Royale ist ein altes denkmalgeschütztes Fachwerkhaus, in dem die Gastronomie schon seit vielen Jahren beheimatet ist. Durch die besondere Atmosphähre, nicht zuletzt wegen der historischen Einrichtung einer alten Abtei, fühlen Sie sich wie in eine andere Epoche zurückversetzt. Wir möchten Sie mit einer leichten französichen Küche verwöhnen, die sich nach den Jahreszeiten und den jeweiligen marktfrischen Produkten richtet.",
 	"pages.rr.text_first_letter": "S",
 	"pages.rr.welcome_h1": "Herzlich Willkommen in der <span class=\"no-break\">Rotisserie Royale</span>",
-	"pages.rr.welcome_h2": "Ihre Adresse für anspruchsvolle Gastlichkeit"
+	"pages.rr.welcome_h2": "Ihre Adresse für anspruchsvolle Gastlichkeit",
+	"input.basic.dateTooEarly": "Bitte rufen Sie uns an, wenn sie für die nächsten zwei Tage reservieren möchten.",
+	"input.basic.tooManyPeople": "Wenn Sie zu mehr als 6 Personen kommen möchten, rufen Sie uns bitte an."
 }

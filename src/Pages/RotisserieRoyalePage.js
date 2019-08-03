@@ -59,12 +59,53 @@ class RotisserieRoyalePage extends Component {
 		inputValues: [],
 		disabled: true,
 		menu: [],
-		page: 0
+		page: 0,
+		reservationNotification: ""
+	};
+
+	parseDate = input => {
+		var parts = input.match(/(\d+)/g);
+		return new Date(parts[2], parts[1] - 1, parts[0]);
 	};
 
 	setInputValue = (name, value, valid) => {
 		let inputValues = this.state.inputValues;
 		let obj = inputValues.find(x => x.name === name);
+
+		if (name === "tableReservationDate") {
+			let validDay = new Date();
+			validDay.setDate(validDay.getDate() + 1);
+			let selectedDay = this.parseDate(value);
+
+			if (validDay < selectedDay) {
+				valid = true;
+				if (this.state.reservationNotification === this.props.t("input.basic.dateTooEarly")) {
+					this.setState({
+						reservationNotification: ""
+					});
+				}
+			} else {
+				valid = false;
+				this.setState({
+					reservationNotification: this.props.t("input.basic.dateTooEarly")
+				});
+			}
+		}
+
+		if (name === "tableReservationNum") {
+			if (value > 6) {
+				valid = false;
+				this.setState({
+					reservationNotification: this.props.t("input.basic.tooManyPeople")
+				});
+			} else {
+				if (this.state.reservationNotification === this.props.t("input.basic.tooManyPeople")) {
+					this.setState({
+						reservationNotification: ""
+					});
+				}
+			}
+		}
 
 		if (obj) {
 			obj.valid = valid;
@@ -77,6 +118,7 @@ class RotisserieRoyalePage extends Component {
 			};
 			inputValues.push(obj);
 		}
+
 		this.setState(
 			{
 				inputValues
@@ -426,6 +468,8 @@ class RotisserieRoyalePage extends Component {
 											setValue={this.setInputValue}
 											placeholder={t("input.basic.additional_info")}
 										/>
+										{this.state.reservationNotification.length > 0 && <div className="form-notification">{this.state.reservationNotification}</div>}
+
 										<button className="btn" disabled={this.state.disabled}>
 											{t("input.basic.table_reservation")}
 										</button>
