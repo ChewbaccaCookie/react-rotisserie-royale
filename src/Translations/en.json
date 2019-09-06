@@ -131,5 +131,7 @@
 	"pages.rr.text": "ou're looking for a friendly atmosphere and attractive eat? Then we look forward to welcoming you as a guest. The Rotisserie-Royale is an old protected monument Half-timbered house, where gastronomy has been around for many years. Due to the special atmosphere, not least because of the Historic setting of an ancient abbey, you feel like in Another epoch. We would like to spoil you with a light French cuisine, according to the seasons and the respective market.",
 	"pages.rr.text_first_letter": "Y",
 	"pages.rr.welcome_h1": "Welcome to the <span class=\"no-break\">Rotisserie Royale</span>",
-	"pages.rr.welcome_h2": "Your address for hospitality."
+	"pages.rr.welcome_h2": "Your address for hospitality.",
+	"input.basic.dateTooEarly": "Please call us if you would like to make a reservation for the next two days.",
+	"input.basic.tooManyPeople": "If you would like to come to more than 6 people, please call us to reserverieren."
 }
