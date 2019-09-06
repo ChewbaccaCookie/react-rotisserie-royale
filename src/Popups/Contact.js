@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
 import Popup from "../Components/Popup";
 import BasicInput from "../Components/BasicInput";
-import mainSettings from "../MainSettings";
 import $ from "jquery";
 import Axios from "axios";
 
@@ -64,7 +63,7 @@ class Contact extends Component {
 
 			window.store.dispatch({ type: "TOGGLE_POPUP", name: "contact" });
 			window.store.dispatch({ type: "TOGGLE_POPUP", name: "responseMessage" });
-			Axios.post(mainSettings.backendServer + "/rotisserie/contact", content).then(function(response) {
+			Axios.post(process.env.REACT_APP_BACKEND_ENDPOINT + "/contactRequest/contact", content).then(function(response) {
 				setTimeout(function() {
 					window.store.dispatch({ type: "REQUEST_FINISHED", name: "responseMessage", response: response.data.message });
 				}, 1000);

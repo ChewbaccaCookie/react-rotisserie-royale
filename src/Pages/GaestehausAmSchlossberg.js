@@ -10,7 +10,6 @@ import Footer from "../Components/Footer";
 import Slider from "react-slick";
 import $ from "jquery";
 import BasicInput from "../Components/BasicInput";
-import mainSettings from "../MainSettings";
 import Axios from "axios";
 import "@y0c/react-datepicker/assets/styles/calendar.scss";
 import "moment/locale/de";
@@ -107,7 +106,7 @@ class GaestehausAmSchlossberg extends Component {
 				});
 
 			window.store.dispatch({ type: "TOGGLE_POPUP", name: "responseMessage" });
-			Axios.post(mainSettings.backendServer + "/rotisserie/booking_request", content).then(function(response) {
+			Axios.post(process.env.REACT_APP_BACKEND_ENDPOINT + "/contactRequest/bookign_request", content).then(function(response) {
 				setTimeout(function() {
 					window.store.dispatch({ type: "REQUEST_FINISHED", name: "responseMessage", response: response.data.message });
 				}, 1000);

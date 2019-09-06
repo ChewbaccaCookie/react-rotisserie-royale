@@ -7,7 +7,6 @@ import Footer from "../Components/Footer";
 import $ from "jquery";
 import BasicInput from "../Components/BasicInput";
 import Axios from "axios";
-import mainSettings from "../MainSettings";
 
 let backgroundImages = [
 	{
@@ -180,7 +179,7 @@ class RotisserieRoyalePage extends Component {
 				});
 
 			window.store.dispatch({ type: "TOGGLE_POPUP", name: "responseMessage" });
-			Axios.post(mainSettings.backendServer + "/rotisserie/table_request", content).then(function(response) {
+			Axios.post(process.env.REACT_APP_BACKEND_ENDPOINT + "/contactRequest/table_request", content).then(function(response) {
 				setTimeout(function() {
 					window.store.dispatch({ type: "REQUEST_FINISHED", name: "responseMessage", response: response.data.message });
 				}, 1000);
