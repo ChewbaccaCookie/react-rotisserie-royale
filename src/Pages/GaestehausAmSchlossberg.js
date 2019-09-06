@@ -44,7 +44,7 @@ class GaestehausAmSchlossberg extends Component {
 
 	async loadArrangements() {
 		try {
-			const arrangements = (await Axios.get(mainSettings.backendServer + "/arrangements/")).data;
+			const arrangements = (await Axios.get(process.env.REACT_APP_BACKEND_ENDPOINT + "/arrangements/get")).data;
 			arrangements.forEach(arr => {
 				arr.price = arr.price.toFixed(2).replace(".", ",") + "€";
 			});

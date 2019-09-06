@@ -22,11 +22,6 @@ let backgroundImages = [
 ];
 
 var translations = {
-	contains: {
-		de: "Enthält:",
-		en: "Contains:",
-		fr: "Contient:"
-	},
 	perPerson: {
 		de: "Pro Person",
 		en: "Per person",
@@ -96,66 +91,18 @@ class RotisserieRoyalePage extends Component {
 		});
 		return valid;
 	};
-	convertToFormat = () => {
-		let dishes = this.state.dishes;
-		let menuCards = [];
-		let internalFormat = [];
-		dishes.map(dish => {
-			if (dish.type === "info" && !menuCards.includes(dish.elementId)) {
-				menuCards.push(dish.elementId);
-			}
-			return 0;
-		});
-
-		menuCards.forEach(card => {
-			let content = dishes.filter(x => x.menuCard === card && x.type === "dish");
-
-			content.sort((a, b) => {
-				return a.order - b.order;
-			});
-
-			let el = {
-				content,
-				info: dishes.find(x => x.elementId === card && x.type === "info")
-			};
-			internalFormat.push(el);
-		});
-
-		internalFormat.sort(function(a, b) {
-			return a.info.order - b.info.order;
-		});
-
-		let currentSiteNum = 0;
-		let page = 0;
-		internalFormat.forEach(card => {
-			if (window.innerWidth > 720) {
-				if (card.content.length + currentSiteNum > 10) {
-					page++;
-					currentSiteNum = 0;
-				}
-
-				currentSiteNum += card.content.length;
-				if (card.info.isMenuCard) {
-					currentSiteNum = 100;
-				}
-				card.page = page;
-			} else {
-				card.page = page;
-				page++;
-			}
-		});
-
-		this.setState({
-			menuCard: internalFormat
-		});
-	};
 
 	componentDidMount = () => {
 		this.loadDishes();
 	};
+	loadDishes = () => {
+		Axios.get(process.env.REACT_APP_BACKEND_ENDPOINT + "/cardDesigner/completeCard/" + process.env.REACT_APP_MASTER_CARD_ID).then(response => {
+			this.setState({ menu: response.data.filter(page => page.id !== "64476b58-e956-a7cd-a96e-218f7e0967d5") });
+		});
+	};
 	selectPage = type => {
 		let page = this.state.page;
-		let maxPage = this.state.menuCard[this.state.menuCard.length - 1].page;
+		let maxPage = this.state.menu.length - 1;
 		if (type === "next") {
 			if (page < maxPage) {
 				page++;
@@ -199,16 +146,6 @@ class RotisserieRoyalePage extends Component {
 		}
 	};
 
-	async loadDishes() {
-		const dishes = (await Axios.get(mainSettings.backendServer + "/rotisserie/menuCard/" + mainSettings.menuCard)).data;
-
-		this.setState(
-			{
-				dishes
-			},
-			this.convertToFormat
-		);
-	}
 	getDishName = dish => {
 		var name = dish.name.replace("\n", "<br>");
 
@@ -219,6 +156,7 @@ class RotisserieRoyalePage extends Component {
 
 	render() {
 		const { t } = this.props;
+		let { menu, page } = this.state;
 		return (
 			<div className="RotisserieRoyalePage">
 				<BackgroundSlider images={backgroundImages} autoplay={true} />
@@ -250,99 +188,91 @@ class RotisserieRoyalePage extends Component {
 							<article id="menu-card" className="menu-card">
 								<h1>{t("pages.rr.menu_card")}</h1>
 								<div className="menu-items">
-									{this.state.menuCard &&
-										this.state.menuCard.map(menuSection => {
-											if (this.state.page === menuSection.page) {
-												return (
-													<div key={menuSection.info.elementId} className={menuSection.info.isMenuCard ? "menu-item" : "menu-item standard-menu"}>
-														<div className="menuCardInfoHead">
-															<h2>{menuSection.info.name[window.lang]}</h2>
-														</div>
-														<div className="menuCardContent">
-															{menuSection.content.map((dish, index) => (
-																<div key={dish.elementId}>
-																	<div className={menuSection.info.isMenuCard ? "menu-dish" : "standard-dish"}>
-																		<div className="dish-info">
-																			<div
-																				className="dish-name"
-																				dangerouslySetInnerHTML={{
-																					__html: dish.name[window.lang].replace(/(?:\r\n|\r|\n)/g, "</br>")
-																				}}>
-																				{this.state.toggleKennz && <sup className="numbers">{dish.numbers.join(",")}</sup>}
-																			</div>
-																			{this.state.toggleContent && (
-																				<div className="dish-content">{`${translations.contains[window.lang]} ${
-																					dish.content[window.lang]
-																				}`}</div>
-																			)}
-																		</div>
-																		{!menuSection.info.isMenuCard && (
-																			<div className="dish-price">{(dish.price || 0).toFixed(2).replace(".", ",")} €</div>
-																		)}
-																	</div>
-																	{index < menuSection.content.length - 1 && (
-																		<p className="dish-divide">
-																			<svg height="12" width="300">
-																				<path d="M 0 6 C 140 6 140 6 150 0 C 160 6 160 6 300 6 C 160 6 160 6 150 12 C 140 6 140 6 0 6 Z" />
-																			</svg>
-																		</p>
-																	)}
-																</div>
-															))}
-
-															{menuSection.info.isMenuCard && (
-																<div className="menuCard-price">
-																	<div className="price">
-																		{translations.perPerson[window.lang]}{" "}
-																		<span className="mainPrice">{(menuSection.info.price || 0).toFixed(2).replace(".", ",")}</span>
-																		€
-																		<br />
-																		<div className="minPersonsDiv">
-																			{translations.menuFor[window.lang]}{" "}
-																			<span className="minPersons">{menuSection.info.minPersons || 0}</span>{" "}
-																			{translations.persons[window.lang]}
-																		</div>
-																	</div>
-																</div>
-															)}
-
-															{menuSection.info.hasCorrespondingWines && (
-																<div className="menuCard-correspondingWines">
-																	<span dangerouslySetInnerHTML={{ __html: translations.correspondingWines[window.lang] }} /> <br />
-																	<div className="price">
-																		{translations.perPerson[window.lang]}{" "}
-																		<span className="correspondingWinesPrice">
-																			{(menuSection.info.correspondingWinesPrice || 0).toFixed(2).replace(".", ",")}
-																		</span>
-																		€
-																	</div>
-																</div>
-															)}
-															{menuSection.info.hasWineRecommendation && (
-																<div className="menuCard-wineRecommendation">
-																	<div className="headding">{translations.wineRecommendation[window.lang]}</div>
+									{menu[page] &&
+										menu[page].cards.map(card => (
+											<div key={card.id} className={card.type === "menu" ? "menu-item" : "menu-item standard-menu"}>
+												<div className="menuCardInfoHead">
+													<h2>{card.name[window.lang]}</h2>
+												</div>
+												<div className="menuCardContent">
+													{card.cardItems.map((item, index) => (
+														<div key={item.id}>
+															<div className={card.type === "menu" ? "menu-dish" : "standard-dish"}>
+																<div className="dish-info">
 																	<div
-																		className="wineRecommendation"
-																		dangerouslySetInnerHTML={{ __html: menuSection.info.wineRecommendation }}
+																		className="dish-name"
+																		dangerouslySetInnerHTML={{
+																			__html: item.name[window.lang].replace(/(?:\r\n|\r|\n)/g, "</br>")
+																		}}
 																	/>
 																</div>
-															)}
-
-															{menuSection.info.hasAdditionalText && (
-																<div
-																	className="menuCard-additionalText"
-																	dangerouslySetInnerHTML={{
-																		__html: menuSection.info.additionalText[window.lang].replace(/(?:\r\n|\r|\n)/g, "</br>")
-																	}}
-																/>
+																{card.type !== "menu" && (
+																	<div className="dish-price">{item.prices[0].price.toFixed(2).replace(".", ",")} €</div>
+																)}
+															</div>
+															{index < card.cardItems.length - 1 && (
+																<p className="dish-divide">
+																	<svg height="12" width="300">
+																		<path d="M 0 6 C 140 6 140 6 150 0 C 160 6 160 6 300 6 C 160 6 160 6 150 12 C 140 6 140 6 0 6 Z" />
+																	</svg>
+																</p>
 															)}
 														</div>
-													</div>
-												);
-											} else {
-												return "";
-											}
-										})}
+													))}
+													{card.type === "menu" && card.options && (
+														<div className="menuCard-price">
+															<div className="price">
+																{card.options.price && card.options.price.enabled && (
+																	<>
+																		{translations.perPerson[window.lang]}{" "}
+																		<span className="mainPrice">{card.options.price.value.toFixed(2).replace(".", ",")}</span>
+																		€
+																		<br />
+																	</>
+																)}
+																{card.options.minPersons && card.options.minPersons.enabled && (
+																	<div className="minPersonsDiv">
+																		{translations.menuFor[window.lang]}{" "}
+																		<span className="minPersons">{card.options.minPersons.value || 0}</span>{" "}
+																		{translations.persons[window.lang]}
+																	</div>
+																)}
+															</div>
+														</div>
+													)}
+
+													{card.options && card.options["corresponding-wines"] && card.options["corresponding-wines"].enabled && (
+														<div className="menuCard-correspondingWines">
+															<span dangerouslySetInnerHTML={{ __html: translations.correspondingWines[window.lang] }} /> <br />
+															<div className="price">
+																{translations.perPerson[window.lang]}{" "}
+																<span className="correspondingWinesPrice">
+																	{card.options["corresponding-wines"].value.toFixed(2).replace(".", ",")}
+																</span>
+																€
+															</div>
+														</div>
+													)}
+													{card.options && card.options["wine-recommendation"] && card.options["wine-recommendation"].enabled && (
+														<div className="menuCard-wineRecommendation">
+															<div className="headding">{translations.wineRecommendation[window.lang]}</div>
+															<div
+																className="wineRecommendation"
+																dangerouslySetInnerHTML={{ __html: card.options["wine-recommendation"].value.name[window.lang] }}
+															/>
+														</div>
+													)}
+													{card.options && card.options.additionalText && card.options.additionalText.enabled && (
+														<div
+															className="menuCard-additionalText"
+															dangerouslySetInnerHTML={{
+																__html: card.options.additionalText.value.name[window.lang].replace(/(?:\r\n|\r|\n)/g, "</br>")
+															}}
+														/>
+													)}
+												</div>
+											</div>
+										))}
 									<div className="menu-background" />
 									<div className="menu-card-controls">
 										<button type="button" className="slick-arrow slick-prev" onClick={() => this.selectPage("prev")}>
