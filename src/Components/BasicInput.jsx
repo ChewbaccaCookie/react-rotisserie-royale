@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
 import { RangeDatePicker, DatePicker } from "@y0c/react-datepicker";
 import moment from "moment";
+import "dayjs/locale/de";
+import "dayjs/locale/en";
 
 class BasicInput extends Component {
 	state = {
@@ -165,15 +167,18 @@ class BasicInput extends Component {
 		this.validateInput();
 	};
 	dateRangeChange = (firstDate, secondDate) => {
+		const t = this.props.t;
+
 		if (firstDate) {
-			this.checkInput(true, firstDate.format(this.props.dateFormat), this.props.name1);
+			this.checkInput(true, moment(firstDate, t("input.basic.dateFormat")).format(this.props.dateFormat), this.props.name1);
 		}
 		if (secondDate) {
-			this.checkInput(true, secondDate.format(this.props.dateFormat), this.props.name2);
+			this.checkInput(true, moment(secondDate, t("input.basic.dateFormat")).format(this.props.dateFormat), this.props.name2);
 		}
 	};
 	dateChange = (tmp, date) => {
-		this.checkInput(true, date.format(this.props.dateFormat), this.props.name);
+		const t = this.props.t;
+		this.checkInput(true, moment(date, t("input.basic.dateFormat")).format(this.props.dateFormat), this.props.name);
 	};
 	basicDateChange = e => {
 		let date = moment(e.target.value).format("L");
@@ -191,13 +196,14 @@ class BasicInput extends Component {
 					monthCount = 1;
 				}
 
+				console.log(window.lang);
+
 				el = (
 					<RangeDatePicker
 						startPlaceholder={this.props.placeholder1}
 						endPlaceholder={this.props.placeholder2}
 						dateFormat={this.props.dateFormat}
 						locale={window.lang}
-						readOnly={true}
 						onChange={this.dateRangeChange}
 						showMonthCnt={monthCount}
 					/>
@@ -206,7 +212,12 @@ class BasicInput extends Component {
 			case "date":
 				if (window.innerWidth > 720) {
 					el = (
-						<DatePicker placeholder={this.props.placeholder} dateFormat={this.props.dateFormat} locale={window.lang} readOnly={true} onChange={this.dateChange} />
+						<DatePicker
+							placeholder={this.props.placeholder}
+							dateFormat={this.props.dateFormat}
+							locale={window.lang}
+							onChange={this.dateChange}
+						/>
 					);
 				} else {
 					el = <input placeholder={this.props.placeholder} name={this.props.name} type="date" onChange={this.basicDateChange} />;

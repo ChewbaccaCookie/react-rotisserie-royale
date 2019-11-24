@@ -7,6 +7,7 @@ import Footer from "../Components/Footer";
 import $ from "jquery";
 import BasicInput from "../Components/BasicInput";
 import Axios from "axios";
+import moment from "moment";
 
 let backgroundImages = [
 	{
@@ -57,11 +58,6 @@ class RotisserieRoyalePage extends Component {
 		reservationNotification: ""
 	};
 
-	parseDate = input => {
-		var parts = input.match(/(\d+)/g);
-		return new Date(parts[2], parts[1] - 1, parts[0]);
-	};
-
 	setInputValue = (name, value, valid) => {
 		let inputValues = this.state.inputValues;
 		let obj = inputValues.find(x => x.name === name);
@@ -69,9 +65,9 @@ class RotisserieRoyalePage extends Component {
 		if (name === "tableReservationDate") {
 			let validDay = new Date();
 			validDay.setDate(validDay.getDate() + 1);
-			let selectedDay = this.parseDate(value);
-
-			if (validDay < selectedDay) {
+			let selectedDay = value;
+			const t = this.props.t;
+			if (moment(validDay, t("input.basic.dateFormat")).unix() < moment(selectedDay, t("input.basic.dateFormat")).unix()) {
 				valid = true;
 				if (this.state.reservationNotification === this.props.t("input.basic.dateTooEarly")) {
 					this.setState({
@@ -137,9 +133,11 @@ class RotisserieRoyalePage extends Component {
 		this.loadDishes();
 	};
 	loadDishes = () => {
-		Axios.get(process.env.REACT_APP_BACKEND_ENDPOINT + "/cardDesigner/completeCard/" + process.env.REACT_APP_MASTER_CARD_ID).then(response => {
-			this.setState({ menu: response.data.filter(page => page.id !== "64476b58-e956-a7cd-a96e-218f7e0967d5") });
-		});
+		Axios.get(process.env.REACT_APP_BACKEND_ENDPOINT + "/cardDesigner/completeCard/" + process.env.REACT_APP_MASTER_CARD_ID).then(
+			response => {
+				this.setState({ menu: response.data.filter(page => page.id !== "64476b58-e956-a7cd-a96e-218f7e0967d5") });
+			}
+		);
 	};
 	selectPage = type => {
 		let page = this.state.page;
@@ -201,7 +199,11 @@ class RotisserieRoyalePage extends Component {
 		return (
 			<div className="RotisserieRoyalePage">
 				<BackgroundSlider images={backgroundImages} autoplay={true} />
-				<div id="logo" />
+				<div id="logo">
+					<a href="/">
+						<img alt="Logo - Rotisserie Royale / Gästehaus am Schlossberg" src="/Assets/Slider/logo.png" />
+					</a>
+				</div>
 				<div className="main-content">
 					<section className="content">
 						<h1 dangerouslySetInnerHTML={{ __html: t("pages.rr.welcome_h1") }} />
@@ -243,12 +245,17 @@ class RotisserieRoyalePage extends Component {
 																	<div
 																		className="dish-name"
 																		dangerouslySetInnerHTML={{
-																			__html: item.name[window.lang].replace(/(?:\r\n|\r|\n)/g, "</br>")
+																			__html: item.name[window.lang].replace(
+																				/(?:\r\n|\r|\n)/g,
+																				"</br>"
+																			)
 																		}}
 																	/>
 																</div>
 																{card.type !== "menu" && (
-																	<div className="dish-price">{item.prices[0].price.toFixed(2).replace(".", ",")} €</div>
+																	<div className="dish-price">
+																		{item.prices[0].price.toFixed(2).replace(".", ",")} €
+																	</div>
 																)}
 															</div>
 															{index < card.cardItems.length - 1 && (
@@ -266,7 +273,9 @@ class RotisserieRoyalePage extends Component {
 																{card.options.price && card.options.price.enabled && (
 																	<>
 																		{translations.perPerson[window.lang]}{" "}
-																		<span className="mainPrice">{card.options.price.value.toFixed(2).replace(".", ",")}</span>
+																		<span className="mainPrice">
+																			{card.options.price.value.toFixed(2).replace(".", ",")}
+																		</span>
 																		€
 																		<br />
 																	</>
@@ -274,7 +283,9 @@ class RotisserieRoyalePage extends Component {
 																{card.options.minPersons && card.options.minPersons.enabled && (
 																	<div className="minPersonsDiv">
 																		{translations.menuFor[window.lang]}{" "}
-																		<span className="minPersons">{card.options.minPersons.value || 0}</span>{" "}
+																		<span className="minPersons">
+																			{card.options.minPersons.value || 0}
+																		</span>{" "}
 																		{translations.persons[window.lang]}
 																	</div>
 																)}
@@ -282,32 +293,50 @@ class RotisserieRoyalePage extends Component {
 														</div>
 													)}
 
-													{card.options && card.options["corresponding-wines"] && card.options["corresponding-wines"].enabled && (
-														<div className="menuCard-correspondingWines">
-															<span dangerouslySetInnerHTML={{ __html: translations.correspondingWines[window.lang] }} /> <br />
-															<div className="price">
-																{translations.perPerson[window.lang]}{" "}
-																<span className="correspondingWinesPrice">
-																	{card.options["corresponding-wines"].value.toFixed(2).replace(".", ",")}
-																</span>
-																€
+													{card.options &&
+														card.options["corresponding-wines"] &&
+														card.options["corresponding-wines"].enabled && (
+															<div className="menuCard-correspondingWines">
+																<span
+																	dangerouslySetInnerHTML={{
+																		__html: translations.correspondingWines[window.lang]
+																	}}
+																/>{" "}
+																<br />
+																<div className="price">
+																	{translations.perPerson[window.lang]}{" "}
+																	<span className="correspondingWinesPrice">
+																		{card.options["corresponding-wines"].value
+																			.toFixed(2)
+																			.replace(".", ",")}
+																	</span>
+																	€
+																</div>
 															</div>
-														</div>
-													)}
-													{card.options && card.options["wine-recommendation"] && card.options["wine-recommendation"].enabled && (
-														<div className="menuCard-wineRecommendation">
-															<div className="headding">{translations.wineRecommendation[window.lang]}</div>
-															<div
-																className="wineRecommendation"
-																dangerouslySetInnerHTML={{ __html: card.options["wine-recommendation"].value.name[window.lang] }}
-															/>
-														</div>
-													)}
+														)}
+													{card.options &&
+														card.options["wine-recommendation"] &&
+														card.options["wine-recommendation"].enabled && (
+															<div className="menuCard-wineRecommendation">
+																<div className="headding">
+																	{translations.wineRecommendation[window.lang]}
+																</div>
+																<div
+																	className="wineRecommendation"
+																	dangerouslySetInnerHTML={{
+																		__html: card.options["wine-recommendation"].value.name[window.lang]
+																	}}
+																/>
+															</div>
+														)}
 													{card.options && card.options.additionalText && card.options.additionalText.enabled && (
 														<div
 															className="menuCard-additionalText"
 															dangerouslySetInnerHTML={{
-																__html: card.options.additionalText.value.name[window.lang].replace(/(?:\r\n|\r|\n)/g, "</br>")
+																__html: card.options.additionalText.value.name[window.lang].replace(
+																	/(?:\r\n|\r|\n)/g,
+																	"</br>"
+																)
 															}}
 														/>
 													)}
@@ -359,7 +388,12 @@ class RotisserieRoyalePage extends Component {
 											setValue={this.setInputValue}
 											placeholder={t("input.basic.city")}
 										/>
-										<BasicInput type="tel" name="tableReservationPhone" setValue={this.setInputValue} placeholder={t("input.basic.phone")} />
+										<BasicInput
+											type="tel"
+											name="tableReservationPhone"
+											setValue={this.setInputValue}
+											placeholder={t("input.basic.phone")}
+										/>
 										<BasicInput
 											type="email"
 											name="tableReservationEmail"
@@ -397,7 +431,9 @@ class RotisserieRoyalePage extends Component {
 											setValue={this.setInputValue}
 											placeholder={t("input.basic.additional_info")}
 										/>
-										{this.state.reservationNotification.length > 0 && <div className="form-notification">{this.state.reservationNotification}</div>}
+										{this.state.reservationNotification.length > 0 && (
+											<div className="form-notification">{this.state.reservationNotification}</div>
+										)}
 
 										<button className="btn" disabled={this.state.disabled}>
 											{t("input.basic.table_reservation")}

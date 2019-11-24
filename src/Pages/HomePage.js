@@ -4,6 +4,7 @@ import "react-awesome-slider/dist/styles.css";
 import "../Styles/Pages.Home.scss";
 import { Link } from "react-router-dom";
 import BackgroundSlider from "../Components/BackgroundSlider";
+import PropTypes from "prop-types";
 
 let backgroundImages = [
 	{
@@ -26,7 +27,9 @@ class HomePage extends Component {
 		return (
 			<div className="HomePage">
 				<BackgroundSlider images={backgroundImages} autoplay={true} />
-				<div id="logo" />
+				<div id="logo">
+					<img alt="Logo - Rotisserie Royale / Gästehaus am Schlossberg" src="/Assets/Slider/logo.png" />
+				</div>
 
 				<div id="welcome-text">
 					<h1 dangerouslySetInnerHTML={{ __html: t("pages.home.welcome_text") }} />
@@ -49,5 +52,9 @@ class HomePage extends Component {
 		);
 	}
 }
+
+HomePage.propTypes = {
+	t: PropTypes.any
+};
 
 export default withTranslation()(HomePage);

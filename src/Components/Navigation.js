@@ -16,14 +16,13 @@ class Navigation extends Component {
 			menuOpen: !this.state.menuOpen
 		});
 	};
-	componentWillMount = () => {
+	componentDidMount = () => {
 		window.lang = cookie.get("lang");
 		if (window.lang) {
 			i18n.changeLanguage(window.lang);
 		} else {
 			//Get Browser language => Set right Language
 			let userLang = navigator.language || navigator.userLanguage;
-			console.log(userLang);
 			if (userLang === "de-DE") {
 				this.setLanguage("de");
 			} else {
@@ -64,10 +63,18 @@ class Navigation extends Component {
 						<NavLink onClick={this.toggleNav} activeClassName="nav-is-active" exact to="/" className="navigation-link">
 							{t("navigation.home")}
 						</NavLink>
-						<NavLink onClick={this.toggleNav} activeClassName="nav-is-active" to="/Rotisserie-Royale" className="navigation-link">
+						<NavLink
+							onClick={this.toggleNav}
+							activeClassName="nav-is-active"
+							to="/Rotisserie-Royale"
+							className="navigation-link">
 							{t("basic.rotisserie_royale")}
 						</NavLink>
-						<NavLink onClick={this.toggleNav} activeClassName="nav-is-active" to="/Gästehaus-am-Schlossberg" className="navigation-link">
+						<NavLink
+							onClick={this.toggleNav}
+							activeClassName="nav-is-active"
+							to="/Gästehaus-am-Schlossberg"
+							className="navigation-link">
 							{t("basic.gaestehaus_am_schlossberg")}
 						</NavLink>
 						<div className="additional-links">

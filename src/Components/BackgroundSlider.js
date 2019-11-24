@@ -1,31 +1,27 @@
 import React, { Component } from "react";
 import AwesomeSlider from "react-awesome-slider";
+import withAutoplay from "react-awesome-slider/dist/autoplay";
 import "react-awesome-slider/dist/styles.css";
-import $ from "jquery";
+import PropTypes from "prop-types";
+
+const AutoplaySlider = withAutoplay(AwesomeSlider);
 
 class BackgroundSlider extends Component {
-	autoplay = () => {
-		$(".aws-sld__controls__arrow-right").click();
-		setTimeout(this.autoplay, 9000);
-	};
-	componentDidMount = () => {
-		if (this.props.autoplay === true) {
-			setTimeout(this.autoplay, 9000);
-		}
-	};
-
 	render() {
 		return (
 			<div className="backgroundSlider">
 				<div className="slider-overlay" />
-				<AwesomeSlider>
+				<AutoplaySlider interval={6000} bullets={false} organicArrows={false} fillParent={true} play={true}>
 					{this.props.images.map(image => (
 						<div key={image.src} data-src={image.src} />
 					))}
-				</AwesomeSlider>
+				</AutoplaySlider>
 			</div>
 		);
 	}
 }
 
+BackgroundSlider.propTypes = {
+	images: PropTypes.any
+};
 export default BackgroundSlider;
