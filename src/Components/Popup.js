@@ -49,7 +49,7 @@ class Popup extends Component {
 	componentDidMount = () => {
 		this.updatedPopupStore();
 	};
-	componentWillMount = () => {
+	componentDidMount = () => {
 		this.updateOpenState();
 		document.addEventListener("keydown", this.onKeyDown, false);
 	};

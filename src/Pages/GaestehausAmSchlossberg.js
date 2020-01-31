@@ -147,7 +147,11 @@ class GaestehausAmSchlossberg extends Component {
 		return (
 			<div className="RotisserieRoyalePage">
 				<BackgroundSlider images={backgroundImages} autoplay={true} />
-				<div id="logo" />
+				<div id="logo">
+					<a href="/">
+						<img alt="Logo - Rotisserie Royale / Gästehaus am Schlossberg" src="/Assets/Slider/logo.png" />
+					</a>
+				</div>
 				<div className="main-content">
 					<section className="content">
 						<h1 dangerouslySetInnerHTML={{ __html: t("pages.gh.welcome_h1") }} />
@@ -164,14 +168,14 @@ class GaestehausAmSchlossberg extends Component {
 							<article className="small-content text-center">
 								<h1>{t("pages.gh.dog.h1")}</h1>
 								<p>{t("pages.gh.dog.main_text")}</p>
-								<p className="sub-text" dangerouslySetInnerHTML={{ __html: t("pages.gh.dog.sub_text") }} />
-								<button
+								{/*<p className="sub-text" dangerouslySetInnerHTML={{ __html: t("pages.gh.dog.sub_text") }} />*/}
+								{/*<button
 									onClick={() => {
 										this.openPopup("dog");
 									}}
 									className="blue">
 									{t("basic.more_information")}
-								</button>
+								</button>*/}
 							</article>
 							<article className="small-content text-center">
 								<h1>{t("pages.gh.rooms.h1")}</h1>
@@ -195,7 +199,10 @@ class GaestehausAmSchlossberg extends Component {
 												/>
 												<div className="arrangement-content">
 													<h2>{element.names[window.lang]}</h2>
-													<ul>{element.content[window.lang] && element.content[window.lang].map(li => <li key={li}>{li}</li>)}</ul>
+													<ul>
+														{element.content[window.lang] &&
+															element.content[window.lang].map(li => <li key={li}>{li}</li>)}
+													</ul>
 													<p className="price">
 														{t("pages.gh.per_person")} <span className="orange">{element.price}</span>
 													</p>
@@ -212,7 +219,13 @@ class GaestehausAmSchlossberg extends Component {
 								<h1>{t("pages.gh.booking_request")}</h1>
 								<form onSubmit={this.sendBookingRequest}>
 									<fieldset>
-										<BasicInput type="text" name="bookingRequestName" required={true} setValue={this.setInputValue} placeholder={t("input.basic.name")} />
+										<BasicInput
+											type="text"
+											name="bookingRequestName"
+											required={true}
+											setValue={this.setInputValue}
+											placeholder={t("input.basic.name")}
+										/>
 										<BasicInput
 											type="text"
 											name="bookingRequestStreet"
@@ -220,9 +233,26 @@ class GaestehausAmSchlossberg extends Component {
 											setValue={this.setInputValue}
 											placeholder={t("input.basic.street")}
 										/>
-										<BasicInput type="number" name="bookingRequestPLZ" required={true} setValue={this.setInputValue} placeholder={t("input.basic.plz")} />
-										<BasicInput type="text" name="bookingRequestCity" required={true} setValue={this.setInputValue} placeholder={t("input.basic.city")} />
-										<BasicInput type="tel" name="bookingRequestPhone" setValue={this.setInputValue} placeholder={t("input.basic.phone")} />
+										<BasicInput
+											type="number"
+											name="bookingRequestPLZ"
+											required={true}
+											setValue={this.setInputValue}
+											placeholder={t("input.basic.plz")}
+										/>
+										<BasicInput
+											type="text"
+											name="bookingRequestCity"
+											required={true}
+											setValue={this.setInputValue}
+											placeholder={t("input.basic.city")}
+										/>
+										<BasicInput
+											type="tel"
+											name="bookingRequestPhone"
+											setValue={this.setInputValue}
+											placeholder={t("input.basic.phone")}
+										/>
 										<BasicInput
 											type="email"
 											name="bookingRequestEmail"

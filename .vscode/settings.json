@@ -1,0 +1,6 @@
+{
+  "files.exclude": {
+    "rotisserie-royale.code-workspace": true,
+    "renovate.json": true
+  }
+}

@@ -95,14 +95,15 @@ noscript {
 	z-index: 1;
 }
 #logo {
-	width: calc(100% - 50px);
 	position: absolute;
-	top: 50px;
+	top: 75px;
 	left: 50px;
-	height: 110px;
-	background: url("/Assets/Slider/logo.png");
 	background-repeat: no-repeat;
 	background-size: contain;
+	img {
+		width: calc(100% - 50px);
+		max-width: 350px;
+	}
 }
 h1,
 h2,
@@ -276,12 +277,6 @@ a {
 @media (max-width: 720px) {
 	body {
 		font-size: 8px;
-	}
-	#logo {
-		left: 0;
-		background-position: center;
-		width: 100%;
-		background-size: 80%;
 	}
 	.content {
 		font-size: 0.9rem;
