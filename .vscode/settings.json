@@ -5,6 +5,11 @@
     "README.md": true,
     "node_modules": true,
     ".vscode": true,
-    ".htaccess": true
+    ".htaccess": true,
+    ".prettierrc": true,
+    ".releaserc": true,
+    "renovate.json": true,
+    ".eslintrc": true,
+    ".gitignore": true
   }
 }
