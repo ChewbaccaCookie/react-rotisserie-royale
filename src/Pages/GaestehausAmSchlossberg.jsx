@@ -8,33 +8,33 @@ import "slick-carousel/slick/slick-theme.css";
 import BackgroundSlider from "../Components/BackgroundSlider";
 import Footer from "../Components/Footer";
 import Slider from "react-slick";
-import $ from "jquery";
-import BasicInput from "../Components/BasicInput";
 import Axios from "axios";
 import "@y0c/react-datepicker/assets/styles/calendar.scss";
 import "moment/locale/de";
 import "moment/locale/en-gb";
+import { Form, Input } from "@onedash/tools";
+import PopupUtils from "../Utils/PopupUtils";
 
 let backgroundImages = [
 	{
-		src: "/Assets/MinifiedImages/gh-slider-1-min.jpg"
+		src: "/Assets/MinifiedImages/gh-slider-1-min.jpg",
 	},
 	{
-		src: "/Assets/MinifiedImages/gh-slider-2-min.jpg"
+		src: "/Assets/MinifiedImages/gh-slider-2-min.jpg",
 	},
 	{
-		src: "/Assets/MinifiedImages/gh-slider-3-min.jpg"
+		src: "/Assets/MinifiedImages/gh-slider-3-min.jpg",
 	},
 	{
-		src: "/Assets/MinifiedImages/gh-slider-4-min.jpg"
-	}
+		src: "/Assets/MinifiedImages/gh-slider-4-min.jpg",
+	},
 ];
 
 class GaestehausAmSchlossberg extends Component {
 	state = {
 		inputValues: [],
 		disabled: true,
-		date: new Date()
+		date: new Date(),
 	};
 
 	componentDidMount = () => {
@@ -44,11 +44,11 @@ class GaestehausAmSchlossberg extends Component {
 	async loadArrangements() {
 		try {
 			const arrangements = (await Axios.get(process.env.REACT_APP_BACKEND_ENDPOINT + "/arrangements/get")).data;
-			arrangements.forEach(arr => {
+			arrangements.forEach((arr) => {
 				arr.price = arr.price.toFixed(2).replace(".", ",") + "€";
 			});
 			this.setState({
-				arrangements
+				arrangements,
 			});
 		} catch (err) {
 			console.log(err);
@@ -57,7 +57,7 @@ class GaestehausAmSchlossberg extends Component {
 
 	setInputValue = (name, value, valid) => {
 		let inputValues = this.state.inputValues;
-		let obj = inputValues.find(x => x.name === name);
+		let obj = inputValues.find((x) => x.name === name);
 
 		if (obj) {
 			obj.valid = valid;
@@ -66,56 +66,56 @@ class GaestehausAmSchlossberg extends Component {
 			obj = {
 				name,
 				valid,
-				value
+				value,
 			};
 			inputValues.push(obj);
 		}
 		this.setState(
 			{
-				inputValues
+				inputValues,
 			},
 			this.checkValidationStatus
 		);
 	};
 	checkValidationStatus = () => {
 		let valid = true;
-		this.state.inputValues.forEach(element => {
+		this.state.inputValues.forEach((element) => {
 			if (element.valid === false) {
 				valid = false;
 			}
 		});
 		this.setState({
-			disabled: !valid
+			disabled: !valid,
 		});
 		return valid;
 	};
-	sendBookingRequest = e => {
-		e.preventDefault();
+	sendBookingRequest = (e) => {
+		/*e.preventDefault();
 		if (this.checkValidationStatus()) {
 			$(".booking-request input, .booking-request textarea").each((index, element) => {
 				element.value = "";
 			});
 			let content = {
 				language: window.lang,
-				inputVal: {}
+				inputVal: {},
 			};
 			this.state.inputValues
-				.filter(input => input.name.indexOf("bookingRequest") === 0)
-				.forEach(inputVal => {
+				.filter((input) => input.name.indexOf("bookingRequest") === 0)
+				.forEach((inputVal) => {
 					content.inputVal[inputVal.name] = inputVal.value;
 				});
 
 			window.store.dispatch({ type: "TOGGLE_POPUP", name: "responseMessage" });
-			Axios.post(process.env.REACT_APP_BACKEND_ENDPOINT + "/contactRequest/bookign_request", content).then(function(response) {
-				setTimeout(function() {
+			Axios.post(process.env.REACT_APP_BACKEND_ENDPOINT + "/contactRequest/bookign_request", content).then(function (response) {
+				setTimeout(function () {
 					window.store.dispatch({ type: "REQUEST_FINISHED", name: "responseMessage", response: response.data.message });
 				}, 1000);
 			});
-		}
+		}*/
 	};
 
-	openPopup = name => {
-		window.store.dispatch({ type: "TOGGLE_POPUP", name });
+	openPopup = (name) => {
+		PopupUtils.showPopup(name);
 	};
 	render() {
 		const { t } = this.props;
@@ -139,10 +139,10 @@ class GaestehausAmSchlossberg extends Component {
 						slidesToScroll: 1,
 						speed: 700,
 						arrows: false,
-						autoplay: true
-					}
-				}
-			]
+						autoplay: true,
+					},
+				},
+			],
 		};
 		return (
 			<div className="RotisserieRoyalePage">
@@ -168,14 +168,6 @@ class GaestehausAmSchlossberg extends Component {
 							<article className="small-content text-center">
 								<h1>{t("pages.gh.dog.h1")}</h1>
 								<p>{t("pages.gh.dog.main_text")}</p>
-								{/*<p className="sub-text" dangerouslySetInnerHTML={{ __html: t("pages.gh.dog.sub_text") }} />*/}
-								{/*<button
-									onClick={() => {
-										this.openPopup("dog");
-									}}
-									className="blue">
-									{t("basic.more_information")}
-								</button>*/}
 							</article>
 							<article className="small-content text-center">
 								<h1>{t("pages.gh.rooms.h1")}</h1>
@@ -194,14 +186,14 @@ class GaestehausAmSchlossberg extends Component {
 												<div
 													className="arrangement-image"
 													style={{
-														backgroundImage: "url('" + element.imageSrc + "')"
+														backgroundImage: "url('" + element.imageSrc + "')",
 													}}
 												/>
 												<div className="arrangement-content">
 													<h2>{element.names[window.lang]}</h2>
 													<ul>
 														{element.content[window.lang] &&
-															element.content[window.lang].map(li => <li key={li}>{li}</li>)}
+															element.content[window.lang].map((li) => <li key={li}>{li}</li>)}
 													</ul>
 													<p className="price">
 														{t("pages.gh.per_person")} <span className="orange">{element.price}</span>
@@ -217,6 +209,26 @@ class GaestehausAmSchlossberg extends Component {
 						<div className="flex-center">
 							<article id="booking-request" className="booking-request middle-content basicInput">
 								<h1>{t("pages.gh.booking_request")}</h1>
+								<Form validateOnChange styling="none">
+									<fieldset>
+										<Input required name="bookingRequestName" placeholder={t("input.basic.name")} />
+										<Input required name="bookingRequestStreet" placeholder={t("input.basic.street")} />
+										<Input required name="bookingRequestPLZ" placeholder={t("input.basic.plz")} />
+										<Input required name="bookingRequestCity" placeholder={t("input.basic.city")} />
+										<Input required name="bookingRequestEmail" placeholder={t("input.basic.email")} />
+									</fieldset>
+									<fieldset>
+										<Input
+											required
+											type="date-range"
+											placeholder={t("input.basic.arrival")}
+											placeholder2={t("input.basic.departure")}
+											name1="bookingRequestArrival"
+											name2="bookingRequestDeparture"
+										/>
+									</fieldset>
+								</Form>
+								{/*
 								<form onSubmit={this.sendBookingRequest}>
 									<fieldset>
 										<BasicInput
@@ -226,6 +238,7 @@ class GaestehausAmSchlossberg extends Component {
 											setValue={this.setInputValue}
 											placeholder={t("input.basic.name")}
 										/>
+
 										<BasicInput
 											type="text"
 											name="bookingRequestStreet"
@@ -284,6 +297,7 @@ class GaestehausAmSchlossberg extends Component {
 										</button>
 									</fieldset>
 								</form>
+								*/}
 							</article>
 						</div>
 					</section>

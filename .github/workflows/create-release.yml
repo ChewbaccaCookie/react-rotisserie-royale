@@ -1,0 +1,53 @@
+name: Deploy Server
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    create-release:
+        name: "Create new Release"
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  persist-credentials: false
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: 13
+                  registry-url: https://npm.onedash.dev/
+            - name: 🏗 Install dependencies
+              run: npm i @semantic-release/git
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+            - name: Semantic Release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+              run: npx semantic-release
+
+    deploy-server:
+        needs: create-release
+        runs-on: ubuntu-latest
+        name: "Deploy Server"
+        steps:
+            - uses: actions/checkout@v2
+            - name: get-npm-version
+              uses: martinbeentjes/npm-get-version-action@master
+              id: get-npm-version
+
+            - name: Get release version
+              id: get_version
+              run: echo ::set-env name=RELEASE_VERSION::${{steps.get-npm-version.outputs.current-version}}
+
+            - name: "🚦 Build server"
+              run: npm run build
+            - name: 🚀 Deploy to ftp
+              uses: SamKirkland/FTP-Deploy-Action@3.1.0
+              with:
+                  ftp-server: ${{ secrets.FTP_SERVER }}
+                  ftp-username: ${{ secrets.FTP_USERNAME }}
+                  ftp-password: ${{ secrets.FTP_PASSWORD }}
+                  local-dir: build/

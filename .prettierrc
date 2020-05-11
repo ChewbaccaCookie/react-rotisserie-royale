@@ -2,7 +2,8 @@
 	"useTabs": true,
 	"tabWidth": 4,
 	"singleQuote": false,
-	"printWidth": 140,
-	"jsxBracketSameLine": true,
-	"endOfLine": "crlf"
+	"printWidth": 150,
+	"endOfLine": "crlf",
+	"jsxSingleQuote": false,
+	"semi": true
 }

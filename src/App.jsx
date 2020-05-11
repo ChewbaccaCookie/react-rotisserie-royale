@@ -18,30 +18,42 @@ import GaestehausAmSchlossberg from "./Pages/GaestehausAmSchlossberg";
 import Dogs from "./Popups/Dogs";
 import ResponseMessage from "./Popups/ResponseMessage";
 import PageNotFound from "./Components/404";
+import { StyleLoader } from "@onedash/tools";
 
 const store = createStore(popupRededucer);
 window.store = store;
 
 class App extends Component {
+	state = {
+		popups: {},
+	};
+	componentDidMount() {
+		window.store.subscribe(() => {
+			let state = window.store.getState();
+			this.setState({ popups: state.popups });
+		});
+	}
 	render() {
 		return (
 			<div>
-				<Navigation />
-				<Switch>
-					<Route exact path="/" component={HomePage} />
-					<Route exact path="/Rotisserie-Royale" component={RotisserieRoyalePage} />
-					<Route exact path="/Gästehaus-am-Schlossberg" component={GaestehausAmSchlossberg} />
+				<StyleLoader>
+					<Navigation />
+					<Switch>
+						<Route exact path="/" component={HomePage} />
+						<Route exact path="/Rotisserie-Royale" component={RotisserieRoyalePage} />
+						<Route exact path="/Gästehaus-am-Schlossberg" component={GaestehausAmSchlossberg} />
 
-					<Route component={PageNotFound} />
-				</Switch>
-				<section className="popups">
-					<Privacy />
-					<Impressum />
-					<Location />
-					<Contact />
-					<Dogs />
-					<ResponseMessage />
-				</section>
+						<Route component={PageNotFound} />
+					</Switch>
+					<section className="popups">
+						<Privacy isOpen={this.state.popups.privacy} />
+						<Impressum isOpen={this.state.popups.impressum} />
+						<Location isOpen={this.state.popups.location} />
+						<Contact isOpen={this.state.popups.contact} />
+						<Dogs isOpen={this.state.popups.dogs} />
+						<ResponseMessage isOpen={this.state.popups.ResponseMessage} />
+					</section>
+				</StyleLoader>
 			</div>
 		);
 	}

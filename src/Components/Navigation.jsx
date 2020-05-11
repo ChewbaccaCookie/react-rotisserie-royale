@@ -4,16 +4,17 @@ import { NavLink } from "react-router-dom";
 import i18n from "../i18n";
 import "../Styles/Component.Nav.scss";
 import { Cookies } from "react-cookie";
+import PopupUtils from "../Utils/PopupUtils";
 
 const cookie = new Cookies();
 
 class Navigation extends Component {
 	state = {
-		menuOpen: false
+		menuOpen: false,
 	};
 	toggleNav = () => {
 		this.setState({
-			menuOpen: !this.state.menuOpen
+			menuOpen: !this.state.menuOpen,
 		});
 	};
 	componentDidMount = () => {
@@ -23,7 +24,7 @@ class Navigation extends Component {
 		} else {
 			//Get Browser language => Set right Language
 			let userLang = navigator.language || navigator.userLanguage;
-			if (userLang === "de-DE") {
+			if (userLang === "de-DE" || "de") {
 				this.setLanguage("de");
 			} else {
 				//Fallback for other user
@@ -31,7 +32,7 @@ class Navigation extends Component {
 			}
 		}
 	};
-	setLanguage = lang => {
+	setLanguage = (lang) => {
 		i18n.changeLanguage(lang);
 		window.lang = lang;
 		cookie.set("lang", lang, { path: "/", expires: new Date(9999, 11, 31) });
@@ -44,9 +45,9 @@ class Navigation extends Component {
 			this.setLanguage("de");
 		}
 	};
-	openPopup = name => {
+	openPopup = (name) => {
 		this.toggleNav();
-		window.store.dispatch({ type: "TOGGLE_POPUP", name });
+		PopupUtils.showPopup(name);
 	};
 	render() {
 		const { t } = this.props;
@@ -63,18 +64,10 @@ class Navigation extends Component {
 						<NavLink onClick={this.toggleNav} activeClassName="nav-is-active" exact to="/" className="navigation-link">
 							{t("navigation.home")}
 						</NavLink>
-						<NavLink
-							onClick={this.toggleNav}
-							activeClassName="nav-is-active"
-							to="/Rotisserie-Royale"
-							className="navigation-link">
+						<NavLink onClick={this.toggleNav} activeClassName="nav-is-active" to="/Rotisserie-Royale" className="navigation-link">
 							{t("basic.rotisserie_royale")}
 						</NavLink>
-						<NavLink
-							onClick={this.toggleNav}
-							activeClassName="nav-is-active"
-							to="/Gästehaus-am-Schlossberg"
-							className="navigation-link">
+						<NavLink onClick={this.toggleNav} activeClassName="nav-is-active" to="/Gästehaus-am-Schlossberg" className="navigation-link">
 							{t("basic.gaestehaus_am_schlossberg")}
 						</NavLink>
 						<div className="additional-links">

@@ -4,49 +4,47 @@ import "react-awesome-slider/dist/styles.css";
 import BackgroundSlider from "../Components/BackgroundSlider";
 import "../Styles/Pages.RotisserieRoyale.scss";
 import Footer from "../Components/Footer";
-import $ from "jquery";
-import BasicInput from "../Components/BasicInput";
 import Axios from "axios";
 import moment from "moment";
 
 let backgroundImages = [
 	{
-		src: "/Assets/MinifiedImages/rr-slider-1-min.jpg"
+		src: "/Assets/MinifiedImages/rr-slider-1-min.jpg",
 	},
 	{
-		src: "/Assets/MinifiedImages/rr-slider-2-min.jpg"
+		src: "/Assets/MinifiedImages/rr-slider-2-min.jpg",
 	},
 	{
-		src: "/Assets/MinifiedImages/rr-slider-3-min.jpg"
-	}
+		src: "/Assets/MinifiedImages/rr-slider-3-min.jpg",
+	},
 ];
 
 var translations = {
 	perPerson: {
 		de: "Pro Person",
 		en: "Per person",
-		fr: "Par personne"
+		fr: "Par personne",
 	},
 	correspondingWines: {
 		de: "Auf Wunsch servieren wir Ihnen zu jedem Gang</br>ein Glas ausgesuchten Wein",
 		en: "On request we can serve an </br>exquisite wine with every dish",
-		fr: "Verre de vin aussocti à</br>chaque plat à la demande"
+		fr: "Verre de vin aussocti à</br>chaque plat à la demande",
 	},
 	menuFor: {
 		de: "Menü ab",
 		en: "Menu from",
-		fr: "Menu à partir de"
+		fr: "Menu à partir de",
 	},
 	persons: {
 		de: "Personen",
 		en: "persons",
-		fr: "personnes"
+		fr: "personnes",
 	},
 	wineRecommendation: {
 		de: "Unsere Weinempfehlung",
 		en: "Our wine suggestion",
-		fr: "Vin recommandés"
-	}
+		fr: "Vin recommandés",
+	},
 };
 
 class RotisserieRoyalePage extends Component {
@@ -55,12 +53,12 @@ class RotisserieRoyalePage extends Component {
 		disabled: true,
 		menu: [],
 		page: 0,
-		reservationNotification: ""
+		reservationNotification: "",
 	};
 
 	setInputValue = (name, value, valid) => {
 		let inputValues = this.state.inputValues;
-		let obj = inputValues.find(x => x.name === name);
+		let obj = inputValues.find((x) => x.name === name);
 
 		if (name === "tableReservationDate") {
 			let validDay = new Date();
@@ -71,13 +69,13 @@ class RotisserieRoyalePage extends Component {
 				valid = true;
 				if (this.state.reservationNotification === this.props.t("input.basic.dateTooEarly")) {
 					this.setState({
-						reservationNotification: ""
+						reservationNotification: "",
 					});
 				}
 			} else {
 				valid = false;
 				this.setState({
-					reservationNotification: this.props.t("input.basic.dateTooEarly")
+					reservationNotification: this.props.t("input.basic.dateTooEarly"),
 				});
 			}
 		}
@@ -86,12 +84,12 @@ class RotisserieRoyalePage extends Component {
 			if (value > 6) {
 				valid = false;
 				this.setState({
-					reservationNotification: this.props.t("input.basic.tooManyPeople")
+					reservationNotification: this.props.t("input.basic.tooManyPeople"),
 				});
 			} else {
 				if (this.state.reservationNotification === this.props.t("input.basic.tooManyPeople")) {
 					this.setState({
-						reservationNotification: ""
+						reservationNotification: "",
 					});
 				}
 			}
@@ -104,27 +102,27 @@ class RotisserieRoyalePage extends Component {
 			obj = {
 				name,
 				valid,
-				value
+				value,
 			};
 			inputValues.push(obj);
 		}
 
 		this.setState(
 			{
-				inputValues
+				inputValues,
 			},
 			this.checkValidationStatus
 		);
 	};
 	checkValidationStatus = () => {
 		let valid = true;
-		this.state.inputValues.forEach(element => {
+		this.state.inputValues.forEach((element) => {
 			if (element.valid === false) {
 				valid = false;
 			}
 		});
 		this.setState({
-			disabled: !valid
+			disabled: !valid,
 		});
 		return valid;
 	};
@@ -133,13 +131,11 @@ class RotisserieRoyalePage extends Component {
 		this.loadDishes();
 	};
 	loadDishes = () => {
-		Axios.get(process.env.REACT_APP_BACKEND_ENDPOINT + "/cardDesigner/completeCard/" + process.env.REACT_APP_MASTER_CARD_ID).then(
-			response => {
-				this.setState({ menu: response.data.filter(page => page.id !== "64476b58-e956-a7cd-a96e-218f7e0967d5") });
-			}
-		);
+		Axios.get(process.env.REACT_APP_BACKEND_ENDPOINT + "/cardDesigner/completeCard/" + process.env.REACT_APP_MASTER_CARD_ID).then((response) => {
+			this.setState({ menu: response.data.filter((page) => page.id !== "64476b58-e956-a7cd-a96e-218f7e0967d5") });
+		});
 	};
-	selectPage = type => {
+	selectPage = (type) => {
 		let page = this.state.page;
 		let maxPage = this.state.menu.length - 1;
 		if (type === "next") {
@@ -156,36 +152,36 @@ class RotisserieRoyalePage extends Component {
 			}
 		}
 		this.setState({
-			page
+			page,
 		});
 	};
 
-	sendTableReservationRequest = e => {
-		e.preventDefault();
+	sendTableReservationRequest = (e) => {
+		/*e.preventDefault();
 		if (this.checkValidationStatus()) {
 			$(".table-reservation input, .table-reservation textarea").each((index, element) => {
 				element.value = "";
 			});
 			let content = {
 				language: window.lang,
-				inputVal: {}
+				inputVal: {},
 			};
 			this.state.inputValues
-				.filter(input => input.name.indexOf("tableReservation") === 0)
-				.forEach(inputVal => {
+				.filter((input) => input.name.indexOf("tableReservation") === 0)
+				.forEach((inputVal) => {
 					content.inputVal[inputVal.name] = inputVal.value;
 				});
 
 			window.store.dispatch({ type: "TOGGLE_POPUP", name: "responseMessage" });
-			Axios.post(process.env.REACT_APP_BACKEND_ENDPOINT + "/contactRequest/table_request", content).then(function(response) {
-				setTimeout(function() {
+			Axios.post(process.env.REACT_APP_BACKEND_ENDPOINT + "/contactRequest/table_request", content).then(function (response) {
+				setTimeout(function () {
 					window.store.dispatch({ type: "REQUEST_FINISHED", name: "responseMessage", response: response.data.message });
 				}, 1000);
 			});
-		}
+		}*/
 	};
 
-	getDishName = dish => {
+	getDishName = (dish) => {
 		var name = dish.name.replace("\n", "<br>");
 
 		name += "<sup>" + dish.numbers.toString() + "</sup>";
@@ -232,7 +228,7 @@ class RotisserieRoyalePage extends Component {
 								<h1>{t("pages.rr.menu_card")}</h1>
 								<div className="menu-items">
 									{menu[page] &&
-										menu[page].cards.map(card => (
+										menu[page].cards.map((card) => (
 											<div key={card.id} className={card.type === "menu" ? "menu-item" : "menu-item standard-menu"}>
 												<div className="menuCardInfoHead">
 													<h2>{card.name[window.lang]}</h2>
@@ -245,10 +241,7 @@ class RotisserieRoyalePage extends Component {
 																	<div
 																		className="dish-name"
 																		dangerouslySetInnerHTML={{
-																			__html: item.name[window.lang].replace(
-																				/(?:\r\n|\r|\n)/g,
-																				"</br>"
-																			)
+																			__html: item.name[window.lang].replace(/(?:\r\n|\r|\n)/g, "</br>"),
 																		}}
 																	/>
 																</div>
@@ -283,9 +276,7 @@ class RotisserieRoyalePage extends Component {
 																{card.options.minPersons && card.options.minPersons.enabled && (
 																	<div className="minPersonsDiv">
 																		{translations.menuFor[window.lang]}{" "}
-																		<span className="minPersons">
-																			{card.options.minPersons.value || 0}
-																		</span>{" "}
+																		<span className="minPersons">{card.options.minPersons.value || 0}</span>{" "}
 																		{translations.persons[window.lang]}
 																	</div>
 																)}
@@ -299,16 +290,14 @@ class RotisserieRoyalePage extends Component {
 															<div className="menuCard-correspondingWines">
 																<span
 																	dangerouslySetInnerHTML={{
-																		__html: translations.correspondingWines[window.lang]
+																		__html: translations.correspondingWines[window.lang],
 																	}}
 																/>{" "}
 																<br />
 																<div className="price">
 																	{translations.perPerson[window.lang]}{" "}
 																	<span className="correspondingWinesPrice">
-																		{card.options["corresponding-wines"].value
-																			.toFixed(2)
-																			.replace(".", ",")}
+																		{card.options["corresponding-wines"].value.toFixed(2).replace(".", ",")}
 																	</span>
 																	€
 																</div>
@@ -318,13 +307,11 @@ class RotisserieRoyalePage extends Component {
 														card.options["wine-recommendation"] &&
 														card.options["wine-recommendation"].enabled && (
 															<div className="menuCard-wineRecommendation">
-																<div className="headding">
-																	{translations.wineRecommendation[window.lang]}
-																</div>
+																<div className="headding">{translations.wineRecommendation[window.lang]}</div>
 																<div
 																	className="wineRecommendation"
 																	dangerouslySetInnerHTML={{
-																		__html: card.options["wine-recommendation"].value.name[window.lang]
+																		__html: card.options["wine-recommendation"].value.name[window.lang],
 																	}}
 																/>
 															</div>
@@ -336,7 +323,7 @@ class RotisserieRoyalePage extends Component {
 																__html: card.options.additionalText.value.name[window.lang].replace(
 																	/(?:\r\n|\r|\n)/g,
 																	"</br>"
-																)
+																),
 															}}
 														/>
 													)}
@@ -358,7 +345,7 @@ class RotisserieRoyalePage extends Component {
 						<div className="flex-center">
 							<article id="table-reservation" className="table-reservation middle-content basicInput">
 								<h1>{t("pages.rr.table_reservation")}</h1>
-								<form onSubmit={this.sendTableReservationRequest}>
+								{/*<form onSubmit={this.sendTableReservationRequest}>
 									<fieldset>
 										<BasicInput
 											type="text"
@@ -439,7 +426,7 @@ class RotisserieRoyalePage extends Component {
 											{t("input.basic.table_reservation")}
 										</button>
 									</fieldset>
-								</form>
+										</form>*/}
 							</article>
 						</div>
 					</section>

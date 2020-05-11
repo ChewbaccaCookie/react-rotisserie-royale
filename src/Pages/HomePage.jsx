@@ -4,21 +4,20 @@ import "react-awesome-slider/dist/styles.css";
 import "../Styles/Pages.Home.scss";
 import { Link } from "react-router-dom";
 import BackgroundSlider from "../Components/BackgroundSlider";
-import PropTypes from "prop-types";
 
 let backgroundImages = [
 	{
-		src: "/Assets/MinifiedImages/home-slider-1-min.jpg"
+		src: "/Assets/MinifiedImages/home-slider-1-min.jpg",
 	},
 	{
-		src: "/Assets/MinifiedImages/home-slider-2-min.jpg"
+		src: "/Assets/MinifiedImages/home-slider-2-min.jpg",
 	},
 	{
-		src: "/Assets/MinifiedImages/home-slider-3-min.jpg"
+		src: "/Assets/MinifiedImages/home-slider-3-min.jpg",
 	},
 	{
-		src: "/Assets/MinifiedImages/home-slider-4-min.jpg"
-	}
+		src: "/Assets/MinifiedImages/home-slider-4-min.jpg",
+	},
 ];
 
 class HomePage extends Component {
@@ -52,9 +51,5 @@ class HomePage extends Component {
 		);
 	}
 }
-
-HomePage.propTypes = {
-	t: PropTypes.any
-};
 
 export default withTranslation()(HomePage);

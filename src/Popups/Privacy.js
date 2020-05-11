@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
-import Popup from "../Components/Popup";
+import { Dialog } from "@onedash/tools";
+import PopupUtils from "../Utils/PopupUtils";
 
 class Privacy extends Component {
 	render() {
 		const n = 21;
 		const { t } = this.props;
 		return (
-			<Popup name="privacy" title={t("pages.privacy.h1")}>
+			<Dialog onClose={() => PopupUtils.closePopup("privacy")} isOpen={this.props.isOpen} name="privacy" title={t("pages.privacy.h1")}>
 				<p>{t("pages.privacy.start_text")}</p>
 				{[...Array(n)].map((e, i) => (
 					<div key={`div-${i}`}>
@@ -15,7 +16,7 @@ class Privacy extends Component {
 						<p dangerouslySetInnerHTML={{ __html: t(`pages.privacy.text.${i + 1}`) }} />
 					</div>
 				))}
-			</Popup>
+			</Dialog>
 		);
 	}
 }

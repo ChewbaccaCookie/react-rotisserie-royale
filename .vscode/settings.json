@@ -1,6 +1,11 @@
 {
-  "files.exclude": {
-    "rotisserie-royale.code-workspace": true,
-    "renovate.json": true
-  }
+	"files.exclude": {
+		"rotisserie-royale.code-workspace": true,
+		"pnpm-lock.yaml": true,
+		"README.md": true,
+		"node_modules": true,
+		".vscode": true,
+		".gitignore": true,
+		".htaccess": true
+	}
 }
