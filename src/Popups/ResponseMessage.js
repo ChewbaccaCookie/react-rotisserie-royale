@@ -1,19 +1,36 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
-import { Dialog } from "@onedash/tools";
+import { Dialog, Spinner } from "@onedash/tools";
 import PopupUtils from "../Utils/PopupUtils";
+import "../Styles/ResponseMessage.Popup.scss";
 
 class ResonseMessage extends Component {
 	state = {
-		response: "",
+		response: undefined,
 		loaded: false,
 	};
-
+	componentDidMount() {
+		window.store.subscribe(() => {
+			let state = window.store.getState();
+			this.setState({ response: state.response, loaded: state.response !== undefined ? true : false });
+		});
+	}
 	render() {
 		return (
-			<Dialog onClose={() => PopupUtils.closePopup("responseMessage")} isOpen={this.props.isOpen} name="responseMessage" withoutBorder={true}>
+			<Dialog
+				onClose={() => {
+					PopupUtils.closePopup("responseMessage");
+					PopupUtils.clearMessage();
+				}}
+				buttons={[]}
+				settings={{ showX: false }}
+				isOpen={this.props.isOpen}
+				name="responseMessage"
+				withoutBorder={true}
+				className="response-message"
+			>
 				<div className="response">
-					<div className={this.state.loaded ? "loader fadeOut" : "loader"} />
+					{!this.state.loaded && <Spinner defaultVisible />}
 					<svg
 						className={this.state.loaded ? "animated successAnimation visible" : "animated successAnimation"}
 						xmlns="http://www.w3.org/2000/svg"

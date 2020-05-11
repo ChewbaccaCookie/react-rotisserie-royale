@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
-import Axios from "axios";
 
 class Contact extends Component {
 	state = {
@@ -69,7 +68,6 @@ class Contact extends Component {
 	};
 
 	render() {
-		const { t } = this.props;
 		return <></>;
 		/*return (
 			<Popup name="contact" title={t("footer.contact")} type="small-popup">

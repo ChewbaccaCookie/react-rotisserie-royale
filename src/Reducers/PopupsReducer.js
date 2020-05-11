@@ -7,6 +7,7 @@ const defaultState = {
 		responseMessage: false,
 		dog: false,
 	},
+	response: undefined,
 };
 
 const popups = (state = defaultState, action) => {
@@ -16,6 +17,9 @@ const popups = (state = defaultState, action) => {
 			break;
 		case "CLOSE_POPUP":
 			state.popups[action.name] = false;
+			break;
+		case "RESPONSE_MESSAGE":
+			state.response = action.message;
 			break;
 		default:
 			return state;

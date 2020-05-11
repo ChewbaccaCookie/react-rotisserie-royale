@@ -10,8 +10,6 @@ import Footer from "../Components/Footer";
 import Slider from "react-slick";
 import Axios from "axios";
 import "@y0c/react-datepicker/assets/styles/calendar.scss";
-import "moment/locale/de";
-import "moment/locale/en-gb";
 import { Form, Input } from "@onedash/tools";
 import PopupUtils from "../Utils/PopupUtils";
 

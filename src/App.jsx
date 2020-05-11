@@ -4,8 +4,8 @@ import { withTranslation } from "react-i18next";
 import HomePage from "./Pages/HomePage";
 
 import "./Styles/Reset.scss";
+import "./Styles/ToolsOverwrite.scss";
 import "./Styles/MainStyle.scss";
-import "./Styles/Input.scss";
 import Navigation from "./Components/Navigation";
 import RotisserieRoyalePage from "./Pages/RotisserieRoyalePage";
 import Privacy from "./Popups/Privacy";
@@ -51,7 +51,7 @@ class App extends Component {
 						<Location isOpen={this.state.popups.location} />
 						<Contact isOpen={this.state.popups.contact} />
 						<Dogs isOpen={this.state.popups.dogs} />
-						<ResponseMessage isOpen={this.state.popups.ResponseMessage} />
+						<ResponseMessage isOpen={this.state.popups.responseMessage} />
 					</section>
 				</StyleLoader>
 			</div>
