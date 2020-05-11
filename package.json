@@ -4,7 +4,7 @@
 	"private": true,
 	"homepage": "https://rotisserie-royale.de",
 	"dependencies": {
-		"@onedash/tools": "^7.0.3",
+		"@onedash/tools": "^7.0.4",
 		"@y0c/react-datepicker": "1.0.3",
 		"axios": "0.19.2",
 		"dayjs": "1.8.26",
@@ -16,9 +16,9 @@
 		"react-cookie": "4.0.3",
 		"react-dom": "16.13.1",
 		"react-i18next": "11.4.0",
-		"react-router-dom": "5.1.2",
+		"react-router-dom": "5.2.0",
 		"react-scripts": "3.4.1",
-		"react-slick": "0.26.0",
+		"react-slick": "0.26.1",
 		"redux": "4.0.5",
 		"slick-carousel": "1.8.1"
 	},

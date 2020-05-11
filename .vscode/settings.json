@@ -1,11 +1,10 @@
 {
-	"files.exclude": {
-		"rotisserie-royale.code-workspace": true,
-		"pnpm-lock.yaml": true,
-		"README.md": true,
-		"node_modules": true,
-		".vscode": true,
-		".gitignore": true,
-		".htaccess": true
-	}
+  "files.exclude": {
+    "rotisserie-royale.code-workspace": true,
+    "pnpm-lock.yaml": true,
+    "README.md": true,
+    "node_modules": true,
+    ".vscode": true,
+    ".htaccess": true
+  }
 }
