@@ -4,6 +4,7 @@ import { Form, Select, Input } from "@onedash/tools";
 import "../Styles/Pages.Corona.scss";
 import Axios from "axios";
 import PopupUtils from "../Utils/PopupUtils";
+import SocialDistancing from "./social-distancing.png";
 
 export default class Corona extends Component {
 	form = React.createRef();
@@ -97,7 +98,7 @@ export default class Corona extends Component {
 		return (
 			<Div100vh className="corona">
 				<div className={`image-container step-${step}`}>
-					<img alt="Social Distancing" className="title-image" src="/Assets/Images/social-distancing.png" />
+					<img alt="Social Distancing" height="100%" className="title-image" src={SocialDistancing} />
 
 					<h1 className="left-title">#Flattenthecurve</h1>
 				</div>
@@ -156,7 +157,7 @@ export default class Corona extends Component {
 								</div>
 							</div>
 							<div className={this.classInputStep(2)}>
-								<h2>2. Anzahl der Haushälte</h2>
+								<h2>2. Anzahl der Haushalte</h2>
 								<div className="inputs">
 									<button type="button" className={this.classHouseholds(1)} onClick={() => this.setHouseholds(1)}>
 										1
