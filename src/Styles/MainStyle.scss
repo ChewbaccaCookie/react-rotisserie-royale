@@ -132,7 +132,7 @@ a {
 	}
 }
 .main-content {
-	top: 75vh;
+	margin-top: 75vh;
 	position: relative;
 }
 
@@ -225,6 +225,9 @@ a {
 }
 .bold {
 	font-weight: bold !important;
+}
+.underline {
+	text-decoration: underline;
 }
 a {
 	text-decoration: none;

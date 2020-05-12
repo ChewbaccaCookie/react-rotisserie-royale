@@ -8,6 +8,7 @@ const defaultState = {
 		dog: false,
 	},
 	response: undefined,
+	redirectPath: undefined,
 };
 
 const popups = (state = defaultState, action) => {
@@ -20,6 +21,7 @@ const popups = (state = defaultState, action) => {
 			break;
 		case "RESPONSE_MESSAGE":
 			state.response = action.message;
+			state.redirectPath = action.path;
 			break;
 		default:
 			return state;

@@ -127,7 +127,8 @@
 			box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
 		}
 	}
-	&.onedash-date-picker {
+	&.onedash-date-picker,
+	&.onedash-date-range-picker {
 		flex-basis: 220px;
 		flex-shrink: 0;
 		flex-grow: 1;
@@ -157,6 +158,21 @@
 			background: none;
 		}
 		&.input-invalid .SingleDatePickerInput {
+			border-bottom: 3px solid #9e1212;
+			input {
+				padding: 12px 10px 10px 10px;
+			}
+		}
+	}
+	&.onedash-date-range-picker {
+		.DateInput {
+			border-radius: 4px;
+			border: 1px solid #9e1212;
+			border-radius: 4px;
+			background: none;
+		}
+
+		&.input-invalid .DateInput {
 			border-bottom: 3px solid #9e1212;
 			input {
 				padding: 12px 10px 10px 10px;
@@ -199,7 +215,8 @@
 		}
 	}
 }
-#root .flex-center .btn-primary {
+#root .flex-center .btn-primary,
+#root .dialog-content .btn-primary {
 	margin-left: 30px;
 	margin-top: -20px;
 	width: calc(100% - 60px);

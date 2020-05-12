@@ -3,16 +3,18 @@ import { withTranslation } from "react-i18next";
 import { Dialog, Spinner } from "@onedash/tools";
 import PopupUtils from "../Utils/PopupUtils";
 import "../Styles/ResponseMessage.Popup.scss";
+import BrowserHistory from "../Utils/BrowserHistory";
 
 class ResonseMessage extends Component {
 	state = {
 		response: undefined,
 		loaded: false,
+		redirectPath: undefined,
 	};
 	componentDidMount() {
 		window.store.subscribe(() => {
 			let state = window.store.getState();
-			this.setState({ response: state.response, loaded: state.response !== undefined ? true : false });
+			this.setState({ response: state.response, redirectPath: state.redirectPath, loaded: state.response !== undefined ? true : false });
 		});
 	}
 	render() {
@@ -21,6 +23,9 @@ class ResonseMessage extends Component {
 				onClose={() => {
 					PopupUtils.closePopup("responseMessage");
 					PopupUtils.clearMessage();
+					if (this.state.redirectPath) {
+						BrowserHistory.push(this.state.redirectPath);
+					}
 				}}
 				buttons={[]}
 				settings={{ showX: false }}

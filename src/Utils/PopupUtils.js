@@ -6,10 +6,10 @@ export default class PopupUtils {
 		window.store.dispatch({ type: "CLOSE_POPUP", name: popupName });
 	};
 
-	static setResponseMessage = (responseMessage) => {
-		window.store.dispatch({ type: "RESPONSE_MESSAGE", message: responseMessage });
+	static setResponseMessage = (responseMessage, toPathOnClose) => {
+		window.store.dispatch({ type: "RESPONSE_MESSAGE", message: responseMessage, path: toPathOnClose });
 	};
 	static clearMessage = () => {
-		window.store.dispatch({ type: "RESPONSE_MESSAGE", message: undefined });
+		window.store.dispatch({ type: "RESPONSE_MESSAGE", message: undefined, path: undefined });
 	};
 }

@@ -1,12 +1,13 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
+import BrowserHistory from "./Utils/BrowserHistory";
 import ReactDOM from "react-dom";
 import App from "./App";
 import "./i18n";
 
 ReactDOM.render(
-	<BrowserRouter>
+	<Router history={BrowserHistory}>
 		<App />
-	</BrowserRouter>,
+	</Router>,
 	document.getElementById("root")
 );

@@ -1,0 +1,195 @@
+#root .corona {
+	width: 100vw;
+	position: relative;
+	font-size: 1.1rem;
+
+	.image-container {
+		overflow: hidden;
+		margin: 0px;
+		height: calc(100% - 220px);
+		position: relative;
+		transition: 0.6s all ease-in-out;
+		.title-image {
+			height: 100%;
+			margin-left: 100px;
+		}
+		.left-title {
+			font-size: 2.1em;
+			font-weight: 900;
+			font-family: "Raleway";
+			transform: rotate(-90deg) translateX(-50%);
+			position: absolute;
+			left: 20px;
+			width: 80vh;
+			z-index: 2;
+			bottom: 65%;
+			text-transform: uppercase;
+			text-align: left;
+			transform-origin: 0 0;
+		}
+
+		&.step-2 {
+			margin-left: -80%;
+		}
+		&.step-3 {
+			transition: none;
+			height: 0px;
+		}
+	}
+	.steps {
+		overflow: hidden;
+		display: flex;
+		transition: 0.6s all ease-in-out;
+
+		.step {
+			height: 160px;
+			flex-basis: calc(100vw - 60px);
+			flex-shrink: 0;
+			margin: 30px 30px 10px 30px;
+			font-size: 1em;
+			line-height: 1.3em;
+
+			a {
+				color: #d33737;
+			}
+
+			&.step-1 {
+				position: relative;
+			}
+		}
+
+		&.step-2 {
+			margin-left: -100%;
+		}
+		&.step-3 {
+			height: 100%;
+			transition: none;
+			margin-left: -200%;
+			overflow-y: auto;
+			.step {
+				height: calc(100% - 40px);
+			}
+
+			h1 {
+				font-size: 1.8rem;
+				font-family: "Raleway";
+				font-weight: 900;
+				margin-top: 5px;
+				text-transform: uppercase;
+			}
+			.onedash-form {
+				max-width: 600px;
+				width: 100%;
+				position: relative;
+				padding-bottom: 10px;
+
+				&.input-step-3 .onedash-button {
+					display: block;
+				}
+
+				.onedash-button {
+					margin: 30px 0px;
+					width: 100%;
+					display: none;
+				}
+				.onedash-form-component {
+					margin: 0px;
+					margin-top: 10px;
+					width: 100%;
+					max-width: 100%;
+					&.input-invalid .component {
+						background: #ca420c80;
+					}
+					&.onedash-select .component {
+						height: 50px;
+					}
+					label {
+						font-size: 0.9em;
+					}
+					.component {
+						font-size: 1em;
+						border: 2px solid #9e1212;
+						&:not(select) {
+							padding: 14.5px 10px;
+							width: calc(100% - 24px);
+						}
+					}
+				}
+			}
+
+			.input-step {
+				max-height: 0px;
+				overflow: hidden;
+				transition: 0.5s all ease-in-out;
+
+				&:first-of-type h2 {
+					margin-top: 30px;
+				}
+
+				h2 {
+					font-size: 1.4em;
+					font-weight: bold;
+					margin: 50px 0px 20px 0px;
+					color: #914d28;
+					font-family: "Raleway";
+				}
+
+				.member-entry {
+					margin-top: 50px;
+				}
+				.members {
+					margin-top: 20px;
+				}
+
+				.inputs {
+					.onedash-form-component:first-of-type {
+						margin-top: 0px;
+					}
+				}
+				&.visible {
+					max-height: 3000px;
+				}
+
+				.num-households,
+				.num-house-member {
+					width: 50px;
+					height: 50px;
+					padding: 0px;
+					margin: 7.5px 7.5px 7.5px 0px;
+					border: 2px solid #9e1212;
+					border-radius: 6px;
+					font-weight: bold;
+					font-family: "Raleway";
+					transition: 0.3s all ease-in-out;
+
+					&.active {
+						background: #9e1212;
+						color: white;
+					}
+					&:hover {
+						opacity: 1;
+					}
+				}
+			}
+		}
+	}
+	.submit-button {
+		display: flex;
+		align-items: center;
+
+		justify-content: space-between;
+		margin: 0px;
+		padding: 0px;
+		width: 100%;
+		margin-top: 20px;
+		img {
+			width: 30px;
+		}
+		p {
+			font-weight: bold;
+			font-weight: 900;
+			font-family: "Raleway";
+			font-size: 1.2em;
+		}
+	}
+}

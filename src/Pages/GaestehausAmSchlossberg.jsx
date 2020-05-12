@@ -10,8 +10,9 @@ import Footer from "../Components/Footer";
 import Slider from "react-slick";
 import Axios from "axios";
 import "@y0c/react-datepicker/assets/styles/calendar.scss";
-import { Form, Input } from "@onedash/tools";
+import { Form, Input, DateRangePicker } from "@onedash/tools";
 import PopupUtils from "../Utils/PopupUtils";
+import moment from "moment";
 
 let backgroundImages = [
 	{
@@ -87,29 +88,20 @@ class GaestehausAmSchlossberg extends Component {
 		});
 		return valid;
 	};
-	sendBookingRequest = (e) => {
-		/*e.preventDefault();
-		if (this.checkValidationStatus()) {
-			$(".booking-request input, .booking-request textarea").each((index, element) => {
-				element.value = "";
-			});
-			let content = {
-				language: window.lang,
-				inputVal: {},
-			};
-			this.state.inputValues
-				.filter((input) => input.name.indexOf("bookingRequest") === 0)
-				.forEach((inputVal) => {
-					content.inputVal[inputVal.name] = inputVal.value;
-				});
-
-			window.store.dispatch({ type: "TOGGLE_POPUP", name: "responseMessage" });
-			Axios.post(process.env.REACT_APP_BACKEND_ENDPOINT + "/contactRequest/bookign_request", content).then(function (response) {
-				setTimeout(function () {
-					window.store.dispatch({ type: "REQUEST_FINISHED", name: "responseMessage", response: response.data.message });
-				}, 1000);
-			});
-		}*/
+	sendBookingRequest = (data, form) => {
+		form.resetForm();
+		data.bookingRequestArrival = data.bookingRequestDate.startDate.format("ll");
+		data.bookingRequestDeparture = data.bookingRequestDate.endDate.format("ll");
+		const reqData = {
+			inputVal: data,
+			language: window.lang,
+		};
+		PopupUtils.showPopup("responseMessage");
+		Axios.post(process.env.REACT_APP_BACKEND_ENDPOINT + "/contactRequest/bookign_request", reqData).then(function (response) {
+			setTimeout(function () {
+				PopupUtils.setResponseMessage(response.data.message);
+			}, 1000);
+		});
 	};
 
 	openPopup = (name) => {
@@ -207,95 +199,47 @@ class GaestehausAmSchlossberg extends Component {
 						<div className="flex-center">
 							<article id="booking-request" className="booking-request middle-content basicInput">
 								<h1>{t("pages.gh.booking_request")}</h1>
-								<Form validateOnChange styling="none">
-									<fieldset>
-										<Input required name="bookingRequestName" placeholder={t("input.basic.name")} />
-										<Input required name="bookingRequestStreet" placeholder={t("input.basic.street")} />
-										<Input required name="bookingRequestPLZ" placeholder={t("input.basic.plz")} />
-										<Input required name="bookingRequestCity" placeholder={t("input.basic.city")} />
-										<Input required name="bookingRequestEmail" placeholder={t("input.basic.email")} />
-									</fieldset>
-									<fieldset>
+								<Form
+									onSubmit={this.sendBookingRequest}
+									submitText={t("input.basic.booking_request")}
+									validateOnChange
+									styling="none"
+								>
+									<div className="fieldset">
+										<Input required autoComplete="name" name="bookingRequestName" placeholder={t("input.basic.name")} />
 										<Input
 											required
-											type="date-range"
-											placeholder={t("input.basic.arrival")}
-											placeholder2={t("input.basic.departure")}
-											name1="bookingRequestArrival"
-											name2="bookingRequestDeparture"
-										/>
-									</fieldset>
-								</Form>
-								{/*
-								<form onSubmit={this.sendBookingRequest}>
-									<fieldset>
-										<BasicInput
-											type="text"
-											name="bookingRequestName"
-											required={true}
-											setValue={this.setInputValue}
-											placeholder={t("input.basic.name")}
-										/>
-
-										<BasicInput
-											type="text"
 											name="bookingRequestStreet"
-											required={true}
-											setValue={this.setInputValue}
+											autoComplete="street-address"
 											placeholder={t("input.basic.street")}
 										/>
-										<BasicInput
-											type="number"
-											name="bookingRequestPLZ"
-											required={true}
-											setValue={this.setInputValue}
-											placeholder={t("input.basic.plz")}
-										/>
-										<BasicInput
-											type="text"
-											name="bookingRequestCity"
-											required={true}
-											setValue={this.setInputValue}
-											placeholder={t("input.basic.city")}
-										/>
-										<BasicInput
-											type="tel"
-											name="bookingRequestPhone"
-											setValue={this.setInputValue}
-											placeholder={t("input.basic.phone")}
-										/>
-										<BasicInput
+										<Input required name="bookingRequestPLZ" autoComplete="postal-code" placeholder={t("input.basic.plz")} />
+										<Input required name="bookingRequestCity" autoComplete="address-level2" placeholder={t("input.basic.city")} />
+										<Input type="tel" autoComplete="tel" name="bookingRequestPhone" placeholder={t("input.basic.phone")} />
+										<Input
 											type="email"
+											required
 											name="bookingRequestEmail"
-											required={true}
-											setValue={this.setInputValue}
+											autoComplete="email"
 											placeholder={t("input.basic.email")}
 										/>
-									</fieldset>
-									<fieldset>
-										<BasicInput
-											type="dateRange"
-											name1="bookingRequestArrival"
-											name2="bookingRequestDeparture"
-											dateFormat={t("input.basic.dateFormat")}
-											setValue={this.setInputValue}
-											placeholder1={t("input.basic.arrival")}
-											placeholder2={t("input.basic.departure")}
-											required={true}
+									</div>
+									<div className="fieldset">
+										<DateRangePicker
+											minDate={moment()}
+											langKey={window.lang}
+											name="bookingRequestDate"
+											required
+											startPlaceholder={t("input.basic.arrival")}
+											endPlaceholder={t("input.basic.departure")}
 										/>
-
-										<BasicInput
+										<Input
 											type="textarea"
 											name="bookingRequestAdditionalMessage"
-											setValue={this.setInputValue}
 											placeholder={t("input.basic.additional_info")}
 										/>
-										<button className="btn" disabled={this.state.disabled}>
-											{t("input.basic.booking_request")}
-										</button>
-									</fieldset>
-								</form>
-								*/}
+									</div>
+								</Form>
 							</article>
 						</div>
 					</section>

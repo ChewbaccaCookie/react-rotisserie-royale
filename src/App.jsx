@@ -15,6 +15,7 @@ import Impressum from "./Popups/Impressum";
 import Location from "./Popups/Location";
 import Contact from "./Popups/Contact";
 import GaestehausAmSchlossberg from "./Pages/GaestehausAmSchlossberg";
+import Corona from "./Pages/Corona";
 import Dogs from "./Popups/Dogs";
 import ResponseMessage from "./Popups/ResponseMessage";
 import PageNotFound from "./Components/404";
@@ -42,6 +43,8 @@ class App extends Component {
 						<Route exact path="/" component={HomePage} />
 						<Route exact path="/Rotisserie-Royale" component={RotisserieRoyalePage} />
 						<Route exact path="/Gästehaus-am-Schlossberg" component={GaestehausAmSchlossberg} />
+						<Route exact path="/Rotisserie-Royale/corona/:tableNum" component={Corona} />
+						<Route exact path="/Rotisserie-Royale/corona" component={Corona} />
 
 						<Route component={PageNotFound} />
 					</Switch>
