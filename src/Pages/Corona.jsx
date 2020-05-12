@@ -97,7 +97,7 @@ export default class Corona extends Component {
 		return (
 			<Div100vh className="corona">
 				<div className={`image-container step-${step}`}>
-					<img alt="Social Distancing" className="title-image" src="/Assets/images/social-distancing.svg" />
+					<img alt="Social Distancing" className="title-image" src="/Assets/Images/social-distancing.png" />
 
 					<h1 className="left-title">#Flattenthecurve</h1>
 				</div>
@@ -117,7 +117,7 @@ export default class Corona extends Component {
 						</p>
 						<button onClick={this.nextStep} className="submit-button">
 							<p>Weiter</p>
-							<img className="title-image" src="/Assets/images/arrow.svg" alt="Weiter zum nächsten Schritt" />
+							<img className="title-image" src="/Assets/Images/arrow.svg" alt="Weiter zum nächsten Schritt" />
 						</button>
 					</div>
 					<div className="step">
@@ -127,7 +127,7 @@ export default class Corona extends Component {
 						</p>
 						<button onClick={this.nextStep} className="submit-button">
 							<p>Akzeptieren</p>
-							<img className="title-image" src="/Assets/images/arrow.svg" alt="Weiter zum nächsten Schritt" />
+							<img className="title-image" src="/Assets/Images/arrow.svg" alt="Weiter zum nächsten Schritt" />
 						</button>
 					</div>
 
