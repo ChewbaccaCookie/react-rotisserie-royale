@@ -17,7 +17,7 @@ jobs:
                   node-version: 13
                   registry-url: https://npm.onedash.dev/
             - name: 🏗 Install dependencies
-              run: npm i @semantic-release/git
+              run: npm i @semantic-release/git semantic-release @semantic-release/commit-analyzer conventional-changelog-conventionalcommits
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

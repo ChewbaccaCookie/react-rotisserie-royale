@@ -7,7 +7,6 @@
     ".vscode": true,
     ".htaccess": true,
     ".prettierrc": true,
-    ".releaserc": true,
     "renovate.json": true,
     ".gitignore": true
   }
