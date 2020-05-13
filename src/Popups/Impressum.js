@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
-import Popup from "../Components/Popup";
+import { Dialog } from "@onedash/tools";
+import PopupUtils from "../Utils/PopupUtils";
 
 class Impressum extends Component {
 	render() {
 		const { t } = this.props;
 		return (
-			<Popup name="impressum" title={t("pages.impressum.h1")}>
+			<Dialog onClose={() => PopupUtils.closePopup("impressum")} isOpen={this.props.isOpen} name="impressum" title={t("pages.impressum.h1")}>
 				<h2>{t("basic.rotisserie_royale")}</h2>
 				<h3>{t("pages.impressum.h3.resp_person")}</h3>
 				<p dangerouslySetInnerHTML={{ __html: t("pages.impressum.text.rr_resp_person") }} />
@@ -40,7 +41,7 @@ class Impressum extends Component {
 
 				<h2>{t("pages.impressum.h2.design")}</h2>
 				<p dangerouslySetInnerHTML={{ __html: t("pages.impressum.text.design") }} />
-			</Popup>
+			</Dialog>
 		);
 	}
 }

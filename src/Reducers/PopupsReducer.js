@@ -1,23 +1,32 @@
-const popups = (
-	state = [
-		{ name: "privacy", open: false },
-		{ name: "impressum", open: false },
-		{ name: "location", open: false },
-		{ name: "contact", open: false },
-		{ name: "responseMessage", open: false, loaded: false, response: "" },
-		{ name: "dog", open: false }
-	],
-	action
-) => {
-	switch (action.type) {
-		case "TOGGLE_POPUP":
-			return state.map(popup => (popup.name === action.name ? { ...popup, open: !popup.open } : popup));
+const defaultState = {
+	popups: {
+		privacy: false,
+		impressum: false,
+		location: false,
+		contact: false,
+		responseMessage: false,
+		dog: false,
+	},
+	response: undefined,
+	redirectPath: undefined,
+};
 
-		case "REQUEST_FINISHED":
-			return state.map(popup => (popup.name === action.name ? { ...popup, loaded: true, response: action.response } : popup));
+const popups = (state = defaultState, action) => {
+	switch (action.type) {
+		case "SHOW_POPUP":
+			state.popups[action.name] = true;
+			break;
+		case "CLOSE_POPUP":
+			state.popups[action.name] = false;
+			break;
+		case "RESPONSE_MESSAGE":
+			state.response = action.message;
+			state.redirectPath = action.path;
+			break;
 		default:
 			return state;
 	}
+	return state;
 };
 
 export default popups;

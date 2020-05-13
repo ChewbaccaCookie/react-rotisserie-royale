@@ -1,0 +1,27 @@
+name: Code Checks
+on:
+    pull_request:
+        branches:
+            - master
+jobs:
+    code-check:
+        name: "Run Code checks"
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: 13
+                  registry-url: https://npm.onedash.dev/
+            - name: 🏗 Install dependencies
+              run: npx pnpm install --lockfile=false
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            - name: 📝 Format coding
+              run: npm run format
+
+            - name: "🚧 Check linting"
+              run: npm run lint
+
+            - name: "🚦 Build server"
+              run: npm run build

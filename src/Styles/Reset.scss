@@ -127,3 +127,33 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type="number"] {
+	-moz-appearance: textfield;
+}
+input[type="time"]::-webkit-outer-spin-button,
+input[type="time"]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+input[type="time"]::before {
+	margin-right: 0.6em;
+	font-family: "Roboto Condensed";
+	font-size: 0.8rem;
+	color: #757575;
+}
+input[type="time"]:lang(de)::before {
+	content: "Uhrzeit:";
+}
+input[type="time"]:lang(en)::before {
+	content: "Time:";
+}
+
+input[type="time"] {
+	-moz-appearance: textfield;
+}

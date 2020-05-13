@@ -1,7 +1,6 @@
 Options -MultiViews
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_URI} !/onedash/
 RewriteRule ^ index.html [QSA,L]
 
 # Deflate Compression by FileType
