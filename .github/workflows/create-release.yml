@@ -34,13 +34,10 @@ jobs:
         name: "Deploy Server"
         steps:
             - uses: actions/checkout@v2
-            - name: get-npm-version
-              uses: martinbeentjes/npm-get-version-action@master
-              id: get-npm-version
-
-            - name: Get release version
-              id: get_version
-              run: echo ::set-env name=RELEASE_VERSION::${{steps.get-npm-version.outputs.current-version}}
+            - name: 🏗 Install dependencies
+              run: npx pnpm install --lockfile=false
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
             - name: "🚦 Build server"
               run: npm run build
