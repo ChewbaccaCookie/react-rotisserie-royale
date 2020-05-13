@@ -49,8 +49,7 @@ class GaestehausAmSchlossberg extends Component {
 			this.setState({
 				arrangements,
 			});
-		} catch (err) {
-			console.log(err);
+		} finally {
 		}
 	}
 

@@ -9,7 +9,6 @@
     ".prettierrc": true,
     ".releaserc": true,
     "renovate.json": true,
-    ".eslintrc": true,
     ".gitignore": true
   }
 }

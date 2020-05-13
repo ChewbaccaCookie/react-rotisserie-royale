@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Div100vh from "react-div-100vh";
-import { Form, Select, Input } from "@onedash/tools";
+import { Form, Select, Input, Button } from "@onedash/tools";
 import "../Styles/Pages.Corona.scss";
 import Axios from "axios";
 import PopupUtils from "../Utils/PopupUtils";
@@ -16,6 +16,9 @@ export default class Corona extends Component {
 			1: 2,
 			2: 2,
 		},
+		tables: undefined,
+		tableStates: undefined,
+		tableBlocked: false,
 	};
 
 	nextStep = () => {
@@ -24,11 +27,7 @@ export default class Corona extends Component {
 		});
 	};
 	componentDidMount() {
-		const table = this.props.match.params.tableNum;
-
-		if (table && tables.find((x) => x.value === Number(table))) {
-			this.setState({ table: Number(table), inputStep: 2 });
-		}
+		this.loadTables();
 	}
 
 	classInputStep = (num) => {
@@ -93,6 +92,45 @@ export default class Corona extends Component {
 		}
 	};
 
+	loadTables = async () => {
+		const response = await Axios.get(process.env.REACT_APP_NEW_BACKEND_ENDPOINT + "/gastro/corona");
+
+		const tables = [];
+		response.data.data.forEach((t) => {
+			tables.push({
+				label: t.name,
+				value: t.table,
+			});
+		});
+		this.setState(
+			{
+				tables,
+				tableStates: response.data.data,
+			},
+			() => {
+				const table = this.props.match.params.tableNum;
+
+				if (table && tables.find((x) => x.value === Number(table))) {
+					this.selectTable({ value: Number(table) });
+				}
+			}
+		);
+	};
+
+	selectTable = (obj) => {
+		const table = this.state.tableStates.find((x) => x.table === obj.value);
+		if (!table) return;
+		if (table.status === "blocked") {
+			this.setState({
+				table: obj.value,
+				tableBlocked: true,
+			});
+
+			return;
+		}
+		this.setState({ table: obj.value, inputStep: 2, tableBlocked: false });
+	};
+
 	render() {
 		const step = this.state.step;
 		return (
@@ -145,15 +183,23 @@ export default class Corona extends Component {
 								<h2>1. Ihr Tisch</h2>
 								<div className="inputs">
 									<Select
-										onChange={() => this.setState({ inputStep: 2 })}
+										onChange={this.selectTable}
 										name="table"
 										value={this.state.table}
 										native
-										options={tables}
+										options={this.state.tables}
 										required
 										disabled={this.state.table !== undefined ? true : false}
 										label="An welchem Tisch sitzen Sie?"
 									></Select>
+									{this.state.tableBlocked === true && (
+										<div className="select-message">
+											Dieser Tisch ist aktuell noch belegt. Bitten Sie eine Servicekraft diesen Sitzplatz wieder freizuschalten.
+											<Button className="visible" onClick={this.loadTables}>
+												Aktualisieren
+											</Button>
+										</div>
+									)}
 								</div>
 							</div>
 							<div className={this.classInputStep(2)}>
@@ -236,70 +282,3 @@ export default class Corona extends Component {
 		);
 	}
 }
-
-const tables = [
-	{
-		value: 1,
-		label: "Tisch 1",
-	},
-	{
-		value: 2,
-		label: "Tisch 2",
-	},
-	{
-		value: 3,
-		label: "Tisch 3",
-	},
-	{
-		value: 4,
-		label: "Tisch 4",
-	},
-	{
-		value: 5,
-		label: "Tisch 5",
-	},
-	{
-		value: 6,
-		label: "Tisch 6",
-	},
-	{
-		value: 7,
-		label: "Tisch 7",
-	},
-	{
-		value: 10,
-		label: "Tisch 10",
-	},
-	{
-		value: 12,
-		label: "Tisch 12",
-	},
-	{
-		value: 14,
-		label: "Tisch 14",
-	},
-	{
-		value: 15,
-		label: "Tisch 15",
-	},
-	{
-		value: 16,
-		label: "Tisch 16",
-	},
-	{
-		value: 17,
-		label: "Tisch 17",
-	},
-	{
-		value: 18,
-		label: "Tisch 18",
-	},
-	{
-		value: 23,
-		label: "Tisch 23",
-	},
-	{
-		value: 25,
-		label: "Tisch 25",
-	},
-];
