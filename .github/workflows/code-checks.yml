@@ -7,14 +7,21 @@ jobs:
     code-check:
         name: "Run Code checks"
         runs-on: ubuntu-latest
+        if: "! contains(toJSON(github.event.commits.*.message), '[skip-ci]')"
         steps:
             - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
               with:
                   node-version: 13
                   registry-url: https://npm.onedash.dev/
+            - uses: actions/cache@v1
+              with:
+                  path: ~/.pnpm-store
+                  key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  restore-keys: |
+                  
             - name: 🏗 Install dependencies
-              run: npx pnpm install --lockfile=false
+              run: npx pnpm install
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
             - name: 📝 Format coding
