@@ -24,7 +24,7 @@ class Navigation extends Component {
 		} else {
 			//Get Browser language => Set right Language
 			let userLang = navigator.language || navigator.userLanguage;
-			if (userLang === "de-DE" || "de") {
+			if (userLang === "de-DE" || userLang === "de") {
 				this.setLanguage("de");
 			} else {
 				//Fallback for other user

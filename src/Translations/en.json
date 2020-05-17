@@ -133,5 +133,24 @@
 	"pages.rr.welcome_h1": "Welcome to the <span class=\"no-break\">Rotisserie Royale</span>",
 	"pages.rr.welcome_h2": "Your address for hospitality.",
 	"input.basic.dateTooEarly": "Please call us if you would like to make a reservation for the next two days.",
-	"input.basic.tooManyPeople": "If you would like to come to more than 6 people, please call us to reserverieren."
+	"input.basic.tooManyPeople": "If you would like to come to more than 6 people, please call us to reserverieren.",
+
+	"corona.tableName": "Table",
+	"corona.step1.text": "Due to the sixth <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://corona.rlp.de/fileadmin/rlp-stk/pdf-Dateien/Corona/6._CoBeLVO_.pdf\">Corona control regulation of Rhineland-Palatinate</a> we are obliged to record the contact details of all our guests.",
+	"corona.step1.btn": "Next",
+	"corona.step2.text": "Your data will be stored for one month and made available to the health authorities in case of a COVID - 19 Case at our restaurant. The data will <span class=\"bold underline\">not</span> be used for other purposes.",
+	"corona.step2.btn": "Accept",
+	"corona.step3.title": "Data input",
+	"corona.step3.submit": "Submit data",
+	"corona.step3.inputStep1.title": "1. Your table",
+	"corona.step3.inputStep1.select": "Select...",
+	"corona.step3.inputStep1.tableLabel": "What table are you at?",
+	"corona.step3.inputStep1.tableBlocked": "This table is currently still occupied. Please ask a waitress to unlock this seat. <Button class=\"visible\" onClick={this.loadTables}>Refresh</Button>",
+	"corona.step3.inputStep2.title": "2. Number of households",
+	"corona.step3.inputStep3.first": "First",
+	"corona.step3.inputStep3.second": "Second",
+	"corona.step3.inputStep3.household": "Household",
+	"corona.step3.inputStep3.num": "Number of people living in this household",
+	"corona.step3.inputStep3.nameOf": "Name of the",
+	"corona.step3.inputStep3.resident": "resident"
 }

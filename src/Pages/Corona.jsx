@@ -5,8 +5,9 @@ import "../Styles/Pages.Corona.scss";
 import Axios from "axios";
 import PopupUtils from "../Utils/PopupUtils";
 import SocialDistancing from "./social-distancing.png";
+import { withTranslation } from "react-i18next";
 
-export default class Corona extends Component {
+class Corona extends Component {
 	form = React.createRef();
 	state = {
 		step: 1,
@@ -55,12 +56,12 @@ export default class Corona extends Component {
 	};
 
 	updateFormValidation = () => {
-		if (this.form.current) {
-			setTimeout(() => {
+		setTimeout(() => {
+			if (this.form.current) {
 				this.form.current.validateSubmitBtn();
 				this.form.current.resetValidation();
-			});
-		}
+			}
+		});
 	};
 
 	sendData = async (data, form) => {
@@ -98,7 +99,7 @@ export default class Corona extends Component {
 		const tables = [];
 		response.data.data.forEach((t) => {
 			tables.push({
-				label: t.name,
+				label: this.props.t("corona.tableName") + " " + t.table,
 				value: t.table,
 			});
 		});
@@ -132,6 +133,7 @@ export default class Corona extends Component {
 	};
 
 	render() {
+		const t = this.props.t;
 		const step = this.state.step;
 		return (
 			<Div100vh className="corona">
@@ -143,44 +145,32 @@ export default class Corona extends Component {
 
 				<div className={`steps step-${step}`}>
 					<div className="step">
-						<p>
-							Aufgrund der sechsten{" "}
-							<a
-								target="_blank"
-								rel="noopener noreferrer"
-								href="https://corona.rlp.de/fileadmin/rlp-stk/pdf-Dateien/Corona/6._CoBeLVO_.pdf"
-							>
-								Corona-Bekämpfungsverordnung Rheinland-Pfalz
-							</a>{" "}
-							sind wir verpflichtet die Kontaktdaten aller unserer Gäste zu erfassen.
-						</p>
+						<p dangerouslySetInnerHTML={{ __html: t("corona.step1.text") }} />
 						<button onClick={this.nextStep} className="submit-button">
-							<p>Weiter</p>
-							<img className="title-image" src="/Assets/Images/arrow.svg" alt="Weiter zum nächsten Schritt" />
+							<p>{t("corona.step1.btn")}</p>
+							<img className="title-image" src="/Assets/Images/arrow.svg" alt={t("corona.step1.btn")} />
 						</button>
 					</div>
 					<div className="step">
-						<p>
-							Ihre Daten werden einen Monat aufbewahrt und auf Anordnung des Gesundheitsamtes diesem zur Verfügung gestellt. Die Daten
-							werden <span className="bold underline">nicht</span> anderweitig verwendet.
-						</p>
+						<p dangerouslySetInnerHTML={{ __html: t("corona.step2.text") }} />
+
 						<button onClick={this.nextStep} className="submit-button">
-							<p>Akzeptieren</p>
-							<img className="title-image" src="/Assets/Images/arrow.svg" alt="Weiter zum nächsten Schritt" />
+							<p>{t("corona.step2.btn")}</p>
+							<img className="title-image" src="/Assets/Images/arrow.svg" alt={t("corona.step2.btn")} />
 						</button>
 					</div>
 
 					<div className="step">
-						<h1>Dateneingabe</h1>
+						<h1>{t("corona.step3.title")}</h1>
 						<Form
 							ref={this.form}
 							onSubmit={this.sendData}
 							className={`input-step-${this.state.inputStep}`}
 							validateOnSubmit
-							submitText="Daten absenden"
+							submitText={t("corona.step3.submit")}
 						>
 							<div className={this.classInputStep(1)}>
-								<h2>1. Ihr Tisch</h2>
+								<h2>{t("corona.step3.inputStep1.title")}</h2>
 								<div className="inputs">
 									<Select
 										onChange={this.selectTable}
@@ -189,21 +179,20 @@ export default class Corona extends Component {
 										native
 										options={this.state.tables}
 										required
+										placeholder={t("corona.step3.inputStep1.select")}
 										disabled={this.state.table !== undefined ? true : false}
-										label="An welchem Tisch sitzen Sie?"
+										label={t("corona.step3.inputStep1.tableLabel")}
 									></Select>
 									{this.state.tableBlocked === true && (
-										<div className="select-message">
-											Dieser Tisch ist aktuell noch belegt. Bitten Sie eine Servicekraft diesen Sitzplatz wieder freizuschalten.
-											<Button className="visible" onClick={this.loadTables}>
-												Aktualisieren
-											</Button>
-										</div>
+										<div
+											className="select-message"
+											dangerouslySetInnerHTML={{ __html: t("corona.step3.inputStep1.tableBlocked") }}
+										/>
 									)}
 								</div>
 							</div>
 							<div className={this.classInputStep(2)}>
-								<h2>2. Anzahl der Haushalte</h2>
+								<h2>{t("corona.step3.inputStep2.title")}</h2>
 								<div className="inputs">
 									<button type="button" className={this.classHouseholds(1)} onClick={() => this.setHouseholds(1)}>
 										1
@@ -217,7 +206,8 @@ export default class Corona extends Component {
 								{[...Array(this.state.houseHolds)].map((x, i) => (
 									<React.Fragment key={i}>
 										<h2>
-											{3 + i}. {i === 0 ? "Erster" : "Zweiter"} Haushalt
+											{3 + i}. {i === 0 ? t("corona.step3.inputStep3.first") : t("corona.step3.inputStep3.second")}{" "}
+											{t("corona.step3.inputStep3.household")}
 										</h2>
 										<div className="inputs">
 											<Input name={`household-${i + 1}-name`} autoComplete="name" required type="text" label="Name" />
@@ -226,25 +216,31 @@ export default class Corona extends Component {
 												autoComplete="street-address"
 												required
 												type="text"
-												label="Straße"
+												label={t("input.basic.street")}
 											/>
 											<Input
 												name={`household-${i + 1}-plz`}
 												autoComplete="postal-code"
 												required
 												type="text"
-												label="Postleitzahl"
+												label={t("input.basic.plz")}
 											/>
 											<Input
 												name={`household-${i + 1}-address`}
 												autoComplete="address-level2"
 												required
 												type="text"
-												label="Ort"
+												label={t("input.basic.city")}
 											/>
-											<Input name={`household-${i + 1}-phone`} autoComplete="tel" type="tel" required label="Telefonnummer" />
+											<Input
+												name={`household-${i + 1}-phone`}
+												autoComplete="tel"
+												type="tel"
+												required
+												label={t("input.basic.phone")}
+											/>
 											<div className="member-entry">
-												<h3>Anzahl der Anwohner dieses Haushalts</h3>
+												<h3>{t("corona.step3.inputStep3.num")}</h3>
 												{[...Array(6)].map((x, ii) => (
 													<button
 														type="button"
@@ -265,7 +261,13 @@ export default class Corona extends Component {
 															autoComplete="off"
 															required
 															type="text"
-															label={`Name des ${ii + 2}. Anwohners`}
+															label={
+																t("corona.step3.inputStep3.nameOf") +
+																" " +
+																(ii + 2) +
+																". " +
+																t("corona.step3.inputStep3.resident")
+															}
 															name={`household-${i + 1}-member-${ii + 1}`}
 														/>
 													))}
@@ -282,3 +284,4 @@ export default class Corona extends Component {
 		);
 	}
 }
+export default withTranslation()(Corona);

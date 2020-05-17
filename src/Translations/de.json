@@ -133,5 +133,24 @@
 	"pages.rr.welcome_h1": "Herzlich Willkommen in der <span class=\"no-break\">Rotisserie Royale</span>",
 	"pages.rr.welcome_h2": "Ihre Adresse für anspruchsvolle Gastlichkeit",
 	"input.basic.dateTooEarly": "Bitte rufen Sie uns an, wenn sie für die nächsten zwei Tage reservieren möchten.",
-	"input.basic.tooManyPeople": "Wenn Sie zu mehr als 6 Personen kommen möchten, rufen Sie uns bitte an."
+	"input.basic.tooManyPeople": "Wenn Sie zu mehr als 6 Personen kommen möchten, rufen Sie uns bitte an.",
+
+	"corona.tableName": "Tisch",
+	"corona.step1.text": "Aufgrund der sechsten <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://corona.rlp.de/fileadmin/rlp-stk/pdf-Dateien/Corona/6._CoBeLVO_.pdf\">Corona-Bekämpfungsverordnung Rheinland-Pfalz</a> sind wir verpflichtet die Kontaktdaten aller unserer Gäste zu erfassen.",
+	"corona.step1.btn": "Weiter",
+	"corona.step2.text": "Ihre Daten werden einen Monat aufbewahrt und auf Anordnung des Gesundheitsamtes diesem zur Verfügung gestellt. Die Daten werden <span class=\"bold underline\">nicht</span> anderweitig verwendet.",
+	"corona.step2.btn": "Akzeptieren",
+	"corona.step3.title": "Dateneingabe",
+	"corona.step3.submit": "Daten absenden",
+	"corona.step3.inputStep1.title": "1. Ihr Tisch",
+	"corona.step3.inputStep1.select": "Wählen Sie ...",
+	"corona.step3.inputStep1.tableLabel": "An welchem Tisch sitzen Sie?",
+	"corona.step3.inputStep1.tableBlocked": "Dieser Tisch ist aktuell noch belegt. Bitten Sie eine Servicekraft diesen Sitzplatz wieder freizuschalten. <Button class=\"visible\" onClick={this.loadTables}>Aktualisieren</Button>",
+	"corona.step3.inputStep2.title": "2. Anzahl der Haushalte",
+	"corona.step3.inputStep3.first": "Erster",
+	"corona.step3.inputStep3.second": "Zweiter",
+	"corona.step3.inputStep3.household": "Haushalt",
+	"corona.step3.inputStep3.num": "Anzahl der Anwohner dieses Haushalts",
+	"corona.step3.inputStep3.nameOf": "Name des",
+	"corona.step3.inputStep3.resident": "Anwohners"
 }
