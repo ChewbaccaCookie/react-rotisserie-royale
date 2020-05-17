@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Div100vh from "react-div-100vh";
-import { Form, Select, Input, Button } from "@onedash/tools";
+import { Form, Select, Input } from "@onedash/tools";
 import "../Styles/Pages.Corona.scss";
 import Axios from "axios";
 import PopupUtils from "../Utils/PopupUtils";
