@@ -1,0 +1,96 @@
+.menu-card.square-twenty {
+	$pageBackground: white;
+	* {
+		font-family: "Raleway";
+		color: #373737;
+	}
+	.page {
+		height: 206.9mm;
+		width: 209mm;
+		background: $pageBackground;
+
+		.columns {
+			justify-content: space-between;
+		}
+		.page-title {
+			position: absolute;
+			position: absolute;
+			left: 30px;
+			top: 10px;
+			font-weight: 900;
+			text-transform: uppercase;
+			font-size: 1.7rem;
+			padding: 0 20px 5px;
+			border-bottom: 2px dotted #ca4343;
+			color: #3b3a36;
+			margin: 20px 0;
+		}
+	}
+
+	.item {
+		margin: 5px 0px;
+
+		.name,
+		.description {
+			font-weight: 300;
+			margin: 0px;
+			line-height: 100%;
+		}
+	}
+
+	.column {
+		border-right: 2px solid #adadad;
+		width: calc(50% - 40px);
+		padding-right: 40px;
+
+		&:last-of-type {
+			border-right: none;
+			padding-right: 0px;
+		}
+	}
+	.min-persons {
+		margin-top: 5px;
+		color: #914d28;
+	}
+	.corresponding-wine {
+		margin-top: 30px;
+		span {
+			display: block;
+			font-weight: 400;
+			font-size: 1.1em;
+			&.price {
+				font-weight: 700;
+			}
+		}
+	}
+	.second-block {
+		margin-left: 20px;
+	}
+	.section {
+		&.price-border {
+			.second-block {
+				margin-left: 0px;
+			}
+			.drink,
+			.dish {
+				position: relative;
+
+				& > div {
+					flex-shrink: 0;
+				}
+
+				.item-border {
+					flex-grow: 1;
+					flex-shrink: 100;
+
+					margin-left: 5px;
+					margin-right: 5px;
+					width: 100%;
+					z-index: -1;
+					height: 1em;
+					border-bottom: 1px dotted #ca4343;
+				}
+			}
+		}
+	}
+}

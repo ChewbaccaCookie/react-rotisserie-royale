@@ -1,0 +1,212 @@
+.menu-card {
+	line-height: 100%;
+
+	* {
+		font-size: 1em;
+	}
+	.free-images,
+	.free-texts {
+		z-index: 2;
+		.free-image,
+		.free-text {
+			margin: 0px;
+			position: absolute;
+			transform: translateX(-50%) translateY(-50%);
+		}
+	}
+
+	.page-wrapper {
+		.page:last-of-type {
+			margin-right: 80px;
+		}
+	}
+	.page {
+		flex-shrink: 0;
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+		background: white;
+		position: relative;
+
+		.columns {
+			display: flex;
+			height: 100%;
+		}
+		& > .watermark {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 1;
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+		}
+
+		.column {
+			z-index: 2;
+			&.horizontal-center {
+				width: 100%;
+				display: flex;
+				justify-content: center;
+			}
+
+			&.vertical-center {
+				height: 100%;
+				display: flex;
+				align-items: center;
+			}
+		}
+	}
+	.ingredients {
+		display: none;
+	}
+
+	.section {
+		&.no-item-price {
+			.items {
+				.dish .price,
+				.drink .price {
+					display: none;
+				}
+			}
+		}
+		&.is-successor {
+			.title {
+				display: none;
+			}
+			&:first-of-type {
+				margin-top: 55px;
+			}
+		}
+		&.amount-hidden {
+			.amount {
+				display: none;
+			}
+			.price-item .price {
+				width: auto;
+				padding-left: 5px;
+			}
+		}
+
+		.wine-recommendation {
+			.amount,
+			.price {
+				display: inline;
+				margin: 0px;
+			}
+			.price {
+				margin-left: 5px;
+			}
+		}
+		.min-persons {
+			margin-top: 5px;
+		}
+		.corresponding-wine {
+			span {
+				display: block;
+			}
+		}
+	}
+}
+.footer-bar {
+	position: fixed;
+	bottom: 0;
+	height: 20px;
+	left: 0;
+	background: var(--background);
+	border-top: 1px solid var(--lightGray);
+	width: calc(100% - 11px);
+	z-index: 5;
+}
+
+/**
+*  DEFAULT PRINTING BEHAVIOR
+*/
+@media print {
+	.menu-card {
+		.page {
+			box-shadow: none;
+			margin: 0px;
+			.columns {
+				border-left: 2px dashed #d6d6d6;
+				border-right: 2px dashed #d6d6d6;
+			}
+		}
+	}
+}
+
+#root {
+	@media (max-width: 980px) {
+		.menu-manager {
+			width: calc(100% + 20px);
+			margin: 0px -20px;
+		}
+		.page-wrapper {
+			width: 100%;
+		}
+		.page {
+			box-shadow: none;
+			width: 100%;
+			height: auto;
+		}
+
+		.section .dish .second-block,
+		.section .drink .second-block {
+			flex-shrink: 20;
+		}
+
+		.free-images,
+		.free-texts {
+			display: none;
+		}
+		.two-columns-block,
+		.two-columns-price-bottom {
+			.page-title {
+				text-align: center;
+				position: relative;
+				border: none;
+				margin: 0px;
+				padding: 0px;
+				margin-left: -50px;
+			}
+			.columns {
+				display: block;
+				padding: 1cm !important;
+
+				.column {
+					width: 100%;
+					border: none;
+				}
+			}
+		}
+		.column {
+			padding-right: 0px !important;
+		}
+		.two-columns-price-bottom {
+			.title {
+				text-align: center;
+
+				padding: 0px;
+				display: block;
+				margin: 30px 0px 10px 0px;
+				border: none;
+			}
+			.column {
+				text-align: center;
+			}
+			.second-block .prices {
+				display: inline-block;
+				margin: 10px auto 5px auto;
+				.amount {
+					text-align: left;
+					width: 40px;
+				}
+			}
+		}
+		.centered-price-bottom {
+			.section > .title {
+				line-height: 100%;
+			}
+		}
+	}
+}

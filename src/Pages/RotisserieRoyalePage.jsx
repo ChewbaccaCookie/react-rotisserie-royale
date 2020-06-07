@@ -8,6 +8,7 @@ import Axios from "axios";
 import moment from "moment";
 import { Form, Input, DatePicker } from "@onedash/tools";
 import PopupUtils from "../Utils/PopupUtils";
+import MenuManager from "../Components/MenuDesigner/MenuManger/MenuManager";
 
 let backgroundImages = [
 	{
@@ -87,6 +88,10 @@ class RotisserieRoyalePage extends Component {
 								<p>{t("pages.rr.kitchen_ours.second")}</p>
 								<p className="bold">{t("pages.rr.kitchen_ours.free_day")}</p>
 							</article>
+						</div>
+						<div className="flex-center">
+							<h1>{t("pages.rr.menu_card")}</h1>
+							<MenuManager />
 						</div>
 
 						<div className="flex-center">

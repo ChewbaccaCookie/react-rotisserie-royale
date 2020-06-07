@@ -40,6 +40,7 @@ class App extends Component {
 			<div>
 				<StyleLoader>
 					<Navigation />
+
 					<Switch>
 						<Route exact path="/" component={HomePage} />
 						<Route exact path="/Rotisserie-Royale" component={RotisserieRoyalePage} />

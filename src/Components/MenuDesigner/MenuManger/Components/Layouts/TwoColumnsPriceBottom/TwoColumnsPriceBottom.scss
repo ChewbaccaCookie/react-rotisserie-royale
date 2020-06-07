@@ -1,0 +1,67 @@
+.page.two-columns-price-bottom {
+	.column-0 {
+		text-align: right;
+		.section {
+			& > .title {
+				text-align: right;
+				padding: 0 5px 2px 25px;
+			}
+		}
+		.price-item {
+			justify-content: flex-end;
+		}
+	}
+
+	.section {
+		margin-top: 20px;
+		&:first-of-type {
+			margin-top: 10px;
+		}
+	}
+	.item:first-of-type {
+		margin-top: 5px !important;
+	}
+
+	.title {
+		padding: 0 25px 2px 5px;
+		display: inline-block;
+		border-bottom: 2px solid #582b12;
+		margin: 5px 0 7px;
+		font-size: 1.3em;
+		font-weight: 500;
+		text-transform: uppercase;
+		color: #914d28;
+	}
+
+	.drink,
+	.dish {
+		margin: 5px 0px;
+
+		.name {
+			font-weight: 400;
+		}
+		.description {
+			font-size: 0.9em;
+			opacity: 0.9;
+		}
+		p {
+			margin: 0px;
+		}
+	}
+	.drink .price-item {
+		display: flex;
+
+		.amount {
+			font-size: 0.8em;
+			font-weight: 400;
+			line-height: 1.8em;
+			text-align: right;
+			width: 60px;
+		}
+		.price {
+			font-weight: 700;
+			text-align: right;
+			width: 65px;
+		}
+	}
+}
