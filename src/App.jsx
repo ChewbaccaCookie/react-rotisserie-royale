@@ -20,7 +20,6 @@ import Dogs from "./Popups/Dogs";
 import ResponseMessage from "./Popups/ResponseMessage";
 import PageNotFound from "./Components/404";
 import { StyleLoader } from "@onedash/tools";
-import ManageCorona from "./Pages/ManageCorona";
 
 const store = createStore(popupRededucer);
 window.store = store;
@@ -47,8 +46,6 @@ class App extends Component {
 						<Route exact path="/Gästehaus-am-Schlossberg" component={GaestehausAmSchlossberg} />
 						<Route exact path="/Rotisserie-Royale/corona/:tableNum" component={Corona} />
 						<Route exact path="/Rotisserie-Royale/corona" component={Corona} />
-						<Route exact path="/Rotisserie-Royale/manage-corona" component={ManageCorona} />
-
 						<Route component={PageNotFound} />
 					</Switch>
 					<section className="popups">
