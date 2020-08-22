@@ -158,6 +158,7 @@ class RotisserieRoyalePage extends Component {
 											name="tableReservationAdditionalMessage"
 											placeholder={t("input.basic.additional_info")}
 										/>
+										<div className="form-notification">{t("pages.rr.reservationNotice")}</div>
 										{this.state.reservationNotification && (
 											<div className="form-notification">{this.state.reservationNotification}</div>
 										)}

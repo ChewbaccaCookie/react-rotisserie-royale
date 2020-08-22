@@ -10,7 +10,7 @@
 	-o-transition: 0.5s ease-in-out;
 	transition: 0.5s ease-in-out;
 	cursor: pointer;
-	z-index: 3;
+	z-index: 51;
 	position: fixed;
 	right: 30px;
 	top: 30px;
@@ -65,7 +65,7 @@
 	height: 0;
 	width: 100vw;
 	position: fixed;
-	z-index: 100000000000000000;
+	z-index: 50;
 	left: 0;
 	top: 0;
 	background-color: rgba(0, 0, 0, 0.9);

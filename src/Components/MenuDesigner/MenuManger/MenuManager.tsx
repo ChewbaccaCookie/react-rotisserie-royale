@@ -59,7 +59,6 @@ class MenuManager extends Component<MenuManagerProps> {
 
 	render() {
 		const menu = this.state.menu;
-		console.log(this.state.selectedPage);
 
 		return (
 			<div className="menu-manager">

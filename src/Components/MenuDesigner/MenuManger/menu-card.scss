@@ -16,15 +16,13 @@
 	}
 
 	.page-wrapper {
-		.page:last-of-type {
-			margin-right: 80px;
-		}
 	}
 	.page {
 		flex-shrink: 0;
 		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 		background: white;
 		position: relative;
+		margin: 0px auto;
 
 		.columns {
 			display: flex;

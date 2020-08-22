@@ -33,13 +33,13 @@ class HomePage extends Component {
 				<div id="welcome-text">
 					<h1 dangerouslySetInnerHTML={{ __html: t("pages.home.welcome_text") }} />
 					<div id="btns">
-						<Link to="Rotisserie-Royale" className="btn">
+						<Link to="/Rotisserie-Royale" className="btn">
 							<span className="arrow-wrapper">
 								<span className="arrow" />
 							</span>
 							{t("basic.rotisserie_royale")}
 						</Link>
-						<Link to="Gästehaus-am-Schlossberg" className="btn">
+						<Link to="/Gästehaus-am-Schlossberg" className="btn">
 							<span className="arrow-wrapper">
 								<span className="arrow" />
 							</span>
