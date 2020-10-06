@@ -3,7 +3,7 @@ import React from "react";
 export default class Convert {
 	public static numberToPrice = (price: number | undefined): string => {
 		if (price) {
-			return String(price.toFixed(2)).replace(".", ",") + "€";
+			return String(Number(price).toFixed(2)).replace(".", ",") + "€";
 		} else {
 			return "0,00€";
 		}
