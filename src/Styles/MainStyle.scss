@@ -1,11 +1,12 @@
 @font-face {
 	font-family: Champagne;
-	src: url("/Assets/Fonts/Champagne_Limousines.ttf");
+	src: url("Champagne_Limousines.ttf");
 	font-display: swap;
 }
 html {
 	font-size: 100%;
 	--tools-btn-primary: #9e1212 !important;
+	--highlight: #9e1212;
 }
 body {
 	padding: 0;
@@ -14,13 +15,13 @@ body {
 	font-family: "Roboto";
 	font-size: 100%;
 	color: #494949;
-	background: url("/Assets/Basic/Background.png");
+	background: url("./Background.png");
 }
 noscript {
 	background: #d33737;
 }
 .noscript {
-	background: url("/Assets/Basic/Noscript.svg");
+	background: url("Noscript.svg");
 	height: calc(100vh - 18vw);
 	width: 100vw;
 	background-size: contain;
@@ -84,7 +85,6 @@ noscript {
 	color: #e88760;
 }
 .slider-overlay {
-	//background: url("/Assets/Slider/overlay.png");
 	background-color: rgba(0, 0, 0, 0.8);
 	position: absolute;
 	top: 0;
@@ -137,7 +137,7 @@ a {
 	position: relative;
 }
 
-.content {
+.main-content > .content {
 	max-width: 800px;
 	margin-left: auto;
 	margin-right: auto;
@@ -153,11 +153,11 @@ a {
 	padding: 80px;
 	transition: all 0.5s ease;
 
-	li {
+	li:not(.DayPicker_weekHeader_li) {
 		margin-left: 25px;
 	}
 
-	li::before {
+	li:not(.DayPicker_weekHeader_li)::before {
 		margin: 10px;
 		color: #ca4343;
 		content: "\25ba";
@@ -217,7 +217,9 @@ a {
 		flex-wrap: wrap;
 
 		article {
+			flex: 1;
 			margin: 15px 10px;
+			flex-basis: 300px;
 		}
 	}
 }
@@ -256,7 +258,7 @@ a {
 	left: -50px !important;
 	&::before {
 		content: "" !important;
-		background: url(/Assets/Basic/arrow-light-left.svg);
+		background: url("arrow-light-left.svg");
 		height: 22px;
 		width: 42px;
 		background-repeat: no-repeat;
@@ -271,7 +273,7 @@ a {
 	right: -50px !important;
 	&::before {
 		content: "" !important;
-		background: url(/Assets/Basic/arrow-light-right.svg);
+		background: url(arrow-light-right.svg);
 		height: 22px;
 		width: 42px;
 		background-repeat: no-repeat;
@@ -286,7 +288,7 @@ a {
 	body {
 		font-size: 8px;
 	}
-	.content {
+	.main-content > .content {
 		font-size: 0.9rem;
 		line-height: 1.8rem;
 		padding: 10px;

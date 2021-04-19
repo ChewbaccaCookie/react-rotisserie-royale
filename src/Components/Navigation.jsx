@@ -1,87 +1,72 @@
-import React, { Component } from "react";
-import { withTranslation } from "react-i18next";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
-import i18n from "../i18n";
 import "../Styles/Component.Nav.scss";
-import { Cookies } from "react-cookie";
-import PopupUtils from "../Utils/PopupUtils";
+import PopupContext from "../Utils/PopupContext";
 
-const cookie = new Cookies();
-
-class Navigation extends Component {
-	state = {
+const Navigation = () => {
+	const { 1: i18n, t } = useTranslation();
+	const { togglePopup } = React.useContext(PopupContext);
+	const [state, update] = React.useState({
 		menuOpen: false,
+	});
+
+	const toggleNav = () => {
+		update((x) => ({ ...x, menuOpen: !x.menuOpen }));
 	};
-	toggleNav = () => {
-		this.setState({
-			menuOpen: !this.state.menuOpen,
-		});
-	};
-	componentDidMount = () => {
-		window.lang = cookie.get("lang");
-		if (window.lang) {
-			i18n.changeLanguage(window.lang);
-		} else {
-			//Get Browser language => Set right Language
-			let userLang = navigator.language || navigator.userLanguage;
-			if (userLang === "de-DE" || userLang === "de") {
-				this.setLanguage("de");
-			} else {
-				//Fallback for other user
-				this.setLanguage("en");
-			}
-		}
-	};
-	setLanguage = (lang) => {
-		i18n.changeLanguage(lang);
-		window.lang = lang;
-		cookie.set("lang", lang, { path: "/", expires: new Date(9999, 11, 31) });
-	};
-	toggleLanguage = () => {
-		this.toggleNav();
+
+	const setLanguage = React.useCallback(
+		(lang) => {
+			i18n.changeLanguage(lang);
+			window.lang = lang;
+		},
+		[i18n]
+	);
+
+	const toggleLanguage = () => {
+		toggleNav();
 		if (window.lang === "de") {
-			this.setLanguage("en");
+			setLanguage("en");
 		} else {
-			this.setLanguage("de");
+			setLanguage("de");
 		}
 	};
-	openPopup = (name) => {
-		this.toggleNav();
-		PopupUtils.showPopup(name);
+
+	const openPopup = (name) => {
+		toggleNav();
+		togglePopup(name);
 	};
-	render() {
-		const { t } = this.props;
-		return (
-			<div>
-				<div id="nav-icon" className={this.state.menuOpen === true ? "open" : ""} onClick={this.toggleNav}>
-					<span />
-					<span />
-					<span />
-					<span />
-				</div>
-				<div className={this.state.menuOpen === true ? "navOpen Navigation" : "Navigation"}>
-					<div className="overlay-content">
-						<NavLink onClick={this.toggleNav} activeClassName="nav-is-active" exact to="/" className="navigation-link">
-							{t("navigation.home")}
-						</NavLink>
-						<NavLink onClick={this.toggleNav} activeClassName="nav-is-active" to="/Rotisserie-Royale" className="navigation-link">
-							{t("basic.rotisserie_royale")}
-						</NavLink>
-						<NavLink onClick={this.toggleNav} activeClassName="nav-is-active" to="/Gästehaus-am-Schlossberg" className="navigation-link">
-							{t("basic.gaestehaus_am_schlossberg")}
-						</NavLink>
-						<div className="additional-links">
-							<button onClick={() => this.openPopup("impressum")}>{t("basic.impressum")}</button>
-							<button onClick={() => this.openPopup("privacy")}>{t("basic.privacy")}</button>
-							<button onClick={this.toggleLanguage} className="navigation-link">
-								{t("basic.translation_toggle")}
-							</button>
-						</div>
+
+	return (
+		<div>
+			<button id="nav-icon" className={state.menuOpen === true ? "open" : ""} onClick={toggleNav}>
+				<span />
+				<span />
+				<span />
+				<span />
+			</button>
+			<div className={state.menuOpen === true ? "navOpen Navigation" : "Navigation"}>
+				<div className="overlay-content">
+					<NavLink onClick={toggleNav} activeClassName="nav-is-active" exact to="/" className="navigation-link">
+						{t("navigation.home")}
+					</NavLink>
+					<NavLink onClick={toggleNav} activeClassName="nav-is-active" to="/Rotisserie-Royale" className="navigation-link">
+						{t("basic.rotisserie_royale")}
+					</NavLink>
+					<NavLink onClick={toggleNav} activeClassName="nav-is-active" to="/Gästehaus-am-Schlossberg" className="navigation-link">
+						{t("basic.gaestehaus_am_schlossberg")}
+					</NavLink>
+					<div className="additional-links">
+						<button onClick={() => openPopup("impressum")}>{t("basic.impressum")}</button>
+						<button onClick={() => openPopup("privacy")}>{t("basic.privacy")}</button>
+						<button onClick={toggleLanguage} className="navigation-link">
+							{t("basic.translation_toggle")}
+						</button>
 					</div>
 				</div>
 			</div>
-		);
-	}
-}
+		</div>
+	);
+};
 
-export default withTranslation()(Navigation);
+export default Navigation;

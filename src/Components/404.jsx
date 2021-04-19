@@ -1,10 +1,8 @@
-import React, { Component } from "react";
-import { withRouter, Redirect } from "react-router-dom";
+import React from "react";
+import { Redirect } from "react-router-dom";
 
-class PageNotFound extends Component {
-	render() {
-		return <Redirect to="/" />;
-	}
-}
+const PageNotFound = () => {
+	return <Redirect to="/" />;
+};
 
-export default withRouter(PageNotFound);
+export default PageNotFound;

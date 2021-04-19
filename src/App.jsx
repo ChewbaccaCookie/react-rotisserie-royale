@@ -1,16 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { setLocaleMessages as setFormLocaleMessages, FormLocales } from "onedash-react-input-form";
+import { setLocaleMessages as setDialogLocaleMessages, DialogLocales, DialogUtils } from "onedash-dialog";
+import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+import GermanDate from "dayjs/locale/de";
+import EnglishDate from "dayjs/locale/en";
 import HomePage from "./Pages/HomePage";
-
 import "./Styles/Reset.scss";
-import "./Styles/ToolsOverwrite.scss";
 import "./Styles/MainStyle.scss";
 import Navigation from "./Components/Navigation";
 import RotisserieRoyalePage from "./Pages/RotisserieRoyalePage";
 import Privacy from "./Popups/Privacy";
-import { createStore } from "redux";
-import popupRededucer from "./Reducers/PopupsReducer";
 import Impressum from "./Popups/Impressum";
 import Location from "./Popups/Location";
 import Contact from "./Popups/Contact";
@@ -19,47 +21,64 @@ import Corona from "./Pages/Corona";
 import Dogs from "./Popups/Dogs";
 import ResponseMessage from "./Popups/ResponseMessage";
 import PageNotFound from "./Components/404";
-import { StyleLoader } from "@onedash/tools";
+import PopupContext, { initialPopupContext } from "./Utils/PopupContext";
 
-const store = createStore(popupRededucer);
-window.store = store;
+dayjs.extend(localizedFormat);
 
-class App extends Component {
-	state = {
-		popups: {},
-	};
-	componentDidMount() {
-		window.store.subscribe(() => {
-			let state = window.store.getState();
-			this.setState({ popups: state.popups });
-		});
-	}
-	render() {
-		return (
+const App = () => {
+	const { 1: locale } = useTranslation();
+	const [popupState, updatePopupState] = React.useState(initialPopupContext);
+	React.useEffect(() => {
+		DialogUtils.registerHeightHelper();
+	}, []);
+	React.useEffect(() => {
+		updatePopupState((s) => ({
+			...s,
+			togglePopup: (popupName) => {
+				updatePopupState((ss) => ({ ...ss, [popupName]: !ss[popupName] }));
+			},
+			updateResponseMessage: (responseMessage) => {
+				updatePopupState((ss) => ({ ...ss, responseMessage }));
+			},
+		}));
+	}, []);
+
+	React.useEffect(() => {
+		const langKey = locale.language.indexOf("de") !== -1 ? "de" : "en";
+		// Set form locales to German
+		setFormLocaleMessages(langKey === "de" ? FormLocales.DE : FormLocales.EN);
+
+		// Set dialog locales to German
+		setDialogLocaleMessages(langKey === "de" ? DialogLocales.DE : DialogLocales.EN);
+
+		window.lang = langKey;
+
+		dayjs.locale(langKey === "de" ? GermanDate : EnglishDate);
+	}, [locale.language]);
+	return (
+		<PopupContext.Provider value={popupState}>
 			<div>
-				<StyleLoader>
-					<Navigation />
+				<Navigation />
 
-					<Switch>
-						<Route exact path="/" component={HomePage} />
-						<Route exact path="/Rotisserie-Royale" component={RotisserieRoyalePage} />
-						<Route exact path="/Gästehaus-am-Schlossberg" component={GaestehausAmSchlossberg} />
-						<Route exact path="/Rotisserie-Royale/corona/:tableNum" component={Corona} />
-						<Route exact path="/Rotisserie-Royale/corona" component={Corona} />
-						<Route component={PageNotFound} />
-					</Switch>
-					<section className="popups">
-						<Privacy isOpen={this.state.popups.privacy} />
-						<Impressum isOpen={this.state.popups.impressum} />
-						<Location isOpen={this.state.popups.location} />
-						<Contact isOpen={this.state.popups.contact} />
-						<Dogs isOpen={this.state.popups.dogs} />
-						<ResponseMessage isOpen={this.state.popups.responseMessage} />
-					</section>
-				</StyleLoader>
+				<Switch>
+					<Route exact path="/" component={HomePage} />
+					<Route exact path="/Rotisserie-Royale" component={RotisserieRoyalePage} />
+					<Route exact path="/Gästehaus-am-Schlossberg" component={GaestehausAmSchlossberg} />
+					<Route exact path="/Rotisserie-Royale/corona/:tableNum" component={Corona} />
+					<Route exact path="/Rotisserie-Royale/corona" component={Corona} />
+					<Route component={PageNotFound} />
+				</Switch>
+				<section className="popups">
+					<Privacy isOpen={popupState.privacy} />
+					<Impressum isOpen={popupState.impressum} />
+					<Location isOpen={popupState.location} />
+					<Contact isOpen={popupState.contact} />
+					<Dogs isOpen={popupState.dogs} />
+					<ResponseMessage isOpen={popupState.response} />
+				</section>
 			</div>
-		);
-	}
-}
+		</PopupContext.Provider>
+	);
+};
 
-export default withTranslation()(App);
+export default App;

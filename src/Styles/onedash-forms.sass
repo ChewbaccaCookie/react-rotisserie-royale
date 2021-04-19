@@ -1,0 +1,591 @@
+
+.fieldset
+	border-radius: 4px
+	border: 1px solid #9e1212
+	padding: 20px
+	margin: 30px
+	width: calc(100% - 102px)
+	display: flex
+	flex-wrap: wrap
+
+	& > .onedash-form-v2-component
+		margin: 5px 5px
+		flex: 1
+		flex-basis: 220px
+
+.DateRangePicker, .SingleDatePicker, .DayPicker
+	*
+		line-height: 35px
+		.DayPickerKeyboardShortcuts_buttonReset
+			display: none
+
+.onedash-button-v2, .btn
+	display: block
+	background: var(--highlight)
+	color: white
+	border-radius: 4px
+	padding: 10px 20px
+	margin: 30px
+	width: calc(100% - 60px)
+	&:disabled
+		pointer-events: none
+		background: #bfc3ca
+
+.onedash-form-v2-component
+	--blue: #162055
+	--invalid: #d13131
+	--background: white
+	--very-light-gray: #edf1f6
+	--light-gray: #bfc3ca
+	--middle-gray: #81848a
+	--middle-gray: #b8b8b8
+
+	position: relative
+	box-sizing: border-box
+	max-width: 400px
+	width: 100%
+	margin: 15px 0px
+	display: inline-block
+
+	&.full-width
+		flex-basis: 100%
+		max-width: 100%
+
+	*:not(.CalendarDay)
+		box-sizing: border-box
+		line-height: 100%
+	.onedash-label
+		display: block
+		font-size: 11px
+		color: var(--light-gray)
+		margin: 0px 0px 5px 15px
+
+		.required
+			margin-left: 3px
+
+	&.with-icon
+		.placeholder-required
+			right: 64px
+		input, select, textarea
+			padding-right: 75px
+		.onedash-custom-select__control
+			padding-right: 60px
+
+	.placeholder-required
+		position: absolute
+		color: var(--invalid)
+		right: 10px
+		top: 7px
+
+	.input-wrapper
+		position: relative
+
+	.input-icon
+		position: absolute
+		background: var(--very-light-gray)
+		height: calc(100% - 2px)
+		width: 54px
+		right: 1px
+		top: 1px
+		border-radius: 0px 4px 4px 0px
+		display: flex
+		justify-content: center
+		align-items: center
+		z-index: 1
+		i
+			color: var(-middle-gray)
+			font-size: 20px
+
+	input, select, textarea
+		padding: 12px 10px
+		border-radius: 4px
+		box-shadow: none
+		border: 1px solid var(--light-gray)
+		font-size: 13px
+		line-height: 100%
+		font-weight: 400
+		width: 100%
+		height: 100%
+		transition: 0.15s border ease-in-out
+		background-color: var(--background)
+		resize: none
+		appearance: none
+		font-family: "Roboto"
+
+		&:focus
+			outline: none
+			border-color: var(--blue)
+
+	.DateRangePicker, .SingleDatePicker
+		width: 100%
+
+		&_picker
+			z-index: 2
+		.DateRangePickerInput,.SingleDatePickerInput
+			border: none
+			width: 100%
+			.DateInput
+				width: calc(50% - 15px)
+				&_fang
+					display: none
+			.DateRangePickerInput_arrow
+				width: 30px
+				display: inline-flex
+				justify-content: center
+		.SingleDatePickerInput
+			.DateInput
+				width: 100%
+				&_fang,&_screenReaderMessage
+					display: none
+
+	.error-icon
+		display: none
+
+	&.input-invalid
+		input
+			border-color: var(--invalid)
+
+		.input-wrapper
+			animation: .5s bounce
+
+		.error-message
+			position: absolute
+			font-size: 10px
+			left: 12px
+			bottom: 5px
+			color: var(--invalid)
+
+		.error-icon
+			z-index: 2
+			background: var(--invalid)
+			position: absolute
+			right: 0
+			top: 0
+			height: 100%
+			width: 54px
+			display: flex
+			justify-content: center
+			align-items: center
+			border-radius: 0px 13px 13px 0px
+			transform-style: preserve-3d
+			transform-origin: center right
+			animation: 0.2s flip-in ease-in-out
+
+			.icon
+				display: inline-block
+				width: 150px
+				transform: scale(0.25)
+
+				.stroke
+					stroke: white
+				.circular
+					width: 150px
+
+				.circular circle.path
+					stroke-dasharray: 330
+					stroke-dashoffset: 0
+					stroke-linecap: round
+					opacity: 0.4
+					animation: 0.3s draw-circle ease-out
+
+				.cross
+					stroke-width: 6.25
+					stroke-linecap: round
+					position: absolute
+					top: 54px
+					left: 54px
+					width: 40px
+					height: 40px
+
+					.first-line
+						animation: 0.2s draw-first-line ease-out
+					.second-line
+						animation: 0.2s draw-second-line ease-out
+
+	.onedash-custom-select
+		&__control
+			min-height: 54px
+			border-radius: 15px
+			background-color: var(--background)
+			border: 1px solid var(--light-gray)
+			box-shadow: none
+			&:hover, &--is-focused
+				border-color: var(--blue)
+
+		&__placeholder
+			font-size: 13px
+			line-height: 100%
+			font-weight: 400
+
+		&__value-container
+			padding: 10px 15px
+		&__menu
+			background: var(--background)
+			z-index: 2
+		&__option
+			font-size: 13px
+			line-height: 100%
+			&--is-focused
+				background: var(--blue)
+			&:hover
+				background: var(--very-light-gray)
+
+	&.onedash-range-slider
+		.onedash-label
+			margin-left: 0px
+			margin-bottom: 20px
+		.input-range__label
+			color: black
+
+		.input-range__slider
+			background: var(--blue)
+		.input-range__track
+			background: var(--very-light-gray)
+			&--active
+				background: var(--blue)
+	&.onedash-verification-input
+		width: auto
+
+		.example-spinner
+			position: absolute
+			z-index: 2
+			left: 50%
+			top: 50%
+			transform: translateX(-50%) translateY(-50%)
+
+		&.disabled .display
+			background-color: var(--very-light-gray)
+			pointer-events: none
+			color: var(--light-gray)
+		.display-list
+			display: inline-block
+			position: relative
+			display: flex
+			border-radius: 15px
+			height: 54px
+		input
+			position: absolute
+			border: none
+			font-size: 22px
+			text-align: center
+			background-color: transparent
+			outline: none
+			border: none
+			padding: 0px
+			width: auto
+			height: 100%
+			width: 32px
+			top: 0px
+			bottom: 0px
+			z-index: 1
+
+		.display
+			border: 1px solid var(--light-gray)
+			background-color: var(--background)
+			border-right: none
+			width: 32px
+			height: 100%
+			display: flex
+			align-items: center
+			justify-content: center
+			font-size: 22px
+			position: relative
+			&:last-child
+				border-right: 1px solid var(--light-gray)
+				border-radius: 0px 15px 15px 0px
+				.shadows
+					border-radius: 0px 15px 15px 0px
+			&:first-child, &:first-child .shadows
+				border-radius: 15px 0px 0px 15px
+
+			.shadows
+				position: absolute
+				left: -1px
+				top: -1px
+				bottom: 0
+				right: 0
+				border: 1px solid var(--blue)
+				width: calc(100% + 2px)
+				height: calc(100% + 2px)
+				z-index: 1
+				transition: 0.15s all ease-in-out
+
+	&.onedash-single-file-uploader
+		padding: 10px 0px
+		position: relative
+		width: 100%
+
+		.image-upload-area
+			width: 100%
+			height: 200px
+			cursor: pointer
+			&:hover .dropzone i, &:hover .dropzone svg path, &:hover .dropzone .content-placeholder
+				color: var(--highlight)
+				fill: var(--highlight)
+
+			.dropzone
+				position: relative
+				border: 1px solid var(--light-gray)
+				border-radius: 4px
+				display: flex
+				justify-content: center
+				align-items: center
+				flex-direction: column
+				background: var(--very-light-gray)
+				width: calc(100% - 4px)
+				height: calc(100% - 4px)
+
+				&:focus
+					outline: none
+					border-color: var(--blue)
+
+				&.accept
+					border-color: var(--highlight)
+					i, svg path, span
+						color: var(--highlight)
+						fill: var(--highlight)
+				&.reject
+					border-color: var(--invalid)
+
+				.content-placeholder
+					color: var(--gray)
+					font-size: 0.9rem
+					margin-top: 10px
+
+		.file
+			background: var(--very-light-gray)
+			width: 100%
+			height: 100%
+			border-radius: 4px
+			display: flex
+			justify-content: center
+			align-items: center
+			span, i, svg path
+				color: var(--middle-gray)
+				fill: var(--middle-gray)
+		.image, .file
+			width: 100%
+			height: 200px
+			flex-basis: 100px
+			flex-shrink: 0
+			position: relative
+			object-fit: cover
+
+			&:before
+				position: absolute
+				content: ''
+				border-radius: 0px 0px 0px 40%
+				background: white
+				background: var(--background)
+				width: 46px
+				height: 46px
+				right: -7px
+				top: -16px
+
+			.progress-bar
+				height: 5px
+				background: var(--light-gray)
+				width: 100%
+				position: absolute
+				bottom: 0
+				border-bottom-left-radius: 4px
+				border-bottom-right-radius: 4px
+
+				span
+					height: 100%
+					background-color: var(--highlight)
+					display: block
+					border-bottom-left-radius: 4px
+					border-bottom-right-radius: 4px
+
+			img
+				width: 100%
+				height: 100%
+				border-radius: 4px
+				box-shadow: 0px 0px 3px rgba(0,0,0,.5)
+				object-fit: cover
+
+			.delete-btn
+				position: absolute
+				right: 0px
+				top: 0px
+				cursor: pointer
+				transition: 0.15s all ease-in-out
+				background: none
+				border: none
+				&:focus
+					outline: none
+				&:hover
+					opacity: 0.7
+				i, svg
+					font-size: 25px
+					color: var(--invalid)
+					path
+						fill: var(--invalid)
+
+	&.onedash-boolean
+		--duration: 0.4s
+
+		&.has-children
+			display: inline-flex
+			align-items: center
+			.onedash-children
+				font-size: 13px
+				line-height: 100%
+				font-weight: 400
+
+		.checker
+			display: block
+			height: 54px
+			width: 100px
+			box-sizing: content-box
+			padding: 5px
+			border-radius: 4px
+			transition: transform var(--duration) ease
+			cursor: pointer
+			flex-shrink: 0
+			margin-right: 10px
+			margin-top: 5px
+			position: relative
+
+		.checkmark
+			width: 30px
+			height: 30px
+			transition: transform var(--duration) ease
+			transform: translateX(-3px)
+			position: relative
+
+			svg
+				display: block
+				background: var(--very-light-gray)
+				transform: translateX(10px)
+				border-radius: 10px
+				margin-top: 8px
+
+				transition: background-color var(--duration) ease, transform calc(var(--duration) * 1.5) ease
+
+				path
+					// opacity: 0
+					stroke-dasharray: 90 90
+					stroke-dashoffset: 90
+					transition: stroke-dashoffset calc(var(--duration) / 3) linear calc(var(--duration) / 3)
+
+		.checkbox
+			position: absolute
+			top: 0
+			left: 0
+			opacity: 0.4
+			visibility: hidden
+
+			&:checked
+				~ .checkmark
+					transform: translate(60px)
+
+					svg
+						background: var(--blue)
+						transform: translate(-6.4px)
+						path
+							stroke-dashoffset: 0
+
+		.check-bg
+			position: absolute
+			top: 0
+			left: 0
+			width: 100%
+			height: 100%
+			border-radius: inherit
+			background: var(--background)
+			border-radius: 15px
+			border: 1px solid var(--light-gray)
+			box-sizing: border-box
+
+			&:before,
+			&:after
+				content: ""
+				position: absolute
+				top: 0
+				left: 0
+				height: 100%
+				width: 100%
+				border-radius: inherit
+
+			&:after
+				background: var(--background)
+
+			&:focus
+				outline: none
+				border-color: var(--blue)
+
+		.checker.checker
+			&:active
+				transform: scale(0.85)
+				transition-duration: calc(var(--duration) / 2)
+
+				.check-bg::before
+					transform: translateY(0) scale(0.8)
+					opacity: 0.2
+
+.onedash-form
+	.form-buttons
+		margin-top: 20px
+	.onedash-button
+		height: 54px
+		border-radius: 15px
+		border: none
+		padding: 18px 30px
+		cursor: pointer
+		text-transform: uppercase
+		font-weight: 900
+		transition: 0.15s all ease-in-out
+
+		&.form-submit-btn
+			background: var(--blue)
+			color: white
+			margin-left: 10px
+
+			&:disabled
+				color: var(--middle-gray)
+				background: var(--light-gray)
+				pointer-events: none
+
+		&:hover
+			opacity: 0.7
+@keyframes flip-in
+	0%
+		transform: rotateY( 90deg )
+		opacity: 0
+	100%
+		opacity: 1
+		transform: rotateY( 0deg )
+@keyframes bounce
+	0%
+		transform: translateX(0px)
+		timing-function: ease-in
+
+	37%
+		transform: translateX(5px)
+		timing-function: ease-out
+
+	55%
+		transform: translateX(-5px)
+		timing-function: ease-in
+
+	73%
+		transform: translateX(4px)
+		timing-function: ease-out
+
+	82%
+		transform: translateX(-4px)
+		timing-function: ease-in
+
+	91%
+		transform: translateX(2px)
+		timing-function: ease-out
+
+	96%
+		transform: translateX(-2px)
+		timing-function: ease-in
+
+	100%
+		transform: translateX(0px)
+		timing-function: ease-in

@@ -1,16 +1,18 @@
-import React, { Component } from "react";
-import { withTranslation } from "react-i18next";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import Axios from "axios";
+import { DatePicker, Form, Input } from "onedash-react-input-form";
+import dayjs from "dayjs";
 import "react-awesome-slider/dist/styles.css";
+import { Popover } from "onedash-dialog";
 import BackgroundSlider from "../Components/BackgroundSlider";
 import "../Styles/Pages.RotisserieRoyale.scss";
 import Footer from "../Components/Footer";
-import Axios from "axios";
-import moment from "moment";
-import { Form, Input, DatePicker } from "@onedash/tools";
-import PopupUtils from "../Utils/PopupUtils";
-import MenuManager from "../Components/MenuDesigner/MenuManger/MenuManager";
+import MenuCard from "../Components/MenuCard/MenuCard";
+import PopupContext from "../Utils/PopupContext";
+import MediaRender from "../Components/MediaRender";
 
-let backgroundImages = [
+const backgroundImages = [
 	{
 		src: "/Assets/MinifiedImages/rr-slider-1-min.jpg",
 	},
@@ -22,45 +24,47 @@ let backgroundImages = [
 	},
 ];
 
-class RotisserieRoyalePage extends Component {
-	state = {
+const RotisserieRoyalePage = () => {
+	const { t, 1: i18n } = useTranslation();
+	const { togglePopup, updateResponseMessage } = React.useContext(PopupContext);
+	const [state, update] = React.useState({
 		reservationNotification: undefined,
-	};
+		menuCardDialog: false,
+	});
 
-	sendTableReservationRequest = (data, form) => {
+	const sendTableReservationRequest = (data, form) => {
 		form.resetForm();
-		data.tableReservationDate = data.tableReservationDate.format("ll");
+		setTimeout(() => form.validateSubmitBtn());
+		data.tableReservationDate = dayjs(data.tableReservationDate).format("LL");
 		const reqData = {
 			inputVal: data,
 			language: window.lang,
 		};
-		PopupUtils.showPopup("responseMessage");
-		Axios.post(process.env.REACT_APP_BACKEND_ENDPOINT + "/contactRequest/table_request", reqData).then(function (response) {
-			setTimeout(function () {
-				PopupUtils.setResponseMessage(response.data.message);
+		togglePopup("response");
+		Axios.post(`${process.env.REACT_APP_BACKEND_ENDPOINT}/contactRequest/table_request`, reqData).then((response) => {
+			setTimeout(() => {
+				updateResponseMessage(response.data.message);
 			}, 1000);
 		});
 	};
-	validatePersonNum = (value) => {
+
+	const validatePersonNum = (value) => {
 		if (value > 6) {
-			this.setState({
-				reservationNotification: this.props.t("input.basic.tooManyPeople"),
-			});
+			update((s) => ({ ...s, reservationNotification: t("input.basic.tooManyPeople") }));
 			return false;
 		}
 
-		this.setState({
+		update((s) => ({
+			...s,
 			reservationNotification: undefined,
-		});
+		}));
 
 		return true;
 	};
-
-	render() {
-		const { t } = this.props;
-		return (
+	return (
+		<>
 			<div className="RotisserieRoyalePage">
-				<BackgroundSlider images={backgroundImages} autoplay={true} />
+				<BackgroundSlider images={backgroundImages} autoplay />
 				<div id="logo">
 					<a href="/">
 						<img alt="Logo - Rotisserie Royale / Gästehaus am Schlossberg" src="/Assets/Slider/logo.png" />
@@ -91,13 +95,23 @@ class RotisserieRoyalePage extends Component {
 						</div>
 						<div className="flex-center">
 							<h1>{t("pages.rr.menu_card")}</h1>
-							<MenuManager />
+							<MediaRender type="desktop">
+								<MenuCard />
+							</MediaRender>
+							<MediaRender type="mobile">
+								<button className="btn" onClick={() => update((s) => ({ ...s, menuCardDialog: true }))}>
+									Speisekarte anzeigen
+								</button>
+							</MediaRender>
 						</div>
 
 						<div className="flex-center">
 							<article id="table-reservation" className="table-reservation middle-content basicInput">
 								<h1>{t("pages.rr.table_reservation")}</h1>
-								<Form onSubmit={this.sendTableReservationRequest} validateOnSubmit submitText={t("input.basic.table_reservation")}>
+								<Form
+									onSubmit={sendTableReservationRequest}
+									validateOnSubmit
+									submitText={t("input.basic.table_reservation")}>
 									<div className="fieldset">
 										<Input
 											autoComplete="name"
@@ -127,7 +141,12 @@ class RotisserieRoyalePage extends Component {
 											required
 											placeholder={t("input.basic.city")}
 										/>
-										<Input autoComplete="tel" type="text" name="tableReservationPhone" placeholder={t("input.basic.phone")} />
+										<Input
+											autoComplete="tel"
+											type="text"
+											name="tableReservationPhone"
+											placeholder={t("input.basic.phone")}
+										/>
 										<Input
 											autoComplete="email"
 											type="email"
@@ -138,11 +157,12 @@ class RotisserieRoyalePage extends Component {
 									</div>
 									<div className="fieldset">
 										<DatePicker
-											minDate={moment()}
-											langKey={window.lang}
+											minDate={dayjs().add(1, "day").toDate().getTime()}
+											langKey={i18n.language}
 											name="tableReservationDate"
 											required
 											placeholder={t("input.basic.date")}
+											withPortal
 										/>
 										<Input type="time" name="tableReservationTime" required placeholder={t("input.basic.time")} />
 										<Input
@@ -151,7 +171,7 @@ class RotisserieRoyalePage extends Component {
 											name="tableReservationNum"
 											required
 											placeholder={t("input.basic.num_pers")}
-											onValidate={this.validatePersonNum}
+											onValidate={validatePersonNum}
 										/>
 										<Input
 											type="textarea"
@@ -159,8 +179,8 @@ class RotisserieRoyalePage extends Component {
 											placeholder={t("input.basic.additional_info")}
 										/>
 										<div className="form-notification">{t("pages.rr.reservationNotice")}</div>
-										{this.state.reservationNotification && (
-											<div className="form-notification">{this.state.reservationNotification}</div>
+										{state.reservationNotification && (
+											<div className="form-notification">{state.reservationNotification}</div>
 										)}
 									</div>
 								</Form>
@@ -171,8 +191,11 @@ class RotisserieRoyalePage extends Component {
 					<Footer />
 				</div>
 			</div>
-		);
-	}
-}
+			<Popover isOpen={state.menuCardDialog} onClose={() => update((s) => ({ ...s, menuCardDialog: false }))}>
+				<MenuCard />
+			</Popover>
+		</>
+	);
+};
 
-export default withTranslation()(RotisserieRoyalePage);
+export default RotisserieRoyalePage;

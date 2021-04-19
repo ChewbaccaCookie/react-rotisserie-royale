@@ -7,28 +7,23 @@ jobs:
     code-check:
         name: "Run Code checks"
         runs-on: ubuntu-latest
-        if: "! contains(toJSON(github.event.commits.*.message), '[skip-ci]')"
+        if: "!contains(github.event.head_commit.message, 'ci skip')"
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v1
+            - uses: actions/checkout@master
+            - uses: technote-space/auto-cancel-redundant-workflow@v1
+            - uses: actions/setup-node@v2
               with:
-                  node-version: 13
-                  registry-url: https://npm.onedash.dev/
-            - uses: actions/cache@v1
-              with:
-                  path: ~/.pnpm-store
-                  key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
-                  restore-keys: |
-                  
+                  node-version: 15
+            - uses: c-hive/gha-npm-cache@v1
+
             - name: 🏗 Install dependencies
-              run: npx pnpm install
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-            - name: 📝 Format coding
-              run: npm run format
+              run: npm install --legacy-peer-deps
 
-            - name: "🚧 Check linting"
-              run: npm run lint
+            - name: ✒ Check linting / formatting
+              run: npm run lint --if-present
 
-            - name: "🚦 Build server"
+            - name: 🧪 Run Tests
+              run: npm run test --if-present
+
+            - name: Build application
               run: npm run build

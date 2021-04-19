@@ -1,0 +1,343 @@
+.onedash-dialog-v2
+    --blue: #162055
+    --lightBlue: #009eff1d
+    --invalid: #d13131
+    --dialog: white
+    --background: rgba(0,0,0,0.6)
+    --very-light-gray: #edf1f6
+    --light-gray: #dadee4
+    --middle-gray: #81848a
+
+    display: none
+    font-size: 14px
+
+    &.response-message
+        .content
+            overflow: hidden !important
+            display: flex
+            flex-direction: column
+            align-items: center
+            text-align: center
+            svg
+                margin-left: auto
+                margin-right: auto
+            h1
+                color: white
+                font-family: "Champagne"
+                font-size: 1.4rem
+                font-weight: bold
+                color: #fff
+                font-family: "Champagne"
+                padding: 0
+                margin: 30px 0 0
+                transition: all .3s ease-in-out
+                transition-delay: 1s
+
+    &.full-size .dialog
+        padding: 0px !important
+        .content
+            padding-right: 0px
+            border-radius: 10px
+    .dialog-wrapper
+        position: fixed
+        z-index: 100000
+        width: 100vw
+        height: 100vh
+        left: 0
+        top: 0
+        display: flex
+        justify-content: center
+        align-items: center
+
+        .dialog
+            background: var(--dialog)
+            border-radius: 6px
+            padding: 20px
+            display: flex
+            flex-direction: column
+            justify-content: space-between
+            position: relative
+            width: calc(100% - 80px)
+            max-width: 600px
+            animation: scaleIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards
+        .dialog-title
+            font-family: Qwigley!important
+            font-size: 3em
+            text-align: left
+            font-weight: 400!important
+            line-height: 1em
+            color: #9e1212!important
+
+        .close-btn
+            background: none
+            border: none
+            position: absolute
+            right: 25px
+            top: 15px
+            font-size: 1.8rem
+            transform: rotate(45deg)
+            transition: 0.15s all ease-in-out
+            cursor: pointer
+            z-index: 1
+
+            &:focus
+                outline: none
+            &:hover
+                opacity: 0.7
+                transform: rotate(0deg)
+
+        .content
+            max-height: calc((var(--wh) * 100) - 150px)
+            overflow-y: auto
+            padding-right: 10px
+
+            &::-webkit-scrollbar
+                width: 4px
+                height: 2px
+
+            &::-webkit-scrollbar-button
+                width: 0px
+                height: 0px
+
+            &::-webkit-scrollbar-thumb
+                background: #e7e7e7
+                border: 0px none #ffffff
+                border-radius: 50px
+
+            &::-webkit-scrollbar-track
+                background: none
+                border: 0px none #ffffff
+                border-radius: 50px
+
+            &::-webkit-scrollbar-corner
+                background: transparent
+
+    .dialog-bg
+        animation: fadeBGIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards
+        position: fixed
+        width: 100vw
+        height: 100vh
+        left: 0
+        top: 0
+        z-index: 50000
+
+    &.visible
+        display: block
+
+    &.is-closing
+        display: block
+        .dialog
+            animation: scaleOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards
+        .dialog-bg
+            animation: fadeBGOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards
+
+    p
+        font-family: "Roboto Condensed"
+        margin: 5px 15px
+        font-weight: lighter
+        font-size: 1.2em
+        line-height: 150%
+
+    h2
+        font-family: "Champagne"
+        padding: 20px 0 0
+        font-size: 2em
+        margin-left: 10px
+        text-align: left
+        color: #9e1212
+
+    h3
+        margin: 20px 15px 3px
+        font-weight: 700
+        font-size: 1.2em
+
+.onedash-popover-v2
+    --blue: #162055
+    --lightBlue: #009eff1d
+    --invalid: #d13131
+    --dialog: white
+    --background: rgba(0,0,0,0.6)
+    --very-light-gray: #edf1f6
+    --light-gray: #dadee4
+    --middle-gray: #81848a
+
+    display: none
+    font-size: 14px
+
+    .menu-card-wrapper >.menu-card
+        height: calc((var(--wh) * 90) - 50px)
+
+    .popover-wrapper
+        position: fixed
+        z-index: 100000
+        width: 100vw
+        height: 100vh
+        left: 0
+        top: 0
+
+        .popover
+            background: var(--dialog)
+            border-radius: 6px 6px 0px 0px
+            padding: 20px
+            padding-top: 30px
+            display: flex
+            flex-direction: column
+            justify-content: space-between
+            position: absolute
+            bottom: 0
+            left: 20px
+            width: calc(100% - 40px)
+            max-width: 350px
+            animation: swipeBottomIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards
+            @media screen and ( max-width: 480px)
+                max-width: calc(100% - 80px)
+
+        .popover-title
+            color: #ee6732
+            font-size: 1.5rem
+            padding-bottom: 5px
+            margin-top: 20px
+            max-width: calc(100% - 45px)
+
+        @media screen and ( max-width: 720px)
+            .popover-touchbar
+                top: 15px
+                width: 50%
+                height: 5px
+                border-radius: 5px
+                background: var(--light-gray)
+                position: absolute
+                left: 25%
+
+        .close-btn
+            padding: 0px
+            background: var(--light-gray)
+            color: var(--middle-gray)
+            border-radius: 50%
+            width: 40px
+            height: 40px
+            border: none
+            position: absolute
+            right: 25px
+            top: 35px
+            font-size: 1.8rem
+            font-weight: normal
+            transform: rotate(45deg)
+            transition: 0.15s all ease-in-out
+            cursor: pointer
+            &:focus
+                outline: none
+            &:hover
+                opacity: 0.7
+                transform: rotate(0deg)
+
+        .content
+            min-height: 100px
+            max-height: calc((var(--wh) * 90) - 50px)
+            overflow-y: auto
+            padding-right: 10px
+
+            &::-webkit-scrollbar
+                width: 4px
+                height: 2px
+
+            &::-webkit-scrollbar-button
+                width: 0px
+                height: 0px
+
+            &::-webkit-scrollbar-thumb
+                background: #e7e7e7
+                border: 0px none #ffffff
+                border-radius: 50px
+
+            &::-webkit-scrollbar-track
+                background: none
+                border: 0px none #ffffff
+                border-radius: 50px
+
+            &::-webkit-scrollbar-corner
+                background: transparent
+
+    .popover-bg
+        animation: fadeBGIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards
+        position: fixed
+        width: 100vw
+        height: 100vh
+        left: 0
+        top: 0
+        z-index: 50000
+
+    &.visible
+        display: block
+
+    &.is-closing
+        display: block
+        .popover
+            animation: swipeBottomOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards
+        .popover-bg
+            animation: fadeBGOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards
+
+    h1
+        font-size: 1.3em
+        margin: 0px 0px 10px 0px
+        line-height: 1.1em
+    h2
+        font-size: 1.1em
+        margin: 10px 0px
+        line-height: 1em
+
+@keyframes scaleOut
+    0%
+        transform: scale(1)
+        opacity: 1
+
+    100%
+        transform: scale(0)
+        opacity: 0.1
+
+@keyframes scaleIn
+    0%
+        transform: scale(0)
+        opacity: 0.1
+
+    100%
+        transform: scale(1)
+        opacity: 1
+@keyframes swipeBottomOut
+    0%
+        transform: translateY(0%)
+        opacity: 1
+
+    100%
+        transform: translateY(100%)
+        opacity: 0.1
+
+@keyframes swipeBottomIn
+    0%
+        transform: translateY(100%)
+        opacity: 0.1
+
+    100%
+        transform: translateY(0%)
+        opacity: 1
+@keyframes fadeBGIn
+    0%
+        background: transparent
+        backdrop-filter: blur(0px)
+        -webkit-backdrop-filter: blur(0px)
+
+    100%
+        background: var(--background)
+        backdrop-filter: blur(4px)
+        -webkit-backdrop-filter: blur(4px)
+
+@keyframes fadeBGOut
+    0%
+        background: var(--background)
+        backdrop-filter: blur(4px)
+        -webkit-backdrop-filter: blur(4px)
+
+    100%
+        background: transparent
+        backdrop-filter: blur(0px)
+        -webkit-backdrop-filter: blur(0px)
