@@ -1,5 +1,5 @@
 import React from "react";
-import { Router } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import ReactDOM from "react-dom";
 import BrowserHistory from "./Utils/BrowserHistory";
 import App from "./App";
@@ -8,8 +8,8 @@ import "./Styles/onedash-forms.sass";
 import "./Styles/onedash-dialog.sass";
 
 ReactDOM.render(
-	<Router history={BrowserHistory}>
+	<HashRouter history={BrowserHistory}>
 		<App />
-	</Router>,
+	</HashRouter>,
 	document.getElementById("root")
 );
