@@ -10,7 +10,7 @@
 		"axios": "0.21.1",
 		"dayjs": "1.10.4",
 		"history": "4.10.1",
-		"i18next": "20.2.1",
+		"i18next": "20.2.2",
 		"i18next-browser-languagedetector": "^6.1.0",
 		"node-sass": "5.0.0",
 		"onedash-dialog": "^1.2.8",
