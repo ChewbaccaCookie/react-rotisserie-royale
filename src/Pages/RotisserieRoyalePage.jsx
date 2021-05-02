@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import Axios from "axios";
-import { DatePicker, Form, Input } from "onedash-react-input-form";
+import { DatePicker, Form, Input, Textarea } from "onedash-react-input-form";
 import dayjs from "dayjs";
 import "react-awesome-slider/dist/styles.css";
 import { Popover } from "onedash-dialog";
@@ -35,15 +35,15 @@ const RotisserieRoyalePage = () => {
 	const sendTableReservationRequest = (data, form) => {
 		form.resetForm();
 		setTimeout(() => form.validateSubmitBtn());
-		data.tableReservationDate = dayjs(data.tableReservationDate).format("LL");
-		const reqData = {
-			inputVal: data,
-			language: window.lang,
-		};
+		const [hour, minute] = data.time.split(":");
+
+		data.values.timestamp = dayjs(data.date).add(hour, "hour").add(minute, "minute").toDate().getTime();
+
 		togglePopup("response");
-		Axios.post(`${process.env.REACT_APP_BACKEND_ENDPOINT}/contactRequest/table_request`, reqData).then((response) => {
+		Axios.post(`${process.env.REACT_APP_NEW_BACKEND_ENDPOINT}/form/submit/tableReservation`, data).then((response) => {
 			setTimeout(() => {
-				updateResponseMessage(response.data.message);
+
+				updateResponseMessage(response.data.type === "S" ? t(""));
 			}, 1000);
 		});
 	};
@@ -116,41 +116,41 @@ const RotisserieRoyalePage = () => {
 										<Input
 											autoComplete="name"
 											type="text"
-											name="tableReservationName"
+											name="personalData.name"
 											required
 											placeholder={t("input.basic.name")}
 										/>
 										<Input
 											autoComplete="street-address"
 											type="text"
-											name="tableReservationStreet"
+											name="personalData.street"
 											required
 											placeholder={t("input.basic.street")}
 										/>
 										<Input
 											autoComplete="postal-code"
 											type="text"
-											name="tableReservationPlz"
+											name="personalData.plz"
 											required
 											placeholder={t("input.basic.plz")}
 										/>
 										<Input
 											autoComplete="address-level2"
 											type="text"
-											name="tableReservationCity"
+											name="personalData.city"
 											required
 											placeholder={t("input.basic.city")}
 										/>
 										<Input
 											autoComplete="tel"
 											type="text"
-											name="tableReservationPhone"
+											name="personalData.phone"
 											placeholder={t("input.basic.phone")}
 										/>
 										<Input
 											autoComplete="email"
 											type="email"
-											name="tableReservationEmail"
+											name="personalData.email"
 											required
 											placeholder={t("input.basic.email")}
 										/>
@@ -159,23 +159,35 @@ const RotisserieRoyalePage = () => {
 										<DatePicker
 											minDate={dayjs().add(1, "day").toDate().getTime()}
 											langKey={i18n.language}
-											name="tableReservationDate"
+											name="date"
 											required
+											label={t("input.basic.date")}
 											placeholder={t("input.basic.date")}
 											withPortal
 										/>
-										<Input type="time" name="tableReservationTime" required placeholder={t("input.basic.time")} />
 										<Input
-											type="number"
-											settings={{ allowNumberNull: false }}
-											name="tableReservationNum"
+											type="time"
+											name="time"
+											required
+											label={t("input.basic.time")}
+											placeholder={t("input.basic.date")}
+											settings={{ min: "11:30", max: "21:00", step: 900 }}
+										/>
+										<Input
+											name="values.peopleNum"
 											required
 											placeholder={t("input.basic.num_pers")}
 											onValidate={validatePersonNum}
+											className="full-width"
+											settings={{ allowNumberNull: false, allowNumberNegative: false, validateTel: false }}
+											maxLength={2}
+											type="tel"
+											pattern="^$|^[0-9]+$"
 										/>
-										<Input
-											type="textarea"
-											name="tableReservationAdditionalMessage"
+										<Textarea
+											name="values.text"
+											className="full-width"
+											rows={3}
 											placeholder={t("input.basic.additional_info")}
 										/>
 										<div className="form-notification">{t("pages.rr.reservationNotice")}</div>

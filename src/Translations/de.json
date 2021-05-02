@@ -153,5 +153,11 @@
 	"corona.step3.inputStep3.num": "Anzahl der Anwohner dieses Haushalts",
 	"corona.step3.inputStep3.nameOf": "Name des",
 	"corona.step3.inputStep3.resident": "Anwohners",
-	"pages.rr.reservationNotice": "Bitte beachten Sie, dass wir Ihren reservierten Tisch maximal 15 Minuten freihalten und uns vorbehalten diesen bei Nicht­er­schei­nen weiterzuvermitteln."
+	"pages.rr.reservationNotice": "Bitte beachten Sie, dass wir Ihren reservierten Tisch maximal 15 Minuten freihalten und uns vorbehalten diesen bei Nicht­er­schei­nen weiterzuvermitteln.",
+	"response.reservation.completed": "",
+	"response.reservation.failed": "",
+	"response.booking.completed": "",
+	"response.booking.failed": "",
+	"response.contact.completed": "",
+	"response.contact.failed": ""
 }
