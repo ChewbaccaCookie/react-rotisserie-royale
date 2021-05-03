@@ -13,7 +13,7 @@
 		"i18next": "20.2.1",
 		"i18next-browser-languagedetector": "^6.1.0",
 		"node-sass": "5.0.0",
-		"onedash-dialog": "^1.2.8",
+		"onedash-dialog": "^1.2.9",
 		"onedash-react-input-form": "^2.1.1",
 		"react": "17.0.2",
 		"react-awesome-slider": "4.1.0",
