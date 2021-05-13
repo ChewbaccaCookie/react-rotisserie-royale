@@ -24,6 +24,14 @@ svg polygon {
 		margin: 10px 0px;
 	}
 }
+.opening-times {
+	img {
+		margin-top: 5px !important;
+	}
+	h2 {
+		margin: 5px 0px 0px 0px !important;
+	}
+}
 .menu-navigation {
 	width: 100%;
 	max-width: 300px;
@@ -48,6 +56,7 @@ svg polygon {
 			border-color: #9e1212;
 		}
 	}
+
 	@media (max-width: 980px) {
 		flex-wrap: wrap;
 		.page-indicator {

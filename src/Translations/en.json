@@ -122,10 +122,14 @@
 	"pages.privacy.text.8": "If, in the context of our processing, we disclose data to other persons and companies (contract processors, joint controllers or third parties), transmit them to them or otherwise grant access to the data, this will only be done on the basis of a legal permission (eg if the data has been transmitted to third parties, such as payment service providers, to fulfill the contract), users have consented to a legal obligation to do so or on the basis of our legitimate interests (eg the use of agents, webhosters, etc.).\n\nInsofar as we disclose data to other companies in our group, convey it or otherwise grant access to it, this is done in particular for administrative purposes as a legitimate interest and, moreover, on a basis that complies with the legal requirements.",
 	"pages.privacy.text.9": "The data will not be processed outside the European Union (EU). In the case of third-party services, this may be done if it is to fulfill our (pre) contractual obligations, on the basis of your consent, under a legal obligation or based on our legitimate interests. Subject to express consent or contractually required transmission, we process or disclose the data only in third countries with a recognized level of privacy, including those certified under the Privacy Shield, or on the basis of specific warranties, such as limited liability. contractual obligation by so-called standard protection clauses of the European Commission, the existence of certifications or binding internal data protection regulations (Art. 44 to 49 GDPR).",
 	"pages.rr.img_alt": "Dorothee and Markus Bußhoff",
-	"pages.rr.kitchen_ours.first": "12.00 am - 02.00 pm",
-	"pages.rr.kitchen_ours.free_day": "Closed on Wednesdays",
-	"pages.rr.kitchen_ours.h1": "Kitchen hours",
-	"pages.rr.kitchen_ours.second": "05.00 pm - 09.00 pm",
+
+	"pages.rr.opening_times.h1": "Opening hours",
+	"pages.rr.opening_times.days": "Thursday - Tuesday",
+	"pages.rr.opening_times.times1": "11:30 am - 03:00 pm",
+	"pages.rr.opening_times.times2": "05:00 pm - 10:00 pm",
+	"pages.rr.kitchen_times.h2": "Kitchen closing times",
+	"pages.rr.kitchen_times.times": "01:30 pm / 08:00 pm",
+
 	"pages.rr.menu_card": "Menu",
 	"pages.rr.table_reservation": "Table reservation",
 	"pages.rr.text": "ou're looking for a friendly atmosphere and attractive eat? Then we look forward to welcoming you as a guest. The Rotisserie-Royale is an old protected monument Half-timbered house, where gastronomy has been around for many years. Due to the special atmosphere, not least because of the Historic setting of an ancient abbey, you feel like in Another epoch. We would like to spoil you with a light French cuisine, according to the seasons and the respective market.",
