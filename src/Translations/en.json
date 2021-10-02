@@ -31,6 +31,8 @@
 	"input.validation.failedPhone": "phone number is not valid",
 	"input.validation.failedRequired": "Fill in this field",
 	"input.validation.failedShort": "The entry is too short",
+	"input.basic.wrongKitchenTime": "The time you entered is outside our kitchen hours. Please select a time during our kitchen hours.",
+
 	"navigation.home": "Home",
 	"pages.dogs.bold.1": "Price per dog and day: € 10.00",
 	"pages.dogs.bold.2": "Thank you for your understanding and we wish a relaxing stay in our guest house. \nFamily Bußhoff & Team",

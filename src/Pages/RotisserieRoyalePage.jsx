@@ -48,6 +48,17 @@ const RotisserieRoyalePage = () => {
 		});
 	};
 
+	const validateClock = (value) => {
+		if (!value || value === "") return false;
+		const [hour, minute] = value.split(":");
+		const time = Number(hour) + Number(minute) / 60;
+		const valid = !(time < 12 || (time >= 14.5 && time < 17) || time >= 19.5);
+		if (!valid) {
+			update((s) => ({ ...s, reservationNotification: t("input.basic.wrongKitchenTime") }));
+		}
+		return valid;
+	};
+
 	const validatePersonNum = (value) => {
 		if (value > 6) {
 			update((s) => ({ ...s, reservationNotification: t("input.basic.tooManyPeople") }));
@@ -166,7 +177,13 @@ const RotisserieRoyalePage = () => {
 											placeholder={t("input.basic.date")}
 											withPortal
 										/>
-										<Input type="time" name="tableReservationTime" required placeholder={t("input.basic.time")} />
+										<Input
+											type="time"
+											name="tableReservationTime"
+											required
+											placeholder={t("input.basic.time")}
+											onValidate={validateClock}
+										/>
 										<Input
 											type="number"
 											settings={{ allowNumberNull: false }}

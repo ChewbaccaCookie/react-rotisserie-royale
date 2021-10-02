@@ -25,6 +25,7 @@
 	"input.basic.subject": "Betreff",
 	"input.basic.table_reservation": "Tischreservierung anfragen",
 	"input.basic.time": "Uhrzeit",
+	"input.basic.wrongKitchenTime": "Die eingegebene Uhrzeit liegt außerhalb unserer Küchenzeiten. Bitte wählen Sie eine Uhrzeit zu unseren Küchenzeiten.",
 	"input.validation.failedEmail": "Geben Sie eine korrekte Email Adresse an",
 	"input.validation.failedLong": "Die Eingabe ist zu lang",
 	"input.validation.failedNumber": "Nummer ist inkorrekt",
