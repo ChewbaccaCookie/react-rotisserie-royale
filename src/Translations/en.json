@@ -126,9 +126,11 @@
 	"pages.rr.img_alt": "Dorothee and Markus Bußhoff",
 
 	"pages.rr.opening_times.h1": "Opening hours",
+	"pages.rr.opening_times.days1": "Monday, Tuesday, Thursday, Friday",
+	"pages.rr.opening_times.days2": "Saturday, Sunday",
 	"pages.rr.opening_times.days": "Thursday - Tuesday",
-	"pages.rr.opening_times.times1": "11:30 am - 03:00 pm",
-	"pages.rr.opening_times.times2": "05:00 pm - 10:00 pm",
+	"pages.rr.opening_times.times1": "05:00 pm - 10:00 pm",
+	"pages.rr.opening_times.times2": "11:30 am - 03:00 pm\n05:00 pm - 10:00 pm",
 	"pages.rr.kitchen_times.h2": "Kitchen closing times",
 	"pages.rr.kitchen_times.times": "02:30 pm / 07:30 pm",
 

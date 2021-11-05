@@ -99,9 +99,10 @@ const RotisserieRoyalePage = () => {
 							<article className="text-center small-content opening-times">
 								<img src="/Assets/MinifiedImages/rr-1-min.jpg" alt={t("pages.rr.img_alt")} />
 								<h1>{t("pages.rr.opening_times.h1")}</h1>
-								<h2>{t("pages.rr.opening_times.days")}</h2>
-								<p>{t("pages.rr.opening_times.times1")}</p>
-								<p>{t("pages.rr.opening_times.times2")}</p>
+								<h2>{t("pages.rr.opening_times.days1")}</h2>
+								<p dangerouslySetInnerHTML={{ __html: t("pages.rr.opening_times.times1") }} />
+								<h2>{t("pages.rr.opening_times.days2")}</h2>
+								<p dangerouslySetInnerHTML={{ __html: t("pages.rr.opening_times.times2") }} />
 								<h2>{t("pages.rr.kitchen_times.h2")}</h2>
 								<p>{t("pages.rr.kitchen_times.times")}</p>
 							</article>
