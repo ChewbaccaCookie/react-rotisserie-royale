@@ -131,7 +131,6 @@
 	"pages.rr.opening_times.times2": "11:30 Uhr - 15:00 Uhr\n17:00 Uhr - 22:00 Uhr",
 	"pages.rr.kitchen_times.h2": "Küchenannahmeschluss",
 	"pages.rr.kitchen_times.times": "14:30 Uhr / 19:30 Uhr",
-
 	"pages.rr.menu_card": "Speisekarte",
 	"pages.rr.table_reservation": "Tischreservierung",
 	"pages.rr.text": "ie suchen ein angenehmes Ambiente und eine ansprechende Küche? Dann freuen wir uns, Sie als Gast willkommen zu heissen. Die Rotisserie-Royale ist ein altes denkmalgeschütztes Fachwerkhaus, in dem die Gastronomie schon seit vielen Jahren beheimatet ist. Durch die besondere Atmosphähre, nicht zuletzt wegen der historischen Einrichtung einer alten Abtei, fühlen Sie sich wie in eine andere Epoche zurückversetzt. Wir möchten Sie mit einer leichten französichen Küche verwöhnen, die sich nach den Jahreszeiten und den jeweiligen marktfrischen Produkten richtet.",
@@ -140,7 +139,6 @@
 	"pages.rr.welcome_h2": "Ihre Adresse für anspruchsvolle Gastlichkeit",
 	"input.basic.dateTooEarly": "Bitte rufen Sie uns an, wenn sie für die nächsten zwei Tage reservieren möchten.",
 	"input.basic.tooManyPeople": "Wenn Sie zu mehr als 6 Personen kommen möchten, rufen Sie uns bitte an.",
-
 	"corona.tableName": "Tisch",
 	"corona.step1.text": "Aufgrund der sechsten <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://corona.rlp.de/fileadmin/rlp-stk/pdf-Dateien/Corona/6._CoBeLVO_.pdf\">Corona-Bekämpfungsverordnung Rheinland-Pfalz</a> sind wir verpflichtet die Kontaktdaten aller unserer Gäste zu erfassen.",
 	"corona.step1.btn": "Weiter",
@@ -159,5 +157,7 @@
 	"corona.step3.inputStep3.num": "Anzahl der Anwohner dieses Haushalts",
 	"corona.step3.inputStep3.nameOf": "Name des",
 	"corona.step3.inputStep3.resident": "Anwohners",
-	"pages.rr.reservationNotice": "Bitte beachten Sie, dass wir Ihren reservierten Tisch maximal 15 Minuten freihalten und uns vorbehalten diesen bei Nicht­er­schei­nen weiterzuvermitteln."
+	"pages.rr.reservationNotice": "Bitte beachten Sie, dass wir Ihren reservierten Tisch maximal 15 Minuten freihalten und uns vorbehalten diesen bei Nicht­er­schei­nen weiterzuvermitteln.",
+	"vacation.title": "Wir haben Betriebsferien",
+	"vacation.text": "Sehr geehrte Gäste,</br>Unser Restaurant und das Gästehaus bleiben infolge unserer Betriebsferien geschlossen.</br>Wir sind ab dem 27.01.2022 wieder für Sie da.</br>Wenn Sie uns kontaktien möchten, schreiben Sie uns eine E-Mail unter: <a href=\"mailto:info@rotisserie-royale.de\">info@rotisserie-royale.de</a> </br></br>Bleiben Sie gesund!"
 }

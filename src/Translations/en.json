@@ -32,7 +32,6 @@
 	"input.validation.failedRequired": "Fill in this field",
 	"input.validation.failedShort": "The entry is too short",
 	"input.basic.wrongKitchenTime": "The time you entered is outside our kitchen hours. Please select a time during our kitchen hours.",
-
 	"navigation.home": "Home",
 	"pages.dogs.bold.1": "Price per dog and day: € 10.00",
 	"pages.dogs.bold.2": "Thank you for your understanding and we wish a relaxing stay in our guest house. \nFamily Bußhoff & Team",
@@ -124,7 +123,6 @@
 	"pages.privacy.text.8": "If, in the context of our processing, we disclose data to other persons and companies (contract processors, joint controllers or third parties), transmit them to them or otherwise grant access to the data, this will only be done on the basis of a legal permission (eg if the data has been transmitted to third parties, such as payment service providers, to fulfill the contract), users have consented to a legal obligation to do so or on the basis of our legitimate interests (eg the use of agents, webhosters, etc.).\n\nInsofar as we disclose data to other companies in our group, convey it or otherwise grant access to it, this is done in particular for administrative purposes as a legitimate interest and, moreover, on a basis that complies with the legal requirements.",
 	"pages.privacy.text.9": "The data will not be processed outside the European Union (EU). In the case of third-party services, this may be done if it is to fulfill our (pre) contractual obligations, on the basis of your consent, under a legal obligation or based on our legitimate interests. Subject to express consent or contractually required transmission, we process or disclose the data only in third countries with a recognized level of privacy, including those certified under the Privacy Shield, or on the basis of specific warranties, such as limited liability. contractual obligation by so-called standard protection clauses of the European Commission, the existence of certifications or binding internal data protection regulations (Art. 44 to 49 GDPR).",
 	"pages.rr.img_alt": "Dorothee and Markus Bußhoff",
-
 	"pages.rr.opening_times.h1": "Opening hours",
 	"pages.rr.opening_times.days1": "Monday, Tuesday, Thursday, Friday",
 	"pages.rr.opening_times.days2": "Saturday, Sunday",
@@ -133,7 +131,6 @@
 	"pages.rr.opening_times.times2": "11:30 am - 03:00 pm\n05:00 pm - 10:00 pm",
 	"pages.rr.kitchen_times.h2": "Kitchen closing times",
 	"pages.rr.kitchen_times.times": "02:30 pm / 07:30 pm",
-
 	"pages.rr.menu_card": "Menu",
 	"pages.rr.table_reservation": "Table reservation",
 	"pages.rr.text": "ou're looking for a friendly atmosphere and attractive eat? Then we look forward to welcoming you as a guest. The Rotisserie-Royale is an old protected monument Half-timbered house, where gastronomy has been around for many years. Due to the special atmosphere, not least because of the Historic setting of an ancient abbey, you feel like in Another epoch. We would like to spoil you with a light French cuisine, according to the seasons and the respective market.",
@@ -142,7 +139,6 @@
 	"pages.rr.welcome_h2": "Your address for hospitality.",
 	"input.basic.dateTooEarly": "Please call us if you would like to make a reservation for the next two days.",
 	"input.basic.tooManyPeople": "If you would like to come to more than 6 people, please call us.",
-
 	"corona.tableName": "Table",
 	"corona.step1.text": "Due to the sixth <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://corona.rlp.de/fileadmin/rlp-stk/pdf-Dateien/Corona/6._CoBeLVO_.pdf\">Corona control regulation of Rhineland-Palatinate</a> we are obliged to record the contact details of all our guests.",
 	"corona.step1.btn": "Next",
@@ -161,5 +157,7 @@
 	"corona.step3.inputStep3.num": "Number of people living in this household",
 	"corona.step3.inputStep3.nameOf": "Name of the",
 	"corona.step3.inputStep3.resident": "resident",
-	"pages.rr.reservationNotice": "Please note that we will hold your reserved table for a maximum of 15 minutes and we reserve the right to release the table if you do not show up."
+	"pages.rr.reservationNotice": "Please note that we will hold your reserved table for a maximum of 15 minutes and we reserve the right to release the table if you do not show up.",
+	"vacation.title": "We are on vacation",
+	"vacation.text": "Dear guests,</br>Our restaurant and guest house will remain closed as a result of our company vacation.</br>We are back at 27.01.2022.</br>If you want to contact us, write us an email on: <a href=\"mailto:info@rotisserie-royale.de\">info@rotisserie-royale.de</a> </br></br>Stay healthy!"
 }

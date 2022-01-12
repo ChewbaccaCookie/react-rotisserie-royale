@@ -4,5 +4,8 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"i18n-ally.localesPaths": ["src/Translations"],
+		"i18n-ally.keystyle": "flat"
+	}
 }

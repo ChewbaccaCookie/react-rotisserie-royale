@@ -50,10 +50,14 @@ const Navigation = () => {
 					<NavLink onClick={toggleNav} activeClassName="nav-is-active" exact to="/" className="navigation-link">
 						{t("navigation.home")}
 					</NavLink>
-					<NavLink onClick={toggleNav} activeClassName="nav-is-active" to="/Rotisserie-Royale" className="navigation-link">
+					<NavLink onClick={toggleNav} activeClassName="nav-is-active" to="/rotisserie-royale" className="navigation-link">
 						{t("basic.rotisserie_royale")}
 					</NavLink>
-					<NavLink onClick={toggleNav} activeClassName="nav-is-active" to="/Gästehaus-am-Schlossberg" className="navigation-link">
+					<NavLink
+						onClick={toggleNav}
+						activeClassName="nav-is-active"
+						to="/gaestehaus-am-schlossberg"
+						className="navigation-link">
 						{t("basic.gaestehaus_am_schlossberg")}
 					</NavLink>
 					<div className="additional-links">
