@@ -6,12 +6,12 @@
         <priority>1</priority>
     </url>
     <url>
-        <loc>https://rotisserie-royale.de/#/Rotisserie-Royale</loc>
+        <loc>https://rotisserie-royale.de/#/rotisserie-royale</loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rotisserie-royale.de/#/Gästehaus-am-Schlossberg</loc>
+        <loc>https://rotisserie-royale.de/#/gaestehaus-am-schlossberg</loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
